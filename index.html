@@ -7,24 +7,26 @@
     <title>index.html</title>
 </head>
 <body>
-    <div class="index">
-        <h1 style="color:orange;">Hi, SUNNY TEAM!</h1>
-        <h5 style="color:blue;">Come on, fly your dreams here!</h5>
-        <div class="link">
-            <a href="javascript:toGitHub()" style="padding-right: 20px;">GitHub</a>
-            <a href="javascript:toGarenHomePage()" style="padding-right: 20px;" title="root 123456">Home</a>
-        </div>
+<div class="index">
+    <h1 style="color:orange;">Hi, SUNNY TEAM!</h1>
+    <h5 style="color:blue;">Come on, fly your dreams here!</h5>
+    <div class="link">
+        <a href="javascript:toGitHub()" style="padding-right: 20px;">GitHub</a>
+        <a href="javascript:toGarenHomePage()" style="padding-right: 20px;" title="root 123456">Home</a>
     </div>
+</div>
 </body>
 </html>
 
 <script>
-    function toGitHub(){
+    function toGitHub() {
         window.open("https://github.com/GarenGosling/mc-web-app");
     }
+
     function toGarenHomePage() {
         window.open("http://www.garen.org");
     }
+
     function toREADME() {
         window.open("README.txt");
     }
@@ -32,25 +34,31 @@
 </script>
 
 <style>
-    .index{
+    .index {
         width: 40%;
-        margin-left:30%;
-        height:200px;
-        border:1px solid silver;
+        margin-left: 30%;
+        height: 200px;
+        border: 1px solid silver;
         background-color: #ccffdd;
         text-align: center;
-        margin-top:200px;
-        padding-top:50px;
+        margin-top: 200px;
+        padding-top: 50px;
     }
-    a{
+
+    a {
         text-decoration: none;
         color: gray;
     }
-    .link{
+
+    .link {
         margin-top: 60px;
         width: 100%;
         text-align: right;
         font-size: 10px;
         font-weight: bold;
+    }
+
+    .test {
+        color: white;
     }
 </style>
