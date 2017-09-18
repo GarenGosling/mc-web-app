@@ -103,8 +103,18 @@ $(function() {
 		$('.j_news ul').eq(idx).show();
 	});
 
-	$('.j_triangle').click(function() {
-		$(this).next().slideToggle(150);
+	$('.j_triangle').click(function(e) {
+		var e = e || window.event;
+		if(e.stopPropagation) {
+			e.stopPropagation();
+		} else {
+			e.cancelBubble = true;
+		}
+		$(this).find('ol').slideToggle(150);
+	});
+
+	$('body').click(function() {
+		$('.j_triangle').find('ol').slideUp(150);
 	});
 });
 
