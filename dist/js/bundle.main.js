@@ -95,12 +95,11 @@ __webpack_require__(4);
 /***/ (function(module, exports) {
 
 $(function() {
-	$('.j_news ol li').mouseover(function() {
+	$('.j_news .j_news_tab_nav li').mouseover(function() {
 		var idx = $(this).index();
 		$(this).addClass('active').siblings().removeClass('active');
-		$('.j_news_pic').find('p').addClass('hide').eq(idx).removeClass('hide');
-		$('.j_news ul').hide();
-		$('.j_news ul').eq(idx).show();
+		$('.j_news .j_news_tab_con').hide();
+		$('.j_news .j_news_tab_con').eq(idx).show();
 	});
 
 	$('.j_triangle').click(function(e) {
@@ -115,6 +114,10 @@ $(function() {
 
 	$('body').click(function() {
 		$('.j_triangle').find('ol').slideUp(150);
+	});
+
+	$('.j_say_list_tit').click(function() {
+		$(this).parent().parent().parent().toggleClass('no_pic');
 	});
 });
 
