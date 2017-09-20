@@ -76,6 +76,14 @@ a.opacity:hover { filter:alpha(opacity=80); opacity:0.8; -moz-opacity:0.8; }
 	right: 10%;
 }
 
+#banner2 ol li {
+	width: 30px;
+	height: 4px;
+	padding: 0;
+	border-radius: 0;
+	margin: 0 10px;
+}
+
 #banner2 ol li.active {
 	background: #d50f22;
 }body {
