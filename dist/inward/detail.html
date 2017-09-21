@@ -9,6 +9,7 @@
 <body>
     <div id="detail" style="width: 100%;">
         <h3 id="thisTitle"></h3>
+        <h5>视频文件加载缓慢，请耐心等候（100Mb的视频大约需要加载1分钟）。</h5>
     </div>
 </body>
 </html>
@@ -27,7 +28,7 @@
             }
             if(category == "video"){
                 var src = "http://120.27.22.41:9091/download/"+md5;
-                var $video = $("<video/>").attr("controls", "controls").attr("autoplay", "autoplay").attr("style", "background-color: #080808;width:800px;height:600px;");
+                var $video = $("<video/>").attr("controls", "controls").attr("autoplay", "autoplay").attr("style", "background-color: #080808;width:760px;height:540px;");
                 var $source = $("<source/>").attr("src",src);
                 $video.append($source);
                 $video.appendTo("#detail");
