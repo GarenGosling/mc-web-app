@@ -14,6 +14,23 @@
         <ul>
             <li>
                 <a href="http://120.27.22.41:8081" target='_blank'>中产者静态网页(mc-web-app)</a>
+                <ul>
+                    <li>
+                        <a href="http://120.27.22.41:8081" target='_blank'>首页</a>
+                    </li>
+                    <li>
+                        <a href="http://120.27.22.41:8081/stone-from-hill.html" target='_blank'>他山之石</a>
+                    </li>
+                    <li>
+                        <a href="http://120.27.22.41:8081/chinese-world.html" target='_blank'>华人世界</a>
+                    </li>
+                    <li>
+                        <a href="http://120.27.22.41:8081/middle-invest.html" target='_blank'>中产投资</a>
+                    </li>
+                    <li>
+                        <a href="http://120.27.22.41:8081/middle-invest-detail.html" target='_blank'>中产投资-详情</a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="http://120.27.22.41:9093" target='_blank'>中产者后台接口(mc-rest-app)</a>
@@ -26,8 +43,16 @@
     <div id="images">
         <h3>图片</h3>
     </div>
-    <div id="video">
-        <h3>视频</h3>
+    <!--<div id="video">-->
+        <!--<h3>视频</h3>-->
+    <!--</div>-->
+    <div id="html">
+        <h3>文字汇报</h3>
+        <ul>
+            <li>
+                <a href="report-2017_10_01.html" target='_blank'>汇报总结2017-10-01</a>
+            </li>
+        </ul>
     </div>
 </div>
 </body>
@@ -50,15 +75,15 @@ $(document).ready(function(){
                         var $li = $("<li/>").html("<a href='"+url_img+"' target='_blank'>"+item.name+"</a>");
                         $ul_img.append($li);
                     }
-                    if(item.category == "video"){
-                        var url_video = "detail.html?md5=" + item.md5 + "&name=" + item.name + "&category=" + item.category;
-                        var $li = $("<li/>").html("<a href='"+url_video+"' target='_blank'>"+item.name+"</a>");
-                        $ul_video.append($li);
-                    }
+//                    if(item.category == "video"){
+//                        var url_video = "detail.html?md5=" + item.md5 + "&name=" + item.name + "&category=" + item.category;
+//                        var $li = $("<li/>").html("<a href='"+url_video+"' target='_blank'>"+item.name+"</a>");
+//                        $ul_video.append($li);
+//                    }
                 }
             });
             $("#images").append($ul_img);
-            $("#video").append($ul_video);
+//            $("#video").append($ul_video);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             // 通常 textStatus 和 errorThrown 之中
