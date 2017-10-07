@@ -5,7 +5,7 @@
 <title>中产投资</title>
 <link href="style/main.css" rel="stylesheet"></head>
 
-<body>
+<body id="middle-invest">
 <div class="bor_b header">
 	<div class="top">
 		<div class="w1200 clearfix">
@@ -108,7 +108,7 @@
 						<div class="sg">已有<em>145</em>人报名</div>
 						<div class="bn">
 							<a href="middle-invest-detail.html" class="detail">查看详情</a>
-							<a class="sign">立即报名</a>
+							<a class="sign" bindClick="view-detail">立即报名</a>
 						</div>
 					</dd>
 				</dl>
@@ -124,7 +124,7 @@
 						<div class="sg">已有<em>145</em>人报名</div>
 						<div class="bn">
 							<a href="middle-invest-detail.html" class="detail">查看详情</a>
-							<a class="sign">立即报名</a>
+							<a class="sign" bindClick="view-detail">立即报名</a>
 						</div>
 					</dd>
 				</dl>
@@ -140,7 +140,7 @@
 						<div class="sg">已有<em>145</em>人报名</div>
 						<div class="bn">
 							<a href="middle-invest-detail.html" class="detail">查看详情</a>
-							<a class="sign">立即报名</a>
+							<a class="sign" bindClick="view-detail">立即报名</a>
 						</div>
 					</dd>
 				</dl>
@@ -156,7 +156,7 @@
 						<div class="sg">已有<em>145</em>人报名</div>
 						<div class="bn">
 							<a href="middle-invest-detail.html" class="detail">查看详情</a>
-							<a class="sign">立即报名</a>
+							<a class="sign" bindClick="view-detail">立即报名</a>
 						</div>
 					</dd>
 				</dl>
@@ -172,7 +172,7 @@
 						<div class="sg">已有<em>145</em>人报名</div>
 						<div class="bn">
 							<a href="middle-invest-detail.html" class="detail">查看详情</a>
-							<a class="sign">立即报名</a>
+							<a class="sign" bindClick="view-detail">立即报名</a>
 						</div>
 					</dd>
 				</dl>
@@ -188,7 +188,7 @@
 						<div class="sg">已有<em>145</em>人报名</div>
 						<div class="bn">
 							<a href="middle-invest-detail.html" class="detail">查看详情</a>
-							<a class="sign">立即报名</a>
+							<a class="sign" bindClick="view-detail">立即报名</a>
 						</div>
 					</dd>
 				</dl>
@@ -204,7 +204,7 @@
 						<div class="sg">已有<em>145</em>人报名</div>
 						<div class="bn">
 							<a href="middle-invest-detail.html" class="detail">查看详情</a>
-							<a class="sign">立即报名</a>
+							<a class="sign" bindClick="view-detail">立即报名</a>
 						</div>
 					</dd>
 				</dl>
@@ -260,7 +260,61 @@
 		Creative Commons © 2017  中产者网
 	</div>
 </div>
+
+<!-- 报名弹窗 -->
+<div class="pop hide" id="tpl-pop-detail-wrap">
+  <div class="pop_wrap pt10">
+	<h1 class="pop_tit"><p>报名</p></h1>
+	<div class="pop_close" bindClick="close"></div>
+	<div class="pop_main">
+		<div class="pop_main_form">
+			<div class="pl30 pr30 clearfix pt20">
+				<label class="fl mr45 clearfix w67"><span class="fl">主</span><span class="fr">题</span></label>
+				<input class="disable fl" disabled type="text" value="美联储声明：维持基准利率不变 10月启动缩表">
+			</div>
+			<div class="pl30 pr30 clearfix pt20">
+				<label class="fl mr45 clearfix w67">报名人数</label>
+				<div class="pos_r fl">
+					<div class="pop_select pos_r">
+						<span>请下拉选择人数</span>
+						<em bindClick="toggle-select"></em>
+					</div>
+					<ul class="pop_options">
+						<li bindClick="select">1人</li>
+						<li bindClick="select">2人</li>
+						<li bindClick="select">3人</li>
+						<li bindClick="select">4人</li>
+						<li bindClick="select" class="other">5人</li>
+					</ul>
+				</div>	
+			</div>
+			<div class="pl30 pr30 clearfix pt20">
+				<label class="fl mr45 clearfix w67"><span class="fl">姓</span><span class="fr">名</span></label>
+				<input class="fl" type="text" value="请填写您的姓名">
+			</div>
+			<div class="pl30 pr30 clearfix pt20">
+				<label class="fl mr45 clearfix w67">手机号码</label>
+				<input class="fl" type="text" value="请输入您的手机号码">
+			</div>
+			<div class="pl30 pr30 clearfix pt20">
+				<label class="fl mr45 clearfix w67">身份证号</label>
+				<input class="fl" type="text" value="请输入您的身份证号">
+			</div>
+			<div class="pl30 pr30 clearfix pt20">
+				<label class="fl mr45 clearfix w67"><span class="fl">费</span><span class="fr">用</span></label>
+				<input class="disable fl" disabled type="text" value="5238元">
+			</div>
+			<div class="btm_btn">
+				<a class="g_btn_red" href="#">立即报名</a>
+			</div>
+		</div>
+	</div>
+  </div>
+</div>
+
+
 <script type="text/javascript" src="js/plugins/jquery.min.js"></script>
+<script type="text/javascript" src="js/views/middle-invest.js"></script>
 
 <script type="text/javascript" src="js/bundle.main.js"></script></body>
 </html>
