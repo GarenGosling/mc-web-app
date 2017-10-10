@@ -19,6 +19,9 @@ $(function() {
 	var orgDetail = new OrgPop({
 		$el: '#tpl-pop-detail-wrap',
 		events: {
+			'hide-select': function() {
+				$('.j-body-hide').hide();
+			},
             close: function() {
                 this.hide();
             }
