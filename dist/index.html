@@ -5,7 +5,7 @@
 <title>首页</title>
 <link href="style/main.css" rel="stylesheet"></head>
 
-<body>
+<body id="index">
 <div class="header">
 	<div class="top">
 		<div class="w1200 clearfix">
@@ -350,40 +350,26 @@
 			</li>
 		</ul>
 	</div>
-	<div class="flink">
+	<div id="tpl-cooperate-wrap" class="flink">
+		<script id="tpl-cooperate" type="text/x-jsrender">
 		<h3>合作品牌</h3>
 		<ul class="flink_list clearfix">
-			<li class="fl">
-				<a href="#"><img src="images/1-14.jpg"></a>
+			{{for list}}
+			{{if id%5 == 0}}
+			<li data-id="{{:id}}" class="last fl">
+				<a href="{{:url}}"><img src="{{:~root.host_source}}{{:md5}}"></a>
 			</li>
-			<li class="fl">
-				<a href="#"><img src="images/1-15.jpg"></a>
+			{{else}}
+			<li data-id="{{:id}}" class="fl">
+				<a href="{{:url}}"><img src="{{:~root.host_source}}{{:md5}}"></a>
 			</li>
-			<li class="fl">
-				<a href="http://www.ctrip.com" target="blank"><img src="images/1-16.jpg"></a>
-			</li>
-			<li class="fl">
-				<a href="#"><img src="images/1-17.jpg"></a>
-			</li>
-			<li class="fr last">
-				<a href="#"><img src="images/1-18.jpg"></a>
-			</li>
-			<li class="fl">
-				<a href="#"><img src="images/1-19.jpg"></a>
-			</li>
-			<li class="fl">
-				<a href="#"><img src="images/1-20.jpg"></a>
-			</li>
-			<li class="fl">
-				<a href="#"><img src="images/1-21.jpg"></a>
-			</li>
-			<li class="fl">
-				<a href="#"><img src="images/1-22.jpg"></a>
-			</li>
-			<li class="fr last">
+			{{/if}}
+			{{/for}}
+			<li class="fl last">
 				更多品牌敬请期待...
 			</li>
 		</ul>
+		</script>
 	</div>
 	<div class="flink mar_b30">
 		<a name="more_attention"></a>
@@ -427,6 +413,10 @@
 
 <script type="text/javascript" src="js/plugins/jquery.min.js"></script>
 <script type="text/javascript" src="js/plugins/jquery.slide.js"></script>
+<script type="text/javascript" src="js/plugins/jsrender.js"></script>
+<script type="text/javascript" src="js/url.js"></script>
+<script type="text/javascript" src="js/org.js"></script>
+<script type="text/javascript" src="js/views/index.js"></script>
 <script type="text/javascript">
 	$('#banner').slide({
 		picIndex: 0
