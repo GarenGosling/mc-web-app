@@ -1,5 +1,4 @@
 $(function() {
-
     var orgList1 = new Org({
         $el: '#index',
         $renderEl: '#tpl-cooperate-wrap',
@@ -66,7 +65,7 @@ $(function() {
                 $('#banner').slide({
                     picIndex: 0
                 });
-            }, 100)
+            }, 500)
         }
     });
 
@@ -105,7 +104,7 @@ $(function() {
                 $('#banner2').slide({
                     picIndex: 0
                 });
-            }, 100)
+            }, 500)
         }
     });
 })
