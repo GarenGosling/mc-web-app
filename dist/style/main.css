@@ -886,12 +886,28 @@ input[disabled] {
   font-size: 12px;
   border-radius: 2px; }
 
+.pop_main_form textarea {
+  display: inline-block;
+  width: 370px;
+  height: 90px;
+  padding: 5px 15px;
+  line-height: 26px;
+  border: 1px solid #bfbfbf;
+  color: #999;
+  font-size: 12px;
+  border-radius: 2px;
+  text-align: left; }
+
 .pop_main_form .disable {
   font-size: 14px;
   color: #333; }
 
 .pop_main_form .btm_btn {
   padding: 50px 0;
+  text-align: center; }
+
+.pop_main_form .btm_btn2 {
+  padding: 0 0 50px 0;
   text-align: center; }
 
 .pop_select span {
@@ -1016,3 +1032,13 @@ input[disabled] {
 .elite_model_list_pagination {
   text-align: center;
   padding: 50px 0; }
+
+.btn_pop_collect_favorite {
+  display: inline-block;
+  height: 38px;
+  margin: 100px 0 0 30px;
+  padding-left: 50px;
+  line-height: 38px;
+  background: url(../images/2-14.png) no-repeat 0 center;
+  font-size: 16px;
+  color: #333; }

@@ -5,7 +5,7 @@
 <title>精英样板-列表</title>
 <link href="style/main.css" rel="stylesheet"></head>
 
-<body id="middle-invest">
+<body id="elite-model-list">
 <div class="bor_b header">
 	<div class="top">
 		<div class="w1200 clearfix">
@@ -130,7 +130,7 @@
 								</div>
 								<div class="btn_group">
 									<a class="g_btn_red" href="#">查看详情</a>
-									<a class="g_btn_white" href="#">加入收藏</a>
+									<a class="g_btn_white" href="#" bindClick="add-collect">加入收藏</a>
 								</div>
 							</dd>
 						</dl>
@@ -147,7 +147,7 @@
 								</div>
 								<div class="btn_group">
 									<a class="g_btn_red" href="#">查看详情</a>
-									<a class="g_btn_white" href="#">加入收藏</a>
+									<a class="g_btn_white" href="#" bindClick="add-collect">加入收藏</a>
 								</div>
 							</dd>
 						</dl>
@@ -164,7 +164,7 @@
 								</div>
 								<div class="btn_group">
 									<a class="g_btn_red" href="#">查看详情</a>
-									<a class="g_btn_white" href="#">加入收藏</a>
+									<a class="g_btn_white" href="#" bindClick="add-collect">加入收藏</a>
 								</div>
 							</dd>
 						</dl>
@@ -181,7 +181,7 @@
 								</div>
 								<div class="btn_group">
 									<a class="g_btn_red" href="#">查看详情</a>
-									<a class="g_btn_white" href="#">加入收藏</a>
+									<a class="g_btn_white" href="#" bindClick="add-collect">加入收藏</a>
 								</div>
 							</dd>
 						</dl>
@@ -198,7 +198,7 @@
 								</div>
 								<div class="btn_group">
 									<a class="g_btn_red" href="#">查看详情</a>
-									<a class="g_btn_white" href="#">加入收藏</a>
+									<a class="g_btn_white" href="#" bindClick="add-collect">加入收藏</a>
 								</div>
 							</dd>
 						</dl>
@@ -215,7 +215,7 @@
 								</div>
 								<div class="btn_group">
 									<a class="g_btn_red" href="#">查看详情</a>
-									<a class="g_btn_white" href="#">加入收藏</a>
+									<a class="g_btn_white" href="#" bindClick="add-collect">加入收藏</a>
 								</div>
 							</dd>
 						</dl>
@@ -232,7 +232,7 @@
 								</div>
 								<div class="btn_group">
 									<a class="g_btn_red" href="#">查看详情</a>
-									<a class="g_btn_white" href="#">加入收藏</a>
+									<a class="g_btn_white" href="#" bindClick="add-collect">加入收藏</a>
 								</div>
 							</dd>
 						</dl>
@@ -275,8 +275,45 @@
 	</div>
 </div>
 
+<!-- 收藏弹窗 -->
+<div class="pop" id="tpl-pop-collect-wrap">
+  <div class="pop_wrap pt10" bindClick="hide-select">
+	<h1 class="pop_tit"><p>收藏</p></h1>
+	<div class="pop_close" bindClick="close"></div>
+	<div class="pop_main">
+		<div class="pop_main_form">
+			<div class="pl30 pr30 clearfix pt20">
+				<label class="fl mr45 clearfix w67"><span class="fl">分</span><span class="fr">组</span></label>
+				<div class="pos_r fl">
+					<div class="pop_select pos_r">
+						<span>请选择您要分的收藏组</span>
+						<em bindClick="toggle-select"></em>
+					</div>
+					<ul class="pop_options j-body-hide">
+						<li bindClick="select">组1</li>
+						<li bindClick="select">组2</li>
+						<li bindClick="select">组3</li>
+						<li bindClick="select">组4</li>
+						<li bindClick="select" class="other">组5</li>
+					</ul>
+				</div>	
+			</div>
+			<div class="pl30 pr30 clearfix pt20">
+				<label class="fl mr45 clearfix w67"><span class="fl">备</span><span class="fr">注</span></label>
+				<textarea class="fl">请填写您要备注的内容</textarea>
+			</div>
+			<div class="btn_pop_collect_favorite">创建收藏夹</div>
+			<div class="btm_btn2">
+				<a class="g_btn_red" href="#">保存</a>
+			</div>
+		</div>
+	</div>
+  </div>
+</div>
 
 <script type="text/javascript" src="js/plugins/jquery.min.js"></script>
+<script type="text/javascript" src="js/org.js"></script>
+<script type="text/javascript" src="js/views/elite-model-list.js"></script>
 
 <script type="text/javascript" src="js/bundle.main.js"></script></body>
 </html>

@@ -1,15 +1,15 @@
 $(function() {
 	var app = new Org({
-		$el: '#middle-invest',
+		$el: '#elite-model-list',
 		events: {
-			'view-detail': function() {
-				orgDetail.show();
+			'add-collect': function() {
+				orgCollect.show();
 			}
 		}
 	})
 
-	var orgDetail = new OrgPop({
-		$el: '#tpl-pop-detail-wrap',
+	var orgCollect = new OrgPop({
+		$el: '#tpl-pop-collect-wrap',
 		events: {
 			'hide-select': function() {
 				$('.j-body-hide').hide();
