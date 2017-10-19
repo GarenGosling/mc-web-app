@@ -30,6 +30,18 @@ $(function() {
                 var txt = $(event.target).html();
                 $this.parent().siblings().find('span').html(txt);
                 $this.parent().hide();
+            },
+			'add-clip': function() {
+                orgClip.show();
+            }
+        }
+	})
+
+	var orgClip = new OrgPop({
+		$el: '#tpl-pop-clip-wrap',
+		events: {
+            close: function() {
+                this.hide();
             }
         }
 	})

@@ -885,6 +885,14 @@ input[disabled] {
   color: #999;
   font-size: 12px;
   border-radius: 2px; }
+  .pop_main_form input.large {
+    width: 480px;
+    padding: 5px 10px; }
+
+.pop_main_form .tip {
+  padding-top: 10px;
+  color: #333;
+  font-size: 14px; }
 
 .pop_main_form textarea {
   display: inline-block;
@@ -909,6 +917,12 @@ input[disabled] {
 .pop_main_form .btm_btn2 {
   padding: 0 0 50px 0;
   text-align: center; }
+
+.pop_main_form .btm_btn3 {
+  padding: 220px 0 50px 0;
+  text-align: center; }
+  .pop_main_form .btm_btn3 a {
+    margin: 0 15px; }
 
 .pop_select span {
   display: inline-block;
@@ -1041,4 +1055,5 @@ input[disabled] {
   line-height: 38px;
   background: url(../images/2-14.png) no-repeat 0 center;
   font-size: 16px;
-  color: #333; }
+  color: #333;
+  cursor: pointer; }

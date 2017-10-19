@@ -302,9 +302,27 @@
 				<label class="fl mr45 clearfix w67"><span class="fl">备</span><span class="fr">注</span></label>
 				<textarea class="fl">请填写您要备注的内容</textarea>
 			</div>
-			<div class="btn_pop_collect_favorite">创建收藏夹</div>
+			<div class="btn_pop_collect_favorite" bindClick="add-clip">创建收藏夹</div>
 			<div class="btm_btn2">
 				<a class="g_btn_red" href="#">保存</a>
+			</div>
+		</div>
+	</div>
+  </div>
+</div>
+<!-- 创建到收藏夹弹窗 -->
+<div class="pop hide" id="tpl-pop-clip-wrap">
+  <div class="pop_wrap pt10" bindClick="hide-select">
+	<h1 class="pop_tit"><p>创建到收藏夹</p></h1>
+	<div class="pop_close" bindClick="close"></div>
+	<div class="pop_main">
+		<div class="pop_main_form">
+			<div class="pl30 pr30 clearfix pt20">
+				<input class="large" type="text" value="请输入收藏夹名称（不得超过15个字）">
+				<p class="tip">创建后将自动保存在此收藏夹内</p>	
+			</div>
+			<div class="btm_btn3">
+				<a class="g_btn_red" href="#">创建</a><a bindClick="close" class="g_btn_white" href="#">取消</a>
 			</div>
 		</div>
 	</div>
