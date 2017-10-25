@@ -12,7 +12,7 @@
 			<div class="fl">
 				<span class="slogan">中产阶级社会生活向导</span>
 				<em class="top_user">Hi <i>13684955656用户</i></em> / 
-				<a href="#">退出</a>
+				<a href="javascript:logout()">退出</a>
 			</div>
 			<ul class="link fr clearfix">
 				<li class="fl">
@@ -104,7 +104,7 @@
 		<a class="opacity" href="#">用户协议</a>
 		<a class="opacity" href="#">企业服务</a>
 		<a class="opacity" href="#">帮助中心</a>
-		<a class="opacity" href="#">联系我们</a>
+		<a class="opacity" href="javascript:saveLoginVo()">联系我们</a>
 	</div>
 	<div class="copyright">
 		京ICP备11017824号-4&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;工信部备案：京ICP备13038979号-3&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;北京市公安局朝阳分局备案编号:11010502000501 
@@ -115,5 +115,12 @@
 </div>
 <script type="text/javascript" src="js/plugins/jquery.min.js"></script>
 
-<script type="text/javascript" src="js/bundle.main.js"></script></body>
+<script type="text/javascript" src="js/bundle.main.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript">
+    $(function() {
+      saveLoginVo();
+    })
+</script>
+</body>
 </html>
