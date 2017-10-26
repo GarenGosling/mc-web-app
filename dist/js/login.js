@@ -22,33 +22,100 @@ function getTicket() {
 }
 
 /**
- * 保存登录信息
- * 从服务器获取登录信息，然后保存到客户端
- * @returns {boolean}
+ * 获取登录信息
+ * @returns {null}
  */
-function saveLoginVo(){
+function getLoginVo() {
+    var loginVoJson = localStorage.getItem("loginVoJson");
+    if(!loginVoJson){
+        return null;
+    }
+    return JSON.parse(loginVoJson);
+}
+
+/**
+ * 获取作者信息
+ * @returns {*}
+ */
+function getAuthor() {
+    var loginVo = getLoginVo();
+    if(loginVo){
+        var author = loginVo.author;
+        if(author){
+            return author;
+        }
+    }
+    return null;
+}
+
+/**
+ * 获取用户编码
+ * @returns {*}
+ */
+function getUserCode() {
+    var loginVo = getLoginVo();
+    if(loginVo){
+        var loginInfo = loginVo.loginInfo;
+        if(loginInfo){
+            return loginInfo.userCode;
+        }else{
+            return null;
+        }
+    }
+    return null;
+}
+
+/**
+ * 个人中心登录验证
+ * 没有登录认证，则跳转到登录页面；
+ * 有登录认证，如果没有登录信息，则去服务器查询并保存登录信息
+ * 有登录认证，并且有登录信息，则前往作者认证方法
+ */
+function personal_center_login_vaild() {
     debugger
     var ticket = getTicket();
     if(!ticket){
-        alert("您还没有登录");
-        return false;
-    }
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: "http://120.27.22.41:9090/loginVo",
-        beforeSend: function(request) {
-            request.setRequestHeader("ticket", ticket);
-        },
-        success: function(response){
-            if(response && response.code == 200){
-                var loginVo = response.data;
-                localStorage.setItem("loginVo", loginVo);
-            }else{
-                alert(response.message);
-            }
+        login();
+    }else{
+        var loginVo = getLoginVo();
+        if(!loginVo){
+            _getAndSaveLoginVo(ticket);
+        }else{
+            var userCode = loginVo.loginInfo.userCode;
+            _personal_center_author_valid(ticket, userCode);
         }
-    });
+    }
+}
+
+/**
+ * 验证作者
+ * @param ticket
+ * @param userCode
+ * @private
+ */
+function _personal_center_author_valid(ticket, userCode){
+    if(!getAuthor()){
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "http://120.27.22.41:9093/api/author/userCode?userCode="+userCode,
+            beforeSend: function(request) {
+                request.setRequestHeader("ticket", ticket);
+            },
+            success: function(response){
+                if(response && response.code == 200){
+                    var author = response.data;
+                    if(author){
+                        var loginVo = getLoginVo();
+                        loginVo.author = author;
+                        localStorage.setItem("loginVo", loginVo);
+                    }
+                }else{
+                    alert(response.message);
+                }
+            }
+        });
+    }
 }
 
 /**
@@ -137,4 +204,69 @@ function testLoginApi(){
             }
         }
     });
+}
+
+
+/**
+ * 保存登录信息
+ * 从服务器获取登录信息，然后保存到客户端
+ */
+function _getAndSaveLoginVo(ticket){
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "http://120.27.22.41:9090/loginVo",
+        beforeSend: function(request) {
+            request.setRequestHeader("ticket", ticket);
+        },
+        success: function(response){
+            if(response && response.code == 200){
+                var loginVo = response.data;
+                var loginVoJson = JSON.stringify(loginVo);
+                localStorage.setItem("loginVoJson", loginVoJson);
+            }else{
+                alert(response.message);
+            }
+        }
+    });
+}
+/*************/
+function applyAuthor(){
+    var ticket = getTicket();
+    if(!ticket){
+        login();
+    }else{
+        var params = {};
+        params.userCode = getUserCode();
+        params.phone = $("#phone").val();
+        params.idNum = $("#idNum").val();
+        params.realName = $("#realName").val();
+        params.penName = $("#penName").val();
+        params.status = 0;
+        var paramsJson = JSON.stringify(params);
+        $.ajax({
+            type: "POST",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            data: paramsJson,
+            url: "http://120.27.22.41:9093/api/author",
+            beforeSend: function(request) {
+                request.setRequestHeader("ticket", ticket);
+            },
+            success: function(response){
+                if(response && response.code == 200){
+                    var author = response.data;
+                    if(author){
+                        var loginVo = getLoginVo();
+                        loginVo.author = author;
+                        localStorage.setItem("loginVo", loginVo);
+                    }
+                }else{
+                    alert(response.message);
+                }
+            }
+        });
+    }
+
+
 }
