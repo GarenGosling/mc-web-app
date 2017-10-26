@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>个人中心-发布文章</title>
+<title>个人中心-编辑文章</title>
 <link rel="stylesheet" href="http://static.runoob.com/assets/js/jquery-treeview/jquery.treeview.css" />
 <link href="style/main.css" rel="stylesheet"></head>
 
@@ -66,8 +66,8 @@
 				<ul class="sidebar_nav">
 					<li>
 						<div>
-							<a class="active" href="personal-center-public.html">发布文章</a>
-							<a href="personal-center-edit.html">编辑文章</a>
+							<a href="personal-center-public.html">发布文章</a>
+							<a class="active" href="personal-center-edit.html">编辑文章</a>
 						</div>
 					</li>
 				</ul>
@@ -86,12 +86,12 @@
 			<div class="subcont">
 				<div class="subcont_publish">
 					<h3 class="g_tit_bor_red">
-						<span>发布文章</span>
+						<span>编辑文章</span>
 					</h3>
 					<div class="subcont_publish_add">
 						<div class="pos_r pb30 clearfix">
 							<label class="fl">文章分类</label>
-							<p class="j_btn_treeview readonly_wrap fl" bindClick="show-treeview">请点击文章分类</p>
+							<p class="j_btn_treeview readonly_wrap readonly_wrap_edit fl" bindClick="show-treeview">文章分类/精英样板/有关美食</p>
 							<ul id="treeview" class="filetree treeview-famfamfam" bindClick="stop-propagation">
 								<li><span>文章分类</span>
 									<ul>
@@ -121,17 +121,22 @@
 						</div>
 						<div class="pb30 clearfix">
 							<label class="fl">文章标题</label>
-							<input class="fl" type="text" value="请输入文章标题">
+							<input class="edit fl" type="text" value="咸肉烧冬瓜">
 						</div>
 						<div class="pb30 clearfix">
 							<label class="fl">标题图片</label>
-							<div class="tit_pic fl"></div>
+							<div class="tit_pic fl">
+								<p><img src="images/tmp/tmp-38.jpg"></p>
+							</div>
+							<div class="delate_pic_short fl">
+								<a class="g_btn_white">删除图片</a>
+							</div>
 						</div>
 						<div class="pb30 clearfix">
 							<label class="fl">专题选择</label>
 							<div class="pos_r fl">
 								<div class="pop_select pos_r">
-									<span class="small">请选择文章专题</span>
+									<span class="small edit">秋季补气</span>
 									<em bindClick="toggle-select"></em>
 								</div>
 								<ul class="pop_options j-body-hide">
@@ -142,30 +147,26 @@
 						</div>
 						<div class="pb30 clearfix">
 							<label class="fl">正文描述</label>
-							<textarea class="fl">请输入正文内容</textarea>
+							<textarea class="lg fl">1、冬瓜去皮切成小块
+2、腊肉洗净切片
+3、调料备好
+4、热锅下咸肉翻炒至微黄色，加入姜蒜、干辣椒炒出香味
+5、加入冬瓜翻炒片刻
+6、加入水刚好和冬瓜齐平，大火烧开转中火
+7、盖上盖子烧至汤汁浓稠
+8、加入生抽、糖调味即可
+9、盛盘撒上葱花
+10、成品图欣赏
+							</textarea>
 						</div>
 						<div class="pb30 clearfix">
 							<label class="fl">插入图片</label>
 							<div class="add_pic fl">
 								<span></span>
 								<em>点击添加图片</em>
+								<p><img src="images/tmp/tmp-38.jpg"></p>
 							</div>
 							<div class="delate_pic fl"><a class="g_btn_white">删除图片</a></div>
-						</div>
-						<div class="pb30 clearfix">
-							<label class="fl">正文描述</label>
-							<textarea class="fl">请输入正文内容</textarea>
-						</div>
-						<div class="pb30 clearfix">
-							<label class="fl">插入图片</label>
-							<div class="add_pic fl">
-								<span></span>
-								<em>点击添加图片</em>
-							</div>
-							<div class="delate_pic fl clearfix">
-								<a class="g_btn_white fl">删除图片</a>
-								<a class="g_btn_white mar_l30 fl">删除整体</a>
-							</div>
 						</div>
 						<div class="pb30 clearfix">
 							<label class="fl"></label>
@@ -174,7 +175,7 @@
 							</div>
 						</div>
 						<div class="tx_c pb30">
-							<a class="g_btn_red">发布文章</a>
+							<a class="g_btn_red">保存并发布</a>
 						</div>
 					</div>
 				</div>
@@ -204,7 +205,7 @@
 <script src="http://static.runoob.com/assets/js/jquery-treeview/jquery.treeview.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/plugins/jsrender.js"></script>
 <script type="text/javascript" src="js/org.js"></script>
-<script type="text/javascript" src="js/views/personal-center-public.js"></script>
+<script type="text/javascript" src="js/views/personal-center-edit.js"></script>
 
 <script type="text/javascript" src="js/bundle.main.js"></script></body>
 </html>
