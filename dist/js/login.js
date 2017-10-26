@@ -99,6 +99,14 @@ function loginSuccessCallback(){
         localStorage.setItem("ticket",ticket);
         window.location.href="personal-center-public.html";
     }
+    // 是否显示个人中心
+    var ticketLocal = getTicket();
+    if(ticketLocal){
+        $("#personalCenter").show();
+    }else{
+        $("#personalCenter").hide();
+    }
+
 }
 
 /**
@@ -111,4 +119,22 @@ function isLogin() {
         return true;
     }
     return false;
+}
+
+function testLoginApi(){
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "http://120.27.22.41:9093/api/test",
+        beforeSend: function(request) {
+            request.setRequestHeader("ticket", getTicket());
+        },
+        success: function(response){
+            if(response && response.code == 400){
+                window.location.href = "http://120.27.22.41:9090/login";
+            }else{
+                alert("code:"+response.code+" -- message:" + response.message);
+            }
+        }
+    });
 }
