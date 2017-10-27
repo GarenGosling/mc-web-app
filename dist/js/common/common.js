@@ -1,6 +1,7 @@
 /***************** 引入html *******************/
 $(function() {
     $(".header").load("common/head.html");
+    $(".footer").load("common/foot.html");
 });
 
 /***************** url *******************/
