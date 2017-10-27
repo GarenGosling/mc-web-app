@@ -21,10 +21,10 @@ $(function() {
                 if (v !== '') __data[k] = v;
             });
             $.ajax({
-                url: url.partner_link()
+                url: url.mc.partnerLink_all
             })
             .done(function(res) {
-                _this.data.host_source = url.host_source;
+                _this.data.host_source = url.oss.download;
                 _this.data.list = res.data;
                 _this.$render();
             })
@@ -52,10 +52,10 @@ $(function() {
                 if (v !== '') __data[k] = v;
             });
             $.ajax({
-                url: url.carousel()
+                url: url.mc.carousel_all
             })
             .done(function(res) {
-                _this.data.host_source = url.host_source;
+                _this.data.host_source = url.oss.download;
                 _this.data.list = res.data;
                 _this.$render();
                 _this.setBanner();
@@ -91,10 +91,10 @@ $(function() {
                 if (v !== '') __data[k] = v;
             });
             $.ajax({
-            	url: url.carousel()
+            	url: url.mc.carousel_all
             })
             .done(function(res) {
-                _this.data.host_source = url.host_source;
+                _this.data.host_source = url.oss.download;
                 _this.data.list = res.data;
                 _this.$render();
                 _this.setBanner();

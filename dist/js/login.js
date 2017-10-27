@@ -1,9 +1,15 @@
+$(function() {
+   alert(url.oss.download);
+   alert(url.mc.partnerLink_all);
+    alert(url.mc.carousel_all);
+});
+
 /**
  * 注册
  * 跳转到注册页面
  */
 function register() {
-    window.location.href = "http://120.27.22.41:9090/register";
+    window.location.href = url.cas.register;
 }
 
 /**
@@ -11,7 +17,7 @@ function register() {
  * 跳转到登录页面
  * */
 function login() {
-    window.location.href = "http://120.27.22.41:9090/login";
+    window.location.href = url.cas.login;
 }
 
 /**
@@ -98,7 +104,7 @@ function _personal_center_author_valid(ticket, userCode){
         $.ajax({
             type: "GET",
             dataType: "json",
-            url: "http://120.27.22.41:9093/api/author/userCode?userCode="+userCode,
+            url: url.mc.api_author_userCode + "?userCode="+userCode,
             beforeSend: function(request) {
                 request.setRequestHeader("ticket", ticket);
             },
@@ -140,7 +146,7 @@ function logout() {
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "http://120.27.22.41:9090/logout",
+        url: url.cas.logout,
         beforeSend: function(request) {
             request.setRequestHeader("ticket", ticket);
         },
@@ -149,7 +155,7 @@ function logout() {
             if(response && response.code == 200){
                 localStorage.removeItem("ticket");
                 localStorage.removeItem("loginVo");
-                window.location.href = "http://120.27.22.41:8081";
+                window.location.href = url.host.index;
             }else{
                 alert(response.message);
             }
@@ -192,13 +198,13 @@ function testLoginApi(){
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "http://120.27.22.41:9093/api/test",
+        url: url.mc.api_test,
         beforeSend: function(request) {
             request.setRequestHeader("ticket", getTicket());
         },
         success: function(response){
             if(response && response.code == 400){
-                window.location.href = "http://120.27.22.41:9090/login";
+                window.location.href = url.cas.login;
             }else{
                 alert("code:"+response.code+" -- message:" + response.message);
             }
@@ -215,7 +221,7 @@ function _getAndSaveLoginVo(ticket){
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "http://120.27.22.41:9090/loginVo",
+        url: url.cas.loginVo,
         beforeSend: function(request) {
             request.setRequestHeader("ticket", ticket);
         },
@@ -249,7 +255,7 @@ function applyAuthor(){
             contentType: "application/json;charset=UTF-8",
             dataType: "json",
             data: paramsJson,
-            url: "http://120.27.22.41:9093/api/author",
+            url: url.mc.api_author,
             beforeSend: function(request) {
                 request.setRequestHeader("ticket", ticket);
             },
