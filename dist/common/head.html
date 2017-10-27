@@ -1,9 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>华人世界</title>
+    <link href="style/main.css" rel="stylesheet"></head>
+
+<body>
 <div class="top">
     <div class="w1200 clearfix">
-        <div class="fl">
+        <div class="fl" id="loginBtn">
             <span class="slogan">中产阶级社会生活向导</span>
-            <a class="opacity" href="javascript:login()">登录</a> /
-            <a class="opacity" href="javascript:register()">注册</a>
+            <a class="opacity" style="color:blue;" href="javascript:login()">登录</a> /
+            <a class="opacity" style="color:blue;" href="javascript:register()">注册</a>
+        </div>
+        <div class="fl" id="logoutBtn">
+            <span class="slogan">中产阶级社会生活向导</span>
+            <a class="opacity" style="color:blue;" href="javascript:logout()">退出</a>
+            <span class="slogan" style="margin-left: 20px;color: red;">
+                Hi, <i id="welcome" style="font-size: 12px;font-weight: bold;font-style: italic;"></i> ! 欢迎来到个人中心(*^▽^*)
+            </span>
         </div>
         <ul class="link fr clearfix">
             <li class="fl">
@@ -21,30 +36,54 @@
     </div>
 </div>
 
-<div class="nav pos_r">
+<div class="nav pos_r" id="row2">
     <div class="w1200">
         <div class="logo">
-            <a href="index.html"><img src="images/logo.png"></a>
+            <a href="javascript:changePage('main', 'head')"><img src="images/logo.png"></a>
         </div>
         <ul class="clearfix">
             <li class="fl">
-                <a href="global-view.html">全球视野</a>
+                <a href="javascript:changePage('main', 'head')" id="main">网站首页</a>
             </li>
             <li class="fl">
-                <a href="stone-from-hill.html">他山之石</a>
+                <a href="javascript:changePage('global-view', 'head')" id="global-view">全球视野</a>
             </li>
             <li class="fl">
-                <a class="active" href="chinese-world.html">华人世界</a>
+                <a href="javascript:changePage('stone-from-hill', 'head')" id="stone-from-hill">他山之石</a>
+            </li>
+            <li class="fl">
+                <a href="javascript:changePage('chinese-world', 'head')" id="chinese-world">华人世界</a>
             </li>
             <li class="fr">
-                <a href="middle-invest.html">中产投资</a>
+                <a href="javascript:changePage('personal-center', 'head')" id="personal-center">个人中心</a>
             </li>
             <li class="fr">
-                <a href="elite-model.html">主题文章</a>
+                <a href="javascript:changePage('middle-invest', 'head')" id="middle-invest">中产投资</a>
             </li>
             <li class="fr">
-                <a href="middle-life.html">中产生活</a>
+                <a href="javascript:changePage('elite-model', 'head')" id="elite-model">主题文章</a>
+            </li>
+            <li class="fr">
+                <a href="javascript:changePage('middle-life', 'head')" id="middle-life">中产生活</a>
             </li>
         </ul>
     </div>
 </div>
+<script type="text/javascript">
+
+    $(function() {
+        var ticket = getTicket();
+        if(ticket){
+            $("#loginBtn").hide();
+            $("#logoutBtn").show();
+        }else {
+            $("#loginBtn").show();
+            $("#logoutBtn").hide();
+        }
+
+
+    });
+
+</script>
+</body>
+</html>

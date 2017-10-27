@@ -7,147 +7,115 @@
 <link href="style/main.css" rel="stylesheet"><link href="style/main.css" rel="stylesheet"></head>
 
 <body id="personal-center-public">
-<div bindClick="hide-select">
-	<div class="bor_b header"></div>
-	<div class="pt30 pb80 w1200 clearfix">
-		<div class="w230 fl">
-			<div class="sidebar">
-				<h1 class="sidebar_tit">个人中心</h1>
-				<ul class="sidebar_nav">
-					<li>
-						<div>
-							<a class="active" href="personal-center-main.html">首页</a>
-							<a class="active" href="personal-center-public.html">发布文章</a>
-							<a href="personal-center-edit.html">编辑文章</a>
-						</div>
+
+<h1 class="subtit mar_b10">当前位置：<span>个人中心</span> &gt;&gt; <em>发布文章</em></h1>
+<div class="subcont">
+	<div class="subcont_publish">
+		<h3 class="g_tit_bor_red">
+			<span>发布文章</span>
+		</h3>
+		<div class="subcont_publish_add">
+			<div class="pos_r pb30 clearfix">
+				<label class="fl">文章分类</label>
+				<p class="j_btn_treeview readonly_wrap fl" bindClick="show-treeview">请点击文章分类</p>
+				<ul id="treeview" class="filetree treeview-famfamfam" bindClick="stop-propagation">
+					<li><span>文章分类</span>
+						<ul>
+							<li><span class="file" bindClick="classify">全球视野</span>
+							</li>
+							<li><span class="file" bindClick="classify">他山之石</span>
+								<ul>
+									<li><span>北欧</span>
+										<ul id="folder21">
+											<li><span class="file" bindClick="classify">现中产阶级状况</span></li>
+											<li><span class="file" bindClick="classify">结构分析</span></li>
+											<li><span class="file" bindClick="classify">数据分析</span></li>
+										</ul>
+									</li>
+									<li><span>新加坡</span>
+										<ul>
+											<li><span class="file" bindClick="classify">现中产阶级状况</span></li>
+											<li><span class="file" bindClick="classify">结构分析</span></li>
+											<li><span class="file" bindClick="classify">数据分析</span></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</div>
-			<div class="wx bor">
-				<h3 class="tit_bor fon_nor">关注公众号</h3>
-				<div class="wx_pic">
-					<img src="images/1-5.jpg">
-					<p class="fir">扫扫二维码</p>
-					<p>了解跟多精彩信息</p>
+			<div class="pb30 clearfix">
+				<label class="fl">文章标题</label>
+				<input class="fl" type="text" value="请输入文章标题">
+			</div>
+			<div class="pb30 clearfix">
+				<label class="fl">标题图片</label>
+				<div class="tit_pic fl"></div>
+			</div>
+			<div class="pb30 clearfix">
+				<label class="fl">专题选择</label>
+				<div class="pos_r fl">
+					<div class="pop_select pos_r">
+						<span class="small">请选择文章专题</span>
+						<em bindClick="toggle-select"></em>
+					</div>
+					<ul class="pop_options j-body-hide">
+						<li bindClick="select">秋季补气</li>
+						<li bindClick="select" class="other">一周热门</li>
+					</ul>
 				</div>
 			</div>
-		</div>
-		<div class="w940 fr">
-			<h1 class="subtit mar_b10">当前位置：<span>个人中心</span> &gt;&gt; <em>发布文章</em></h1>
-			<div class="subcont">
-				<div class="subcont_publish">
-					<h3 class="g_tit_bor_red">
-						<span>发布文章</span>
-					</h3>
-					<div class="subcont_publish_add">
-						<div class="pos_r pb30 clearfix">
-							<label class="fl">文章分类</label>
-							<p class="j_btn_treeview readonly_wrap fl" bindClick="show-treeview">请点击文章分类</p>
-							<ul id="treeview" class="filetree treeview-famfamfam" bindClick="stop-propagation">
-								<li><span>文章分类</span>
-									<ul>
-										<li><span class="file" bindClick="classify">全球视野</span>
-										</li>
-										<li><span class="file" bindClick="classify">他山之石</span>
-											<ul>
-												<li><span>北欧</span>
-													<ul id="folder21">
-														<li><span class="file" bindClick="classify">现中产阶级状况</span></li>
-														<li><span class="file" bindClick="classify">结构分析</span></li>
-														<li><span class="file" bindClick="classify">数据分析</span></li>
-													</ul>
-												</li>
-												<li><span>新加坡</span>
-													<ul>
-														<li><span class="file" bindClick="classify">现中产阶级状况</span></li>
-														<li><span class="file" bindClick="classify">结构分析</span></li>
-														<li><span class="file" bindClick="classify">数据分析</span></li>
-													</ul>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-						<div class="pb30 clearfix">
-							<label class="fl">文章标题</label>
-							<input class="fl" type="text" value="请输入文章标题">
-						</div>
-						<div class="pb30 clearfix">
-							<label class="fl">标题图片</label>
-							<div class="tit_pic fl"></div>
-						</div>
-						<div class="pb30 clearfix">
-							<label class="fl">专题选择</label>
-							<div class="pos_r fl">
-								<div class="pop_select pos_r">
-									<span class="small">请选择文章专题</span>
-									<em bindClick="toggle-select"></em>
-								</div>
-								<ul class="pop_options j-body-hide">
-									<li bindClick="select">秋季补气</li>
-									<li bindClick="select" class="other">一周热门</li>
-								</ul>
-							</div>
-						</div>
-						<div class="pb30 clearfix">
-							<label class="fl">正文描述</label>
-							<textarea class="fl">请输入正文内容</textarea>
-						</div>
-						<div class="pb30 clearfix">
-							<label class="fl">插入图片</label>
-							<div class="add_pic fl">
-								<span></span>
-								<em>点击添加图片</em>
-							</div>
-							<div class="delate_pic fl"><a class="g_btn_white">删除图片</a></div>
-						</div>
-						<div class="pb30 clearfix">
-							<label class="fl">正文描述</label>
-							<textarea class="fl">请输入正文内容</textarea>
-						</div>
-						<div class="pb30 clearfix">
-							<label class="fl">插入图片</label>
-							<div class="add_pic fl">
-								<span></span>
-								<em>点击添加图片</em>
-							</div>
-							<div class="delate_pic fl clearfix">
-								<a class="g_btn_white fl">删除图片</a>
-								<a class="g_btn_white mar_l30 fl">删除整体</a>
-							</div>
-						</div>
-						<div class="pb30 clearfix">
-							<label class="fl"></label>
-							<div class="fl">
-								<a class="g_btn_red">添加正文和图片</a>
-							</div>
-						</div>
-						<div class="tx_c pb30">
-							<a class="g_btn_red">发布文章</a>
-						</div>
-					</div>
+			<div class="pb30 clearfix">
+				<label class="fl">正文描述</label>
+				<textarea class="fl">请输入正文内容</textarea>
+			</div>
+			<div class="pb30 clearfix">
+				<label class="fl">插入图片</label>
+				<div class="add_pic fl">
+					<span></span>
+					<em>点击添加图片</em>
 				</div>
+				<div class="delate_pic fl"><a class="g_btn_white">删除图片</a></div>
+			</div>
+			<div class="pb30 clearfix">
+				<label class="fl">正文描述</label>
+				<textarea class="fl">请输入正文内容</textarea>
+			</div>
+			<div class="pb30 clearfix">
+				<label class="fl">插入图片</label>
+				<div class="add_pic fl">
+					<span></span>
+					<em>点击添加图片</em>
+				</div>
+				<div class="delate_pic fl clearfix">
+					<a class="g_btn_white fl">删除图片</a>
+					<a class="g_btn_white mar_l30 fl">删除整体</a>
+				</div>
+			</div>
+			<div class="pb30 clearfix">
+				<label class="fl"></label>
+				<div class="fl">
+					<a class="g_btn_red">添加正文和图片</a>
+				</div>
+			</div>
+			<div class="tx_c pb30">
+				<a class="g_btn_red">发布文章</a>
 			</div>
 		</div>
 	</div>
 </div>
 
-<div class="footer"></div>
-
 <script type="text/javascript" src="js/plugins/jquery.min.js"></script>
-<script src="http://static.runoob.com/assets/js/jquery-treeview/jquery.treeview.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/plugins/jquery.treeview.js"></script>
 <script type="text/javascript" src="js/plugins/jsrender.js"></script>
 <script type="text/javascript" src="js/plugins/bundle.main.js"></script>
 <script type="text/javascript" src="js/common/org.js"></script>
 <script type="text/javascript" src="js/common/common.js"></script>
+<script type="text/javascript" src="js/common/login.js"></script>
 <script type="text/javascript" src="js/views/personal-center-public.js"></script>
-<script type="text/javascript">
-    $(function() {
-        personal_center_login_vaild();
-    })
-</script>
+
+
 
 </body>
 </html>

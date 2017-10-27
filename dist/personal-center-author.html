@@ -8,26 +8,47 @@
 
 <body id="personal-center-public">
 
-<h1 class="subtit mar_b10">当前位置：<span>个人中心</span> &gt;&gt; <em>首页</em></h1>
+<h1 class="subtit mar_b10">当前位置：<span>个人中心</span> &gt;&gt; <em>作者申请</em></h1>
 <div class="subcont">
 	<div class="subcont_publish">
 		<h3 class="g_tit_bor_red">
-			<span>首页</span>
+			<span>作者申请</span>
 		</h3>
 		<div class="subcont_publish_add">
-			<img src="images/welcome.png" height="500" width="100%"/>
+			<div class="pb30 clearfix">
+				<label class="fl">姓名：</label>
+				<input class="fl" type="text" placeholder="请输入真实姓名" id="realName">
+			</div>
+			<div class="pb30 clearfix">
+				<label class="fl">笔名：</label>
+				<input class="fl" type="text" placeholder="请输入笔名" id="penName">
+			</div>
+			<div class="pb30 clearfix">
+				<label class="fl">手机号：</label>
+				<input class="fl" type="text" placeholder="请输入手机号" id="phone">
+			</div>
+			<div class="pb30 clearfix">
+				<label class="fl">身份证号：</label>
+				<input class="fl" type="text" placeholder="请输入身份证号" id="idNum">
+			</div>
+			<div class="pb30 clearfix">
+				<label class="fl"></label>
+				<a class="g_btn_white">重置</a>
+				<a class="g_btn_red" style="margin-left: 30px;" onclick="applyAuthor()">提交申请</a>
+			</div>
 		</div>
+
 	</div>
 </div>
 
 <script type="text/javascript" src="js/plugins/jquery.min.js"></script>
-<script type="text/javascript" src="js/plugins/jquery.treeview.js"></script>
 <script type="text/javascript" src="js/plugins/jsrender.js"></script>
 <script type="text/javascript" src="js/plugins/bundle.main.js"></script>
 <script type="text/javascript" src="js/plugins/bundle.main.js"></script>
 <script type="text/javascript" src="js/common/org.js"></script>
 <script type="text/javascript" src="js/common/common.js"></script>
 <script type="text/javascript" src="js/common/login.js"></script>
+<script type="text/javascript" src="js/plugins/jquery.treeview.js"></script>
 <script type="text/javascript" src="js/views/personal-center-public.js"></script>
 </body>
 </html>

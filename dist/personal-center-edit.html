@@ -7,98 +7,73 @@
 <link href="style/main.css" rel="stylesheet"></head>
 
 <body id="personal-center-public">
-<div bindClick="hide-select">
-	<div class="bor_b header"></div>
 
-	<div class="pt30 pb80 w1200 clearfix">
-		<div class="w230 fl">
-			<div class="sidebar">
-				<h1 class="sidebar_tit">个人中心</h1>
-				<ul class="sidebar_nav">
-					<li>
-						<div>
-							<a href="personal-center-public.html">发布文章</a>
-							<a class="active" href="personal-center-edit.html">编辑文章</a>
-						</div>
+<h1 class="subtit mar_b10">当前位置：<span>个人中心</span> &gt;&gt; <em>编辑文章</em></h1>
+<div class="subcont">
+	<div class="subcont_publish">
+		<h3 class="g_tit_bor_red">
+			<span>编辑文章</span>
+		</h3>
+		<div class="subcont_publish_add">
+			<div class="pos_r pb30 clearfix">
+				<label class="fl">文章分类</label>
+				<p class="j_btn_treeview readonly_wrap readonly_wrap_edit fl" bindClick="show-treeview">文章分类/精英样板/有关美食</p>
+				<ul id="treeview" class="filetree treeview-famfamfam" bindClick="stop-propagation">
+					<li><span>文章分类</span>
+						<ul>
+							<li><span class="file" bindClick="classify">全球视野</span>
+							</li>
+							<li><span class="file" bindClick="classify">他山之石</span>
+								<ul>
+									<li><span>北欧</span>
+										<ul id="folder21">
+											<li><span class="file" bindClick="classify">现中产阶级状况</span></li>
+											<li><span class="file" bindClick="classify">结构分析</span></li>
+											<li><span class="file" bindClick="classify">数据分析</span></li>
+										</ul>
+									</li>
+									<li><span>新加坡</span>
+										<ul>
+											<li><span class="file" bindClick="classify">现中产阶级状况</span></li>
+											<li><span class="file" bindClick="classify">结构分析</span></li>
+											<li><span class="file" bindClick="classify">数据分析</span></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</div>
-			<div class="wx bor">
-				<h3 class="tit_bor fon_nor">关注公众号</h3>
-				<div class="wx_pic">
-					<img src="images/1-5.jpg">
-					<p class="fir">扫扫二维码</p>
-					<p>了解跟多精彩信息</p>
+			<div class="pb30 clearfix">
+				<label class="fl">文章标题</label>
+				<input class="edit fl" type="text" value="咸肉烧冬瓜">
+			</div>
+			<div class="pb30 clearfix">
+				<label class="fl">标题图片</label>
+				<div class="tit_pic fl">
+					<p><img src="images/tmp/tmp-38.jpg"></p>
+				</div>
+				<div class="delate_pic_short fl">
+					<a class="g_btn_white">删除图片</a>
 				</div>
 			</div>
-		</div>
-		<div class="w940 fr">
-			<h1 class="subtit mar_b10">当前位置：<span>个人中心</span> &gt;&gt; <em>发布文章</em></h1>
-			<div class="subcont">
-				<div class="subcont_publish">
-					<h3 class="g_tit_bor_red">
-						<span>编辑文章</span>
-					</h3>
-					<div class="subcont_publish_add">
-						<div class="pos_r pb30 clearfix">
-							<label class="fl">文章分类</label>
-							<p class="j_btn_treeview readonly_wrap readonly_wrap_edit fl" bindClick="show-treeview">文章分类/精英样板/有关美食</p>
-							<ul id="treeview" class="filetree treeview-famfamfam" bindClick="stop-propagation">
-								<li><span>文章分类</span>
-									<ul>
-										<li><span class="file" bindClick="classify">全球视野</span>
-										</li>
-										<li><span class="file" bindClick="classify">他山之石</span>
-											<ul>
-												<li><span>北欧</span>
-													<ul id="folder21">
-														<li><span class="file" bindClick="classify">现中产阶级状况</span></li>
-														<li><span class="file" bindClick="classify">结构分析</span></li>
-														<li><span class="file" bindClick="classify">数据分析</span></li>
-													</ul>
-												</li>
-												<li><span>新加坡</span>
-													<ul>
-														<li><span class="file" bindClick="classify">现中产阶级状况</span></li>
-														<li><span class="file" bindClick="classify">结构分析</span></li>
-														<li><span class="file" bindClick="classify">数据分析</span></li>
-													</ul>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-						<div class="pb30 clearfix">
-							<label class="fl">文章标题</label>
-							<input class="edit fl" type="text" value="咸肉烧冬瓜">
-						</div>
-						<div class="pb30 clearfix">
-							<label class="fl">标题图片</label>
-							<div class="tit_pic fl">
-								<p><img src="images/tmp/tmp-38.jpg"></p>
-							</div>
-							<div class="delate_pic_short fl">
-								<a class="g_btn_white">删除图片</a>
-							</div>
-						</div>
-						<div class="pb30 clearfix">
-							<label class="fl">专题选择</label>
-							<div class="pos_r fl">
-								<div class="pop_select pos_r">
-									<span class="small edit">秋季补气</span>
-									<em bindClick="toggle-select"></em>
-								</div>
-								<ul class="pop_options j-body-hide">
-									<li bindClick="select">秋季补气</li>
-									<li bindClick="select" class="other">一周热门</li>
-								</ul>
-							</div>	
-						</div>
-						<div class="pb30 clearfix">
-							<label class="fl">正文描述</label>
-							<textarea class="lg fl">1、冬瓜去皮切成小块
+			<div class="pb30 clearfix">
+				<label class="fl">专题选择</label>
+				<div class="pos_r fl">
+					<div class="pop_select pos_r">
+						<span class="small edit">秋季补气</span>
+						<em bindClick="toggle-select"></em>
+					</div>
+					<ul class="pop_options j-body-hide">
+						<li bindClick="select">秋季补气</li>
+						<li bindClick="select" class="other">一周热门</li>
+					</ul>
+				</div>
+			</div>
+			<div class="pb30 clearfix">
+				<label class="fl">正文描述</label>
+				<textarea class="lg fl">1、冬瓜去皮切成小块
 2、腊肉洗净切片
 3、调料备好
 4、热锅下咸肉翻炒至微黄色，加入姜蒜、干辣椒炒出香味
@@ -109,40 +84,36 @@
 9、盛盘撒上葱花
 10、成品图欣赏
 							</textarea>
-						</div>
-						<div class="pb30 clearfix">
-							<label class="fl">插入图片</label>
-							<div class="add_pic fl">
-								<span></span>
-								<em>点击添加图片</em>
-								<p><img src="images/tmp/tmp-38.jpg"></p>
-							</div>
-							<div class="delate_pic fl"><a class="g_btn_white">删除图片</a></div>
-						</div>
-						<div class="pb30 clearfix">
-							<label class="fl"></label>
-							<div class="fl">
-								<a class="g_btn_red">添加正文和图片</a>
-							</div>
-						</div>
-						<div class="tx_c pb30">
-							<a class="g_btn_red">保存并发布</a>
-						</div>
-					</div>
+			</div>
+			<div class="pb30 clearfix">
+				<label class="fl">插入图片</label>
+				<div class="add_pic fl">
+					<span></span>
+					<em>点击添加图片</em>
+					<p><img src="images/tmp/tmp-38.jpg"></p>
 				</div>
+				<div class="delate_pic fl"><a class="g_btn_white">删除图片</a></div>
+			</div>
+			<div class="pb30 clearfix">
+				<label class="fl"></label>
+				<div class="fl">
+					<a class="g_btn_red">添加正文和图片</a>
+				</div>
+			</div>
+			<div class="tx_c pb30">
+				<a class="g_btn_red">保存并发布</a>
 			</div>
 		</div>
 	</div>
 </div>
 
-<div class="footer"></div>
-
 <script type="text/javascript" src="js/plugins/jquery.min.js"></script>
-<script src="http://static.runoob.com/assets/js/jquery-treeview/jquery.treeview.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/plugins/jquery.treeview.js"></script>
 <script type="text/javascript" src="js/plugins/jsrender.js"></script>
 <script type="text/javascript" src="js/plugins/bundle.main.js"></script>
 <script type="text/javascript" src="js/common/org.js"></script>
 <script type="text/javascript" src="js/common/common.js"></script>
+<script type="text/javascript" src="js/common/login.js"></script>
 <script type="text/javascript" src="js/views/personal-center-edit.js"></script>
 
 </body>

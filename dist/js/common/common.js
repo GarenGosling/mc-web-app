@@ -1,8 +1,37 @@
-/***************** 引入html *******************/
-$(function() {
-    $(".header").load("common/head.html");
-    $(".footer").load("common/foot.html");
-});
+/***************** 页面跳转 *******************/
+function changePage(pageName, tag) {
+
+    if(tag == "head"){
+        $(".active").removeClass("active");
+        $("#"+pageName).addClass("active");
+        if(pageName == "main"){
+            $(".left").html("");
+            $(".right").html("");
+            $(".mainDiv").load("main.html");
+        }else if(pageName == "personal-center"){
+            var ticket = getTicket();
+            if(ticket){
+                $(".mainDiv").html("");
+                $(".left").load("common/left2.html");
+                $(".right").load(pageName+"-main.html");
+            }else {
+                login();
+            }
+
+        }else{
+            $(".mainDiv").html("");
+            $(".left").load("common/left.html");
+            $(".right").load(pageName+".html");
+        }
+    }
+
+    if(tag == "left"){
+        $("#left_menu").find(".active").removeClass("active");
+        $("#"+pageName).addClass("active");
+        $(".right").load(pageName+".html");
+    }
+
+}
 
 /***************** url *******************/
 var server = {};
@@ -105,6 +134,23 @@ function getUserCode() {
 }
 
 /**
+ * 获取登录名
+ * @returns {*}
+ */
+function getLoginName() {
+    var loginVo = getLoginVo();
+    if(loginVo){
+        var loginInfo = loginVo.loginInfo;
+        if(loginInfo){
+            return loginInfo.loginName;
+        }else{
+            return null;
+        }
+    }
+    return null;
+}
+
+/**
  * 个人中心登录验证
  * 没有登录认证，则跳转到登录页面；
  * 有登录认证，如果没有登录信息，则去服务器查询并保存登录信息
@@ -187,7 +233,7 @@ function logout() {
             console.log(response);
             if(response && response.code == 200){
                 localStorage.removeItem("ticket");
-                localStorage.removeItem("loginVo");
+                localStorage.removeItem("loginVoJson");
                 window.location.href = url.host.index;
             }else{
                 alert(response.message);
@@ -203,14 +249,26 @@ function loginSuccessCallback(){
     var ticket = UrlParm.parm("ticket");
     if(ticket){
         localStorage.setItem("ticket",ticket);
-        window.location.href="personal-center-public.html";
-    }
-    // 是否显示个人中心
-    var ticketLocal = getTicket();
-    if(ticketLocal){
-        $("#personalCenter").show();
-    }else{
-        $("#personalCenter").hide();
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: url.cas.loginVo,
+            beforeSend: function(request) {
+                request.setRequestHeader("ticket", ticket);
+            },
+            success: function(response){
+                if(response && response.code == 200){
+                    var loginVo = response.data;
+                    var loginVoJson = JSON.stringify(loginVo);
+                    localStorage.setItem("loginVoJson", loginVoJson);
+                    $("#welcome").text(getLoginName());
+                    changePage('personal-center', 'head');
+                }else{
+                    alert(response.message);
+                }
+            }
+        });
+
     }
 
 }

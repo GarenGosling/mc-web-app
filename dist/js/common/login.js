@@ -1,0 +1,1 @@
+personal_center_login_vaild();
