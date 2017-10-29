@@ -15,7 +15,10 @@ function changePage(pageName, tag) {
                 $(".left").load("common/left2.html");
                 $(".right").load(pageName+"-main.html");
             }else {
-                login();
+                //login();
+                $(".mainDiv").html("");
+                $(".left").load("common/left2.html");
+                $(".right").load(pageName+"-main.html");
             }
 
         }else{
@@ -61,6 +64,7 @@ url.mc.carousel_all = server.mc + '/carousel/all';
 url.mc.api_author_userCode = server.mc + '/api/author/userCode';
 url.mc.api_author = server.mc + '/api/author';
 url.mc.api_test = server.mc + '/api/test';
+url.mc.menu_tree_parentCode = server.mc + '/menu/tree/parentCode';
 
 url.host.index = server.host;
 
@@ -157,7 +161,6 @@ function getLoginName() {
  * 有登录认证，并且有登录信息，则前往作者认证方法
  */
 function personal_center_login_vaild() {
-    debugger
     var ticket = getTicket();
     if(!ticket){
         login();
@@ -167,7 +170,7 @@ function personal_center_login_vaild() {
             _getAndSaveLoginVo(ticket);
         }else{
             var userCode = loginVo.loginInfo.userCode;
-            _personal_center_author_valid(ticket, userCode);
+            //_personal_center_author_valid(ticket, userCode);
         }
     }
 }
@@ -367,4 +370,30 @@ function applyAuthor(){
             }
         });
     }
+}
+
+/**
+ * 查询树形菜单
+ * @param parentCode
+ * @param callback
+ */
+function menuTreeFull(parentCode, callback) {
+    var params = {};
+    params.parentCode = parentCode;
+    $.ajax({
+        type: "GET",
+        contentType: "application/json;charset=UTF-8",
+        dataType: "json",
+        data: params,
+        url: url.mc.menu_tree_parentCode,
+        success: function(response){
+            if(response && response.code == 200){
+                callback(response.data);
+            }else{
+                alert(response.message);
+            }
+        }
+    });
+
+
 }

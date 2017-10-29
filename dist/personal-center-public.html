@@ -1,109 +1,108 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>个人中心-发布文章</title>
-<link rel="stylesheet" href="http://static.runoob.com/assets/js/jquery-treeview/jquery.treeview.css" />
-<link href="style/main.css" rel="stylesheet"><link href="style/main.css" rel="stylesheet"></head>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>个人中心-发布文章</title>
+    <link rel="stylesheet" href="http://static.runoob.com/assets/js/jquery-treeview/jquery.treeview.css"/>
+    <link href="style/main.css" rel="stylesheet">
+    <link href="style/main.css" rel="stylesheet">
+</head>
+<style>
+    .fileupload, .fileupload2 {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+</style>
 <body id="personal-center-public">
 
 <h1 class="subtit mar_b10">当前位置：<span>个人中心</span> &gt;&gt; <em>发布文章</em></h1>
 <div class="subcont">
-	<div class="subcont_publish">
-		<h3 class="g_tit_bor_red">
-			<span>发布文章</span>
-		</h3>
-		<div class="subcont_publish_add">
-			<div class="pos_r pb30 clearfix">
-				<label class="fl">文章分类</label>
-				<p class="j_btn_treeview readonly_wrap fl" bindClick="show-treeview">请点击文章分类</p>
-				<ul id="treeview" class="filetree treeview-famfamfam" bindClick="stop-propagation">
-					<li><span>文章分类</span>
-						<ul>
-							<li><span class="file" bindClick="classify">全球视野</span>
-							</li>
-							<li><span class="file" bindClick="classify">他山之石</span>
-								<ul>
-									<li><span>北欧</span>
-										<ul id="folder21">
-											<li><span class="file" bindClick="classify">现中产阶级状况</span></li>
-											<li><span class="file" bindClick="classify">结构分析</span></li>
-											<li><span class="file" bindClick="classify">数据分析</span></li>
-										</ul>
-									</li>
-									<li><span>新加坡</span>
-										<ul>
-											<li><span class="file" bindClick="classify">现中产阶级状况</span></li>
-											<li><span class="file" bindClick="classify">结构分析</span></li>
-											<li><span class="file" bindClick="classify">数据分析</span></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-			<div class="pb30 clearfix">
-				<label class="fl">文章标题</label>
-				<input class="fl" type="text" value="请输入文章标题">
-			</div>
-			<div class="pb30 clearfix">
-				<label class="fl">标题图片</label>
-				<div class="tit_pic fl"></div>
-			</div>
-			<div class="pb30 clearfix">
-				<label class="fl">专题选择</label>
-				<div class="pos_r fl">
-					<div class="pop_select pos_r">
-						<span class="small">请选择文章专题</span>
-						<em bindClick="toggle-select"></em>
-					</div>
-					<ul class="pop_options j-body-hide">
-						<li bindClick="select">秋季补气</li>
-						<li bindClick="select" class="other">一周热门</li>
-					</ul>
-				</div>
-			</div>
-			<div class="pb30 clearfix">
-				<label class="fl">正文描述</label>
-				<textarea class="fl">请输入正文内容</textarea>
-			</div>
-			<div class="pb30 clearfix">
-				<label class="fl">插入图片</label>
-				<div class="add_pic fl">
-					<span></span>
-					<em>点击添加图片</em>
-				</div>
-				<div class="delate_pic fl"><a class="g_btn_white">删除图片</a></div>
-			</div>
-			<div class="pb30 clearfix">
-				<label class="fl">正文描述</label>
-				<textarea class="fl">请输入正文内容</textarea>
-			</div>
-			<div class="pb30 clearfix">
-				<label class="fl">插入图片</label>
-				<div class="add_pic fl">
-					<span></span>
-					<em>点击添加图片</em>
-				</div>
-				<div class="delate_pic fl clearfix">
-					<a class="g_btn_white fl">删除图片</a>
-					<a class="g_btn_white mar_l30 fl">删除整体</a>
-				</div>
-			</div>
-			<div class="pb30 clearfix">
-				<label class="fl"></label>
-				<div class="fl">
-					<a class="g_btn_red">添加正文和图片</a>
-				</div>
-			</div>
-			<div class="tx_c pb30">
-				<a class="g_btn_red">发布文章</a>
-			</div>
-		</div>
-	</div>
+    <div class="subcont_publish">
+        <h3 class="g_tit_bor_red">
+            <span>发布文章</span>
+        </h3>
+        <div class="subcont_publish_add">
+            <div class="pos_r pb30 clearfix">
+                <label class="fl">文章分类</label>
+                <p id = "treeInput" class="j_btn_treeview readonly_wrap fl" onclick="is_show_treeView()" >请点击文章分类</p>
+                <ul id="treeview" title="0" class="filetree treeview-famfamfam" bindClick="stop-propagation" style="height: 200px;overflow:auto;">
+
+                </ul>
+            </div>
+            <div class="pb30 clearfix">
+                <label class="fl">文章标题</label>
+                <input class="fl" type="text" placeHolder="请输入文章标题">
+            </div>
+            <div class="pb30 clearfix">
+                <label class="fl">标题图片</label>
+                <label class="tit_pic fl">
+                    <span></span>
+                    <form enctype="multipart/form-data"><input type="file" name="file" class="fileupload">
+                    </form>
+                </label>
+            </div>
+            <div class="pb30 clearfix">
+                <label class="fl">专题选择</label>
+                <div class="pos_r fl">
+                    <div class="pop_select pos_r">
+                        <span id="subjectInput" class="small" onclick="is_show_subject()">请选择文章专题</span>
+                        <em onclick="is_show_subject()" bindClick="toggle-select"></em>
+                    </div>
+                    <ul id="subject" class="pop_options j-body-hide" title="1">
+                        <li bindClick="select" onclick="click_subject_li('秋季补气')">秋季补气</li>
+                        <li bindClick="select" onclick="click_subject_li('一周热门')" class="other">一周热门</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pb30 clearfix">
+                <label class="fl">正文描述</label>
+                <textarea class="fl" placeHolder="请输入正文内容"></textarea>
+            </div>
+            <div class="pb30 clearfix">
+                <label class="fl">插入图片</label>
+
+                <label class="add_pic fl">
+                    <span></span>
+                    <em>点击添加图片</em>
+                    <form enctype="multipart/form-data"><input type="file" name="file" class="fileupload2">
+                    </form>
+                </label>
+
+                <div class="delate_pic fl"><a class="g_btn_white delete">删除图片</a></div>
+            </div>
+            <div class="pb30 clearfix">
+                <label class="fl">正文描述</label>
+                <textarea class="fl" placeHolder="请输入正文内容"></textarea>
+            </div>
+            <div class="pb30 clearfix">
+                <label class="fl">插入图片</label>
+                <label class="add_pic fl">
+                    <span></span>
+                    <em>点击添加图片</em>
+                    <form enctype="multipart/form-data"><input type="file" name="file" class="fileupload2">
+                    </form>
+                </label>
+                <div class="delate_pic fl clearfix">
+                    <a class="g_btn_white fl delete">删除图片</a>
+                    <a class="g_btn_white mar_l30 fl">删除整体</a>
+                </div>
+            </div>
+            <div class="pb30 clearfix">
+                <label class="fl"></label>
+                <div class="fl">
+                    <a class="g_btn_red">添加正文和图片</a>
+                </div>
+            </div>
+            <div class="tx_c pb30">
+                <a class="g_btn_red">发布文章</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript" src="js/plugins/jquery.min.js"></script>
@@ -116,6 +115,215 @@
 <script type="text/javascript" src="js/views/personal-center-public.js"></script>
 
 
+<script type="text/tmp" id="tmp5">
+    {{for}}
+    <li>
+        <span onclick="click_tree_li('文章分类{{:fullName}}')">{{:name}}</span>
+        <ul>
+            {{if children != null && children.length>0}}
+            {{for children}}
+            <li>
+                <span onclick="click_tree_li('文章分类{{:fullName}}')">{{:name}}</span>
+                <ul>
+                    {{if children != null && children.length>0}}
+                    {{for children}}
+                    <li>
+                        <span onclick="click_tree_li('文章分类{{:fullName}}')">{{:name}}</span>
+                        <ul>
+                            {{if children != null && children.length>0}}
+                            {{for children}}
+                            <li>
+                                <span onclick="click_tree_li('文章分类{{:fullName}}')">{{:name}}</span>
+                            </li>
+                            {{/for}}
+                            {{/if}}
+                        </ul>
+                    </li>
+                    {{/for}}
+                    {{/if}}
+                </ul>
+            </li>
+            {{/for}}
+            {{/if}}
+        </ul>
+    </li>
+    {{/for}}
+</script>
 
+
+<script type="text/javascript">
+    var params = {};
+    params.parentCode = "0";
+    $.ajax({
+        type: "GET",
+        contentType: "application/json;charset=UTF-8",
+        dataType: "json",
+        data: params,
+        url: url.mc.menu_tree_parentCode,
+        success: function(response){
+            debugger
+            if(response && response.code == 200){
+                var html = '<span onclick="click_tree_li(\'文章分类\')">文章分类</span>';
+                html += $("#tmp5").render(response.data);
+                $("#treeview").html(html);
+            }else{
+                alert(response.message);
+            }
+        }
+    });
+    /**
+     * 是否显示主题的下拉列表
+     * 0: 隐藏 1:显示
+     */
+    function is_show_subject() {
+        var tag = $("#subject").attr("title");
+        if(tag == "0"){
+            $("#subject").hide();
+            $("#subject").attr("title", "1");
+        }else{
+            $("#subject").show();
+            $("#subject").attr("title", "0");
+        }
+    }
+    /**
+     * 点击树形菜单的叶子
+     * 给文章分类赋值，隐藏树形菜单
+     */
+    function click_subject_li(value){
+        $("#subjectInput").text(value);
+        is_show_subject();
+    }
+    /**
+     * 是否显示树形菜单
+     * 0: 隐藏 1:显示
+     */
+    function is_show_treeView() {
+        var tag = $("#treeview").attr("title");
+        if(tag == "0"){
+            $("#treeview").hide();
+            $("#treeview").attr("title", "1");
+        }else{
+            $("#treeview").show();
+            $("#treeview").attr("title", "0");
+        }
+    }
+    /**
+     * 点击树形菜单的叶子
+     * 给文章分类赋值，隐藏树形菜单
+     */
+    function click_tree_li(fullName){
+        $("#treeInput").text(fullName);
+        is_show_treeView();
+    }
+    $(function () {
+//        personal_center_login_vaild();
+        $(".fileupload,.fileupload2").on('change', function (e) {
+            var fileName = e.target.value.split('\\').pop();
+            var imgReg = /(jpg|png|jpeg|bmp|gif)$/;
+            if (!fileName) {
+                alert("请选择文件!");
+                return;
+            }
+            if (!imgReg.test(fileName)) {
+                alert("请选择图片!");
+                return;
+            }
+            var $label = $(this).parent().parent();
+            var file = new FormData($(this).parent("form")[0]);
+            $.ajax({
+                url: 'http://120.27.22.41:9091/upload',
+                type: 'POST',
+                data: file,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (returndata) {
+                    $label.css("background-image", "url(http://120.27.22.41:9091/download/" + returndata.data.md5 + ")");
+                    $label.prop("md5", returndata.data.md5);
+                },
+                error: function (returndata) {
+//                    alert(returndata.message);
+                    // TODO
+                }
+            });
+        });
+        $(".delete").click(function () {
+            var $label=$(this).parent().parent().find(".add_pic")
+            alert($label.prop("md5"));
+            $label.removeProp("md5");
+            $label.css("background-image", "url()");
+        });
+
+        /*****************************************************/
+            var app = new Org({
+                $el: '#personal-center-public',
+                init: function() {
+                    $('#treeview').treeview();
+                    setTimeout(function() {
+                        $('.j_btn_treeview').trigger('click');
+                    }, 0)
+                },
+                events: {
+                    'hide-select': function() {
+                        $('.j-body-hide').hide();
+                        $('#treeview').hide();
+                    },
+                    'toggle-select': function($this, event) {
+                        var e = event || window.event;
+                        if(e.stopPropagation) {
+                            e.stopPropagation();
+                        } else if(e.cancelBubble) {
+                            e.cancelBubble = true;
+                        }
+                        $this.parent().siblings('ul').toggle();
+                    },
+                    select: function($this, event) {
+                        var txt = $(event.target).html();
+                        $this.parent().siblings().find('span').html(txt);
+                        $this.parent().hide();
+                    },
+                    'show-treeview': function($this, event) {
+                        var e = event || window.event;
+                        if(e.stopPropagation) {
+                            e.stopPropagation();
+                        } else if(e.cancelBubble) {
+                            e.cancelBubble = true;
+                        }
+                        $('#treeview').animate({'height': 'toggle'}, 0);
+                    },
+                    'stop-propagation': function($this, event) {
+                        var e = event || window.event;
+                        if(e.stopPropagation) {
+                            e.stopPropagation();
+                        } else if(e.cancelBubble) {
+                            e.cancelBubble = true;
+                        }
+                    },
+                    classify: function($this) {
+                        var selfTx = $this.text();
+                        var pt = $this.parents('ul');
+                        var arr = [];
+                        var str = '';
+
+                        arr.push(selfTx);
+                        for(var i = 0; i < pt.length; i++) {
+                            var parentTx = pt.eq(i).prev('span').text();
+                            if(parentTx) {
+                                arr.unshift(parentTx);
+                            }
+                        }
+                        str = arr.join('/');
+                        $('.j_btn_treeview').text(str);
+                        $('#treeview').hide();
+                    }
+                }
+            })
+
+
+        });
+
+</script>
 </body>
+
 </html>
