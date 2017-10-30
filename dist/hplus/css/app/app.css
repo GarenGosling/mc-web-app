@@ -1,0 +1,63 @@
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.cf{
+    clear: both;
+    zoom: 1;
+}
+.inmodal .modal-header{
+    padding: 10px !important;
+}
+.modal-y{
+    padding: 0px !important;
+    background-color: #f8fafb;
+}
+div.content_wrap {
+    width: 80%;
+    height: 350px;
+    margin: 0 auto;
+}
+.left{
+    width: 40%;
+}
+ul.ztree{
+    height: 320px !important;
+    margin-top: 15px;
+}
+.right{
+    width:60%;
+}
+.ulClass{
+    height: 150px;
+    /*overflow:scroll;*/
+    overflow-y: auto;
+    margin-top: 15px;
+}
+.ulClass li{
+    font-size: 12px;
+    list-style-type: none;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 5px;
+    background: #F0FFF0;
+    border-radius: 5px;
+}
+.modal-footer{
+    padding: 5px 15px !important;
+}
+span.deleteClose{
+    float: right;
+    color: #999;
+    font-size: 18px;
+    padding-right: 5px;
+}
+.ulClass li.title{
+    text-align: left;
+    color: #999;
+    background-color: #fff;
+    margin-top: 0px;
+}

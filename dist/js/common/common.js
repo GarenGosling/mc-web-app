@@ -66,6 +66,7 @@ url.mc.api_author = server.mc + '/api/author';
 url.mc.api_test = server.mc + '/api/test';
 url.mc.menu_tree_parentCode = server.mc + '/menu/tree/parentCode';
 url.mc.api_articles = server.mc + '/api/articles';
+url.mc.articles_query = server.mc + '/articles/query';
 
 url.host.index = server.host;
 
@@ -197,13 +198,28 @@ function _personal_center_author_valid(ticket, userCode){
                     if(author){
                         var loginVo = getLoginVo();
                         loginVo.author = author;
-                        localStorage.setItem("loginVo", loginVo);
+                        var loginVoJson = JSON.stringify(loginVo);
+                        localStorage.setItem("loginVoJson", loginVoJson);
                     }
+                    authorShow();
                 }else{
                     alert(response.message);
                 }
             }
         });
+    }
+}
+
+function authorShow(){
+    var author = getAuthor();
+    if(author){
+        $("#personal-center-articles").show();
+        $("#personal-center-public").show();
+        $("#personal-center-edit").show();
+    }else {
+        $("#personal-center-articles").hide();
+        $("#personal-center-public").hide();
+        $("#personal-center-edit").hide();
     }
 }
 

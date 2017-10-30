@@ -31,26 +31,38 @@
 				<label class="fl">身份证号：</label>
 				<input class="fl" type="text" placeholder="请输入身份证号" id="idNum">
 			</div>
-			<div class="pb30 clearfix">
+			<div class="pb30 clearfix" id="authorBtn">
 				<label class="fl"></label>
 				<a class="g_btn_white">重置</a>
 				<a class="g_btn_red" style="margin-left: 30px;" onclick="applyAuthor()">提交申请</a>
 			</div>
 		</div>
 
+
 	</div>
 </div>
 
 <script type="text/javascript" src="js/plugins/jquery.min.js"></script>
 <script type="text/javascript" src="js/plugins/jsrender.js"></script>
+<script type="text/javascript" src="js/plugins/jquery.slide.js"></script>
 <script type="text/javascript" src="js/plugins/bundle.main.js"></script>
 <script type="text/javascript" src="js/plugins/bundle.main.js"></script>
 <script type="text/javascript" src="js/common/org.js"></script>
 <script type="text/javascript" src="js/common/common.js"></script>
-<!--<script type="text/javascript" src="js/common/login.js"></script>-->
+<script type="text/javascript" src="js/common/login.js"></script>
 <script type="text/javascript" src="js/plugins/jquery.treeview.js"></script>
 <script type="text/javascript" src="js/views/personal-center-public.js"></script>
 <script type="text/javascript">
+	$(function () {
+		var author = getAuthor();
+		if(author){
+			$("#authorBtn").hide();
+			$("#realName").val(author.realName);
+			$("#penName").val(author.penName);
+			$("#phone").val(author.phone);
+			$("#idNum").val(author.idNum);
+		}
+	});
     /**
      * 申请开通作者权限
      */
