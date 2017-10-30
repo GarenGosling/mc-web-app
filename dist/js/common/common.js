@@ -15,10 +15,10 @@ function changePage(pageName, tag) {
                 $(".left").load("common/left2.html");
                 $(".right").load(pageName+"-main.html");
             }else {
-                //login();
-                $(".mainDiv").html("");
-                $(".left").load("common/left2.html");
-                $(".right").load(pageName+"-main.html");
+                login();
+                // $(".mainDiv").html("");
+                // $(".left").load("common/left2.html");
+                // $(".right").load(pageName+"-main.html");
             }
 
         }else{
@@ -43,7 +43,7 @@ server.ip_local = 'localhost';
 server.base = "http://";
 server.cas = server.base + server.ip_test + ':9090';
 server.oss = server.base + server.ip_test + ':9091';
-server.mc = server.base + server.ip_local + ':9093';
+server.mc = server.base + server.ip_test + ':9093';
 server.host = server.base + server.ip_test + ':8081';
 
 var url = {};
@@ -57,7 +57,7 @@ url.cas.login = server.cas + '/login';
 url.cas.logout = server.cas + '/logout';
 url.cas.loginVo = server.cas + '/loginVo';
 
-url.oss.download = server.oss + '/download';
+url.oss.download = server.oss + '/download/';
 
 url.mc.partnerLink_all = server.mc + '/partnerLink/all';
 url.mc.carousel_all = server.mc + '/carousel/all';
@@ -65,6 +65,7 @@ url.mc.api_author_userCode = server.mc + '/api/author/userCode';
 url.mc.api_author = server.mc + '/api/author';
 url.mc.api_test = server.mc + '/api/test';
 url.mc.menu_tree_parentCode = server.mc + '/menu/tree/parentCode';
+url.mc.api_articles = server.mc + '/api/articles';
 
 url.host.index = server.host;
 
@@ -170,7 +171,7 @@ function personal_center_login_vaild() {
             _getAndSaveLoginVo(ticket);
         }else{
             var userCode = loginVo.loginInfo.userCode;
-            //_personal_center_author_valid(ticket, userCode);
+            _personal_center_author_valid(ticket, userCode);
         }
     }
 }
@@ -329,47 +330,6 @@ function _getAndSaveLoginVo(ticket){
             }
         }
     });
-}
-
-/**
- * 申请开通作者权限
- */
-function applyAuthor(){
-    var ticket = getTicket();
-    if(!ticket){
-        login();
-    }else{
-        var params = {};
-        params.userCode = getUserCode();
-        params.phone = $("#phone").val();
-        params.idNum = $("#idNum").val();
-        params.realName = $("#realName").val();
-        params.penName = $("#penName").val();
-        params.status = 0;
-        var paramsJson = JSON.stringify(params);
-        $.ajax({
-            type: "POST",
-            contentType: "application/json;charset=UTF-8",
-            dataType: "json",
-            data: paramsJson,
-            url: url.mc.api_author,
-            beforeSend: function(request) {
-                request.setRequestHeader("ticket", ticket);
-            },
-            success: function(response){
-                if(response && response.code == 200){
-                    var author = response.data;
-                    if(author){
-                        var loginVo = getLoginVo();
-                        loginVo.author = author;
-                        localStorage.setItem("loginVo", loginVo);
-                    }
-                }else{
-                    alert(response.message);
-                }
-            }
-        });
-    }
 }
 
 /**

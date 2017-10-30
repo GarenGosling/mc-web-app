@@ -50,5 +50,47 @@
 <!--<script type="text/javascript" src="js/common/login.js"></script>-->
 <script type="text/javascript" src="js/plugins/jquery.treeview.js"></script>
 <script type="text/javascript" src="js/views/personal-center-public.js"></script>
+<script type="text/javascript">
+    /**
+     * 申请开通作者权限
+     */
+    function applyAuthor(){
+        var ticket = getTicket();
+        if(!ticket){
+            login();
+        }else{
+            var params = {};
+            params.userCode = getUserCode();
+            params.phone = $("#phone").val();
+            params.idNum = $("#idNum").val();
+            params.realName = $("#realName").val();
+            params.penName = $("#penName").val();
+            params.status = 0;
+            var paramsJson = JSON.stringify(params);
+            $.ajax({
+                type: "POST",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                data: paramsJson,
+                url: url.mc.api_author,
+                beforeSend: function(request) {
+                    request.setRequestHeader("ticket", ticket);
+                },
+                success: function(response){
+                    if(response && response.code == 200){
+                        var author = response.data;
+                        if(author){
+                            var loginVo = getLoginVo();
+                            loginVo.author = author;
+                            localStorage.setItem("loginVo", loginVo);
+                        }
+                    }else{
+                        alert(response.message);
+                    }
+                }
+            });
+        }
+    }
+</script>
 </body>
 </html>

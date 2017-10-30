@@ -30,27 +30,30 @@
             <div class="pos_r pb30 clearfix">
                 <label class="fl">文章分类</label>
                 <p id = "treeInput" class="j_btn_treeview readonly_wrap fl" onclick="is_show_treeView()" >请点击文章分类</p>
-                <ul id="treeview" title="0" class="filetree treeview-famfamfam" bindClick="stop-propagation" style="height: 200px;overflow:auto;">
-
-                </ul>
+                <ul id="treeview" title="0" class="filetree treeview-famfamfam" bindClick="stop-propagation" style="height: 200px;overflow:auto;"></ul>
+                <input type="hidden" id="params_menuFullCode"/>
+                <input type="hidden" id="params_menuFullName"/>
             </div>
             <div class="pb30 clearfix">
                 <label class="fl">文章标题</label>
-                <input class="fl" type="text" placeHolder="请输入文章标题">
+                <input class="fl" type="text" placeHolder="请输入文章标题" id="params_title">
             </div>
             <div class="pb30 clearfix">
                 <label class="fl">标题图片</label>
                 <label class="tit_pic fl">
                     <span></span>
-                    <form enctype="multipart/form-data"><input type="file" name="file" class="fileupload">
+                    <form enctype="multipart/form-data">
+                        <input type="file" name="file" class="fileupload">
                     </form>
                 </label>
+                <img style="width:200px;height:100px;margin-left:20px;" hidden>
+                <input type="hidden" class="md5Hid" id="params_md5"/>
             </div>
             <div class="pb30 clearfix">
                 <label class="fl">专题选择</label>
                 <div class="pos_r fl">
                     <div class="pop_select pos_r">
-                        <span id="subjectInput" class="small" onclick="is_show_subject()">请选择文章专题</span>
+                        <span id="params_subjectName" class="small" onclick="is_show_subject()">请选择文章专题</span>
                         <em onclick="is_show_subject()" bindClick="toggle-select"></em>
                     </div>
                     <ul id="subject" class="pop_options j-body-hide" title="1">
@@ -60,50 +63,68 @@
                 </div>
             </div>
             <div class="pb30 clearfix">
-                <label class="fl">正文描述</label>
-                <textarea class="fl" placeHolder="请输入正文内容"></textarea>
+                <label class="fl">文章简介</label>
+                <textarea class="fl" placeHolder="请输入文章简介" id="params_summary"></textarea>
             </div>
-            <div class="pb30 clearfix">
-                <label class="fl">插入图片</label>
+            <div class="blocks">
+                <div class="textAndMd5">
+                    <div class="pb30 clearfix">
+                        <label class="fl">正文描述</label>
+                        <textarea class="fl" placeHolder="请输入正文内容"></textarea>
+                    </div>
+                    <div class="pb30 clearfix">
+                        <label class="fl">插入图片</label>
 
-                <label class="add_pic fl">
-                    <span></span>
-                    <em>点击添加图片</em>
-                    <form enctype="multipart/form-data"><input type="file" name="file" class="fileupload2">
-                    </form>
-                </label>
-
-                <div class="delate_pic fl"><a class="g_btn_white delete">删除图片</a></div>
-            </div>
-            <div class="pb30 clearfix">
-                <label class="fl">正文描述</label>
-                <textarea class="fl" placeHolder="请输入正文内容"></textarea>
-            </div>
-            <div class="pb30 clearfix">
-                <label class="fl">插入图片</label>
-                <label class="add_pic fl">
-                    <span></span>
-                    <em>点击添加图片</em>
-                    <form enctype="multipart/form-data"><input type="file" name="file" class="fileupload2">
-                    </form>
-                </label>
-                <div class="delate_pic fl clearfix">
-                    <a class="g_btn_white fl delete">删除图片</a>
-                    <a class="g_btn_white mar_l30 fl">删除整体</a>
+                        <label class="add_pic fl">
+                            <span></span>
+                            <em>点击添加图片</em>
+                            <form enctype="multipart/form-data"><input type="file" name="file" class="fileupload2">
+                            </form>
+                        </label>
+                        <img style="width:200px;height:100px;margin-left:20px;" hidden>
+                        <input type="hidden" class="md5Hid"/>
+                        <div class="delate_pic fl" ><a class="g_btn_white delete">删除图片</a></div>
+                    </div>
                 </div>
+
             </div>
             <div class="pb30 clearfix">
                 <label class="fl"></label>
                 <div class="fl">
-                    <a class="g_btn_red">添加正文和图片</a>
+                    <a class="g_btn_red" onclick="addBlock()">添加正文和图片</a>
                 </div>
             </div>
             <div class="tx_c pb30">
-                <a class="g_btn_red">发布文章</a>
+                <a class="g_btn_red" onclick="saveArticle()">发布文章</a>
             </div>
         </div>
     </div>
 </div>
+
+<div id="blockDemo" hidden>
+    <div class="textAndMd5">
+        <div class="pb30 clearfix">
+            <label class="fl">正文描述</label>
+            <textarea class="fl" placeHolder="请输入正文内容"></textarea>
+        </div>
+        <div class="pb30 clearfix">
+            <label class="fl">插入图片</label>
+            <label class="add_pic fl">
+                <span></span>
+                <em>点击添加图片</em>
+                <form enctype="multipart/form-data"><input type="file" name="file" class="fileupload2">
+                </form>
+            </label>
+            <img style="width:200px;height:100px;margin-left:20px;" hidden>
+            <input type="hidden" class="md5Hid"/>
+            <div class="delate_pic fl clearfix">
+                <a class="g_btn_white fl delete">删除图片</a>
+                <a class="g_btn_white mar_l30 fl deleteBlock">删除整体</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script type="text/javascript" src="js/plugins/jquery.min.js"></script>
 <script type="text/javascript" src="js/plugins/jquery.treeview.js"></script>
@@ -118,22 +139,22 @@
 <script type="text/tmp" id="tmp5">
     {{for}}
     <li>
-        <span onclick="click_tree_li('文章分类{{:fullName}}')">{{:name}}</span>
+        <span onclick="click_tree_li('{{:fullCode}}','{{:fullName}}')">{{:name}}</span>
         <ul>
             {{if children != null && children.length>0}}
             {{for children}}
             <li>
-                <span onclick="click_tree_li('文章分类{{:fullName}}')">{{:name}}</span>
+                <span onclick="click_tree_li('{{:fullCode}}','{{:fullName}}')">{{:name}}</span>
                 <ul>
                     {{if children != null && children.length>0}}
                     {{for children}}
                     <li>
-                        <span onclick="click_tree_li('文章分类{{:fullName}}')">{{:name}}</span>
+                        <span onclick="click_tree_li('{{:fullCode}}','{{:fullName}}')">{{:name}}</span>
                         <ul>
                             {{if children != null && children.length>0}}
                             {{for children}}
                             <li>
-                                <span onclick="click_tree_li('文章分类{{:fullName}}')">{{:name}}</span>
+                                <span onclick="click_tree_li('{{:fullCode}}','{{:fullName}}')">{{:name}}</span>
                             </li>
                             {{/for}}
                             {{/if}}
@@ -152,18 +173,18 @@
 
 
 <script type="text/javascript">
-    var params = {};
-    params.parentCode = "0";
+    var params_menu = {};
+    params_menu.parentCode = "0";
     $.ajax({
         type: "GET",
         contentType: "application/json;charset=UTF-8",
         dataType: "json",
-        data: params,
+        data: params_menu,
         url: url.mc.menu_tree_parentCode,
         success: function(response){
             debugger
             if(response && response.code == 200){
-                var html = '<span onclick="click_tree_li(\'文章分类\')">文章分类</span>';
+                var html = '';
                 html += $("#tmp5").render(response.data);
                 $("#treeview").html(html);
             }else{
@@ -171,6 +192,49 @@
             }
         }
     });
+
+
+
+    function addBlock(){
+        $(".blocks").append($("#blockDemo").find(".textAndMd5").clone(true));
+    }
+
+
+    function saveArticle(){
+        var params = {};
+        params.menuFullCode = $("#params_menuFullCode").val();
+        params.menuFullName = $("#params_menuFullName").val();
+        params.md5 = $("#params_md5").val();
+        params.title = $("#params_title").val();
+        params.subjectName = $("#params_subjectName").text();
+        params.summary = $("#params_summary").val();
+        params.articleDetails = new Array();
+        $(".blocks").find(".textAndMd5").each(function(i, item){
+            var articleDetail = {};
+            articleDetail.text = $(item).find("textarea").val();
+            articleDetail.md5 = $(item).find(".md5Hid").val();
+            params.articleDetails[i] = articleDetail;
+        });
+        var paramsJson = JSON.stringify(params);
+        console.log(params);
+        $.ajax({
+            type: "POST",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            data: paramsJson,
+            url: url.mc.api_articles,
+            beforeSend: function(request) {
+                request.setRequestHeader("ticket", getTicket());
+            },
+            success: function(response){
+                if(response && response.code == 200){
+                    alert(response.message);
+                }else{
+                    alert(response.message);
+                }
+            }
+        });
+    }
     /**
      * 是否显示主题的下拉列表
      * 0: 隐藏 1:显示
@@ -190,7 +254,7 @@
      * 给文章分类赋值，隐藏树形菜单
      */
     function click_subject_li(value){
-        $("#subjectInput").text(value);
+        $("#params_subjectName").text(value);
         is_show_subject();
     }
     /**
@@ -211,8 +275,10 @@
      * 点击树形菜单的叶子
      * 给文章分类赋值，隐藏树形菜单
      */
-    function click_tree_li(fullName){
+    function click_tree_li(fullCode, fullName){
         $("#treeInput").text(fullName);
+        $("#params_menuFullCode").val(fullCode);
+        $("#params_menuFullName").val(fullName);
         is_show_treeView();
     }
     $(function () {
@@ -238,23 +304,29 @@
                 cache: false,
                 contentType: false,
                 processData: false,
-                success: function (returndata) {
-                    $label.css("background-image", "url(http://120.27.22.41:9091/download/" + returndata.data.md5 + ")");
-                    $label.prop("md5", returndata.data.md5);
+                success: function (response) {
+                    $label.parent().find("img").attr("src",url.oss.download+response.data.md5).show();
+                    $label.parent().find(".md5Hid").val(response.data.md5);
+                    $("#params_md5").val(response.data.md5);
                 },
-                error: function (returndata) {
-//                    alert(returndata.message);
-                    // TODO
+                error: function (response) {
+                    alert(response.message);
                 }
             });
         });
+        /**
+         * 删除图片
+         */
         $(".delete").click(function () {
-            var $label=$(this).parent().parent().find(".add_pic")
-            alert($label.prop("md5"));
-            $label.removeProp("md5");
-            $label.css("background-image", "url()");
+            var $label=$(this).parent().parent().find(".md5Hid").val("");
+            var $label=$(this).parent().parent().find("img").attr("src", "").hide();
         });
-
+        /**
+         * 删除正文和图片
+         */
+        $(".deleteBlock").click(function () {
+            var $label=$(this).parent().parent().parent().remove();
+        });
         /*****************************************************/
             var app = new Org({
                 $el: '#personal-center-public',
