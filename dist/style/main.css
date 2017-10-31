@@ -849,7 +849,7 @@ input[disabled] {
 
 .pop_wrap {
   position: absolute;
-  top: 50%;
+  top: 15%;
   left: 50%;
   display: inline-blobk;
   margin: -275px 0 0 -287px;
