@@ -7,7 +7,7 @@ $(".footer").load("common/foot.html");
  */
 function navbarClick(pageName, menuCode) {
     debugger
-    $(".active").removeClass("active");
+    $("#row2").find(".active").removeClass("active");
     $("#"+pageName).addClass("active");
     changeMenu(menuCode);
 }
@@ -34,6 +34,24 @@ function changeMenu(menuCode){
                 html += '</ul>';
                 $("#left_menu").html(html);
                 $(".right").html("");
+
+                var defaultUrl = "";
+                var defaultCode = "";
+                if(response.data.length>=0){
+                    defaultUrl = response.data[0].url;
+                    defaultCode = response.data[0].code;
+                    if(!defaultUrl && response.data[0].children && response.data[0].children.length>0){
+                        defaultUrl = response.data[0].children[0].url;
+                        defaultCode = response.data[0].children[0].code;
+                        if(!defaultUrl && response.data[0].children[0].children && response.data[0].children[0].children.length>0){
+                            defaultUrl = response.data[0].children[0].children[0].url;
+                            defaultCode = response.data[0].children[0].children[0].code;
+                        }
+                    }
+                }
+                if(defaultUrl && defaultCode){
+                    menuClick(defaultUrl, defaultCode);
+                }
             }else{
                 alert(response.message);
             }
@@ -47,7 +65,7 @@ function changeMenu(menuCode){
  * @param code
  */
 function menuClick(url, code){
-    $("#menus").find(".active").removeClass("active");
+    $("#left_menu").find(".active").removeClass("active");
     $("."+code).addClass("active");
     changeIframe(url, code);
 }
