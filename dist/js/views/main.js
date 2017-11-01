@@ -1,5 +1,9 @@
 $(".footer").load("common/foot.html");
 
+if(UrlParm.parm("pageNameMain") && UrlParm.parm("menuCodeMain")){
+    navbarClick(UrlParm.parm("pageNameMain"), UrlParm.parm("menuCodeMain"));
+}
+
 /**
  * 点击导航栏
  * @param pageName
