@@ -282,7 +282,8 @@ function loginSuccessCallback(){
                     var loginVoJson = JSON.stringify(loginVo);
                     localStorage.setItem("loginVoJson", loginVoJson);
                     $("#welcome").text(getLoginName());
-                    changePage('personal-center', 'head');
+                    //changePage('personal-center', 'head');
+                    window.location.href = 'main.html?pageNameMain=personal-center-main&menuCodeMain=5518c3a5-21ce-43b2-88d2-17e34ee1ba53';
                 }else{
                     alert(response.message);
                 }
