@@ -57,8 +57,9 @@
                         <em onclick="is_show_subject()" bindClick="toggle-select"></em>
                     </div>
                     <ul id="subject" class="pop_options j-body-hide" title="1">
-                        <li bindClick="select" onclick="click_subject_li('秋季补气')">秋季补气</li>
-                        <li bindClick="select" onclick="click_subject_li('一周热门')" class="other">一周热门</li>
+                        <li bindClick="select" onclick="click_subject_li('')">请选择文章专题</li>
+                        <li bindClick="select" onclick="click_subject_li('专题一')">专题一</li>
+                        <li bindClick="select" onclick="click_subject_li('专题二')" class="other">专题二</li>
                     </ul>
                 </div>
             </div>
@@ -208,6 +209,9 @@
         params.md5 = $("#params_md5").val();
         params.title = $("#params_title").val();
         params.subjectName = $("#params_subjectName").text();
+        if("请选择文章专题" == params.subjectName){
+            params.subjectName = "";
+        }
         params.summary = $("#params_summary").val();
         params.articleDetails = new Array();
         $(".blocks").find(".textAndMd5").each(function(i, item){
