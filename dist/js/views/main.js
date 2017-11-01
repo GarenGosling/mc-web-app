@@ -82,7 +82,12 @@ function changeIframe(url, code){
     debugger
     $(".right").html("");
     if(url && code){
-        var path = url+"?menuCode="+code;
+        if(url.indexOf("?")>-1){
+            var path = url+"&menuCode="+code;
+        }else{
+            var path = url+"?menuCode="+code;
+        }
+
         //var myIframe = $("<iframe/>").attr("src",path).attr("width","100%").attr("scrolling","no").attr("frameborder","0").attr("height",document.documentElement.clientHeight);
         var myIframe = $("<iframe/>").attr("src",path).attr("width","100%").attr("scrolling","no").attr("frameborder","0").attr("height","3000");
         $(".right").append(myIframe);

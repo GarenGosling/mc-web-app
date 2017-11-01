@@ -46,6 +46,8 @@
 
 
 <script type="text/javascript">
+    $("body").find("h1").html('当前位置：<span>'+UrlParm.parm("parentModule")+'&gt;&gt;'+UrlParm.parm("moduleName")+'</span>');
+
     var menuCode = UrlParm.parm("menuCode");
     if(menuCode){
         var url = url.mc.articles_query + "?menuCode=" + menuCode + "&showDetail=1";

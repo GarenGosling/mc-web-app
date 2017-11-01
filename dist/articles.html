@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>精英样板-列表</title>
+<link href="style/main.css" rel="stylesheet"></head>
+
+<body id="elite-model-list">
+
+<h1 class="subtit mar_b10">当前位置：<span>中产者网首页</span> &gt;&gt; <em>精英样板</em></h1>
+<div class="subcont">
+	<div class="subcont_elite">
+		<div class="subcont_elite_wrap">
+			<div class="artical" id="articles"></div>
+			<div class="elite_model_list_pagination">
+				<div class="pagination inblock clearfix">
+					<div class="start all fl">首页</div>
+					<div class="pre all fl">上一页</div>
+					<ul class="list clearfix fl">
+						<li class="active all fl">1</li>
+						<li class="all fl">2</li>
+						<li class="all fl">3</li>
+						<li class="all fl">4</li>
+						<li class="all fl">5</li>
+					</ul>
+					<div class="end all fl">下一页</div>
+					<div class="next all fl">尾页</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="js/plugins/jquery.min.js"></script>
+<script type="text/javascript" src="js/plugins/bundle.main.js"></script>
+<script type="text/javascript" src="js/plugins/urlHandler.js"></script>
+<script type="text/javascript" src="js/plugins/jsrender.js"></script>
+<script type="text/javascript" src="js/common/common.js"></script>
+
+<script type="text/tmp" id="articles_tmp">
+	{{for}}
+	{{if md5 != null && md5 != ''}}
+	<dl class="artical_list clearfix">
+		<dt class="fl">
+			<img id="articles_tmp{{:md5}}" style="width:157px;height:100px;">
+		</dt>
+		<dd class="pos_r fr">
+			<h3>{{:title}}</h3>
+			<div class="clearfix">
+				<p class="fl"><span>作者：</span><em>{{:authorPenName}}</em></p>
+				<p class="fl"><span>观看：</span><em>257</em></p>
+				<p class="fl"><span>评论：</span><em>127</em></p>
+			</div>
+			<div class="btn_group">
+				<a class="g_btn_red" href="article_detail.html?id={{:id}}">查看详情</a>
+			</div>
+		</dd>
+	</dl>
+	{{/if}}
+	{{/for}}
+</script>
+
+<script type="text/javascript">
+	$("body").find("h1").html('当前位置：<span>'+UrlParm.parm("parentModule")+'&gt;&gt;'+UrlParm.parm("moduleName")+'</span>');
+
+	var params = {};
+	params.start = 0;
+	params.length = 10;
+	if(UrlParm.parm("menuCode")){
+		params.menuCode = UrlParm.parm("menuCode");
+	}
+	if(UrlParm.parm("subjectName")){
+		params.subjectName = UrlParm.parm("subjectName");
+	}
+	if(UrlParm.parm("orderBy")){
+	    params.orderBy = UrlParm.parm("orderBy");
+	}
+	getArticles(UrlParm.parm("moduleName"), "articles_tmp", "articles", params, UrlParm.parm("url"));
+
+
+    /**
+     * 精选文章
+     * @param menuCode
+     * @param moduleName
+     * @param tmpName
+     * @param parentDiv
+     * @param moreUrl
+     */
+    function getArticles(moduleName, tmpName, parentDiv, params, url) {
+        $.ajax({
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            data: params,
+            url: url,
+            success: function(response){
+                if(response && response.code == 200){
+                    var list = response.data.list;
+                    var html = '<h2 class="subcont_elite_tit"><span>' + moduleName + '</span></h2>';
+                    html += $("#"+tmpName).render(response.data.list);
+                    $("#"+parentDiv).html(html);
+                    $(list).each(function(i, item){
+                        if(item.md5){
+                            var imgUrl = server.oss + '/download/' + item.md5;
+                            $("#"+tmpName+item.md5).attr("src",imgUrl);
+                        }
+                    });
+                }else{
+                    alert(response.message);
+                }
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

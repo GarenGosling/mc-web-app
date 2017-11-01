@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>精英样板</title>
+<link href="style/main.css" rel="stylesheet"></head>
+
+<body id="middle-invest">
+<h1 class="subtit mar_b10">当前位置：<span>中产生活</span> &gt;&gt; <em>有关美食</em></h1>
+<div class="subcont">
+	<div class="subcont_elite">
+		<div class="subcont_elite_wrap">
+			<div class="topic" id="topic_1"></div>
+			<div class="topic" id="topic_2"></div>
+			<div class="artical" id="artical"></div>
+			<div class="topic pt10 pb40" id="pop"></div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="js/plugins/jquery.min.js"></script>
+<script type="text/javascript" src="js/plugins/bundle.main.js"></script>
+<script type="text/javascript" src="js/plugins/urlHandler.js"></script>
+<script type="text/javascript" src="js/plugins/jsrender.js"></script>
+<script type="text/javascript" src="js/common/common.js"></script>
+
+<script type="text/tmp" id="topic_1_tmp">
+	{{for}}
+	{{if md5 != null && md5 != ''}}
+	<li class="mr20 fl">
+		<p><a href="article_detail.html?id={{:id}}"><img id="topic_1_tmp{{:md5}}" style="width:157px;height:100px;"></a></p>
+		<h5>{{:title}}</h5>
+		<h6>{{:authorPenName}}</h6>
+	</li>
+	{{/if}}
+	{{/for}}
+</script>
+
+<script type="text/tmp" id="topic_2_tmp">
+	{{for}}
+	{{if md5 != null && md5 != ''}}
+	<li class="mr20 fl">
+		<p><a href="article_detail.html?id={{:id}}"><img id="topic_2_tmp{{:md5}}" style="width:157px;height:100px;"></a></p>
+		<h5>{{:title}}</h5>
+		<h6>{{:authorPenName}}</h6>
+	</li>
+	{{/if}}
+	{{/for}}
+</script>
+
+<script type="text/tmp" id="artical_tmp">
+	{{for}}
+	{{if md5 != null && md5 != ''}}
+	<dl class="artical_list clearfix">
+		<dt class="fl">
+			<a href="article_detail.html?id={{:id}}"><img id="artical_tmp{{:md5}}" style="width:157px;height:100px;"></a>
+		</dt>
+		<dd class="fr">
+			<h3>{{:title}}</h3>
+			<div class="clearfix">
+				<p class="fl"><span>作者：</span><em>{{:authorPenName}}</em></p>
+				<p class="fl"><span>观看：</span><em>57</em></p>
+				<p class="fl"><span>评论：</span><em>21</em></p>
+			</div>
+		</dd>
+	</dl>
+	{{/if}}
+	{{/for}}
+</script>
+
+<script type="text/tmp" id="pop_tmp">
+	{{for}}
+	{{if md5 != null && md5 != ''}}
+	<li class="mr20 fl">
+		<p><img id="pop_tmp{{:md5}}" style="width:157px;height:100px;"></p>
+		<h5>{{:authorPenName}}精选篇</h5>
+	</li>
+	{{/if}}
+	{{/for}}
+</script>
+
+
+<script type="text/javascript">
+    $("body").find("h1").html('当前位置：<span>'+UrlParm.parm("parentModule")+'&gt;&gt;'+UrlParm.parm("moduleName")+'</span>');
+
+    getArticleBySubjectName(UrlParm.parm("menuCode"), "专题一", "topic_1_tmp", "topic_1", "articles.html?subjectName=专题一&moduleName=专题一&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&url="+url.mc.articles_query);
+    getArticleBySubjectName(UrlParm.parm("menuCode"), "专题二", "topic_2_tmp", "topic_2", "articles.html?subjectName=专题二&moduleName=专题二&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&url="+url.mc.articles_query);
+    getArticleByArtical(UrlParm.parm("menuCode"), "精选文章", "artical_tmp", "artical", "articles.html?&moduleName=精选文章&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&orderBy=id&url="+url.mc.articles_query);
+    getArticleByPop(UrlParm.parm("menuCode"), "精选会员专题", "pop_tmp", "pop", "articles.html?&moduleName=精选会员专题&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&url="+url.mc.articles_popAuthor);
+
+    /**
+	 * 专题文章
+     * @param menuCode
+     * @param subjectName
+     * @param topicTmp
+     * @param topicDiv
+     * @param moreUrl
+     */
+    function getArticleBySubjectName(menuCode, moduleName, tmpName, parentDiv, moreUrl) {
+        var params = {};
+        params.menuCode = menuCode;
+        params.subjectName = moduleName;
+        params.start = 0;
+        params.length = 4;
+        $.ajax({
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            data: params,
+            url: url.mc.articles_query,
+            success: function(response){
+                if(response && response.code == 200){
+                    var list = response.data.list;
+                    var html = '<h2 class="subcont_elite_tit"><a class="fr" href="'+moreUrl+'">更多&gt;</a><span>'+moduleName+'</span></h2>';
+                    html += '<ul class="topic_list clearfix">';
+                    html += $("#"+tmpName).render(response.data.list);
+                    html += '</ul>';
+                    $("#"+parentDiv).html(html);
+                    $(list).each(function(i, item){
+                        if(item.md5){
+                            var imgUrl = server.oss + '/download/' + item.md5;
+                            $("#"+tmpName+item.md5).attr("src",imgUrl);
+                        }
+                    });
+                }else{
+                    alert(response.message);
+                }
+            }
+        });
+    }
+
+    /**
+     * 精选文章
+     * @param menuCode
+     * @param moduleName
+     * @param tmpName
+     * @param parentDiv
+     * @param moreUrl
+     */
+    function getArticleByArtical(menuCode, moduleName, tmpName, parentDiv, moreUrl) {
+        var params = {};
+        params.menuCode = menuCode;
+        params.start = 0;
+        params.length = 3;
+        params.orderBy = "id";
+        $.ajax({
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            data: params,
+            url: url.mc.articles_query,
+            success: function(response){
+                if(response && response.code == 200){
+                    var list = response.data.list;
+                    var html = '<h2 class="subcont_elite_tit"><a class="fr" href="'+moreUrl+'">更多&gt;</a><span>'+moduleName+'</span></h2>';
+                    html += $("#"+tmpName).render(response.data.list);
+                    $("#"+parentDiv).html(html);
+                    $(list).each(function(i, item){
+                        if(item.md5){
+                            var imgUrl = server.oss + '/download/' + item.md5;
+                            $("#"+tmpName+item.md5).attr("src",imgUrl);
+                        }
+                    });
+                }else{
+                    alert(response.message);
+                }
+            }
+        });
+    }
+
+    /**
+	 * 精选会员专题
+     * @param menuCode
+     * @param moduleName
+     * @param tmpName
+     * @param parentDiv
+     * @param moreUrl
+     */
+    function getArticleByPop(menuCode, moduleName, tmpName, parentDiv, moreUrl) {
+        var params = {};
+        params.menuCode = menuCode;
+        params.start = 0;
+        params.length = 4;
+        $.ajax({
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            data: params,
+            url: url.mc.articles_popAuthor,
+            success: function(response){
+                if(response && response.code == 200){
+                    var list = response.data.list;
+                    var html = '<h2 class="subcont_elite_tit"><a class="fr" href="'+moreUrl+'">更多&gt;</a><span>'+moduleName+'</span></h2>';
+                    html += '<ul class="topic_list clearfix">';
+                    html += $("#"+tmpName).render(response.data.list);
+                    html += '</ul>';
+					$("#"+parentDiv).html(html);
+                    $(list).each(function(i, item){
+                        if(item.md5){
+                            var imgUrl = server.oss + '/download/' + item.md5;
+                            $("#"+tmpName+item.md5).attr("src",imgUrl);
+                        }
+                    });
+                }else{
+                    alert(response.message);
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

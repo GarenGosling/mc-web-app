@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>精英样板-列表-详情</title>
+<link href="style/main.css" rel="stylesheet"></head>
+
+<body id="elite-model-list">
+
+<h1 class="subtit mar_b10">当前位置：<span id="articalDetailModule"></span></h1>
+<div class="subcont">
+	<div class="subcont_artical" id="articleDetailMain"></div>
+	<div class="subcont_msg">
+		<h3>论坛留言</h3>
+		<div class="user clearfix">
+					<span class="fl">
+						用户名:
+						<em>张三</em>
+					</span>
+		</div>
+		<div class="txarea">
+			<textarea>评论内容不超过400字...</textarea>
+			<div class="code clearfix">
+			</div>
+			<div class="pub">发布留言</div>
+		</div>
+	</div>
+	<div class="subcont_reply">
+		<ul>
+			<li class="subcont_reply_box">
+				<div class="user clearfix">
+							<span class="fl">
+								用户名:
+								<em>vfgffd</em>
+							</span>
+					<i class="fr">2017-04-21    23：22：00</i>
+				</div>
+				<div class="comment">
+					这个看起来好棒耶，好喜欢
+				</div>
+			</li>
+			<li class="subcont_reply_box">
+				<div class="user clearfix">
+							<span class="fl">
+								用户名:
+								<em>vfgffd</em>
+							</span>
+					<i class="fr">2017-04-21    23：22：00</i>
+				</div>
+				<div class="comment">
+					这个看起来好棒耶，好喜欢
+				</div>
+			</li>
+		</ul>
+		<div class="elimodlis_detail_pagination">
+			<div class="pagination inblock clearfix">
+				<div class="start all fl">首页</div>
+				<div class="pre all fl">上一页</div>
+				<ul class="list clearfix fl">
+					<li class="active all fl">1</li>
+					<li class="all fl">2</li>
+					<li class="all fl">3</li>
+					<li class="all fl">4</li>
+					<li class="all fl">5</li>
+				</ul>
+				<div class="end all fl">下一页</div>
+				<div class="next all fl">尾页</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="js/plugins/jquery.min.js"></script>
+<script type="text/javascript" src="js/plugins/bundle.main.js"></script>
+<script type="text/javascript" src="js/plugins/urlHandler.js"></script>
+<script type="text/javascript" src="js/plugins/jsrender.js"></script>
+<script type="text/javascript" src="js/common/common.js"></script>
+
+<script type="text/tmp" id="articleDetailTmp">
+		{{for}}
+        	<p style="text-indent: 0;">{{:text}}</p>
+        	{{if md5 != null && md5 != ''}}
+			<p style="text-align: center; text-indent: 0;padding: 10px 0">
+				<img id="{{:md5}}" style="width:600px;height:300px;">
+			</p>
+			{{/if}}
+		{{/for}}
+</script>
+
+<script type="text/javascript">
+	if(UrlParm.parm("id")){
+	    debugger
+        var url = url.mc.articles + "/" + UrlParm.parm("id");
+        $.ajax({
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            url: url,
+            success: function(response){
+                if(response && response.code == 200){
+                    var article = response.data;
+                    var module = article.menuFullName.substring(1,article.menuFullName.length).replace("/",">>")
+					$("#articalDetailModule").text(module);
+                    if(article){
+                        var details = article.articleDetails;
+                        var html = '';
+                        html += '<h2>'+article.title+'</h2>';
+                        html += '<h3>';
+                        html += '<span>作者：</span><em class="pr40">'+article.authorPenName+'</em>';
+                        html += '<span>本站发布时间：</span><em>'+article.publishTime+'</em>';
+                        html += '</h3>';
+                        html += '<div class="subcont_artical_para">';
+                        html += $("#articleDetailTmp").render(details);
+                        html += '</div>';
+                        $("#articleDetailMain").html(html);
+                        $(details).each(function(i, item){
+                            if(item.md5){
+                                var imgUrl = server.oss + '/download/' + item.md5;
+                                $("#"+item.md5).attr("src",imgUrl);
+                            }
+                        });
+                    }
+                }else{
+                    alert(response.message);
+                }
+            }
+        });
+    }
+
+</script>
+
+</body>
+</html>
