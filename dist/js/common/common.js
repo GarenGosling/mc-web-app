@@ -173,12 +173,11 @@ function _personal_center_author_valid(){
  * 作者用到的页面是否显示
  */
 function authorShow(){
-    if(getAuthor()){
-        $("#personal-center-articles").show();
-        $("#personal-center-public").show();
-    }else {
-        $("#personal-center-articles").hide();
-        $("#personal-center-public").hide();
+    if(!getAuthor()){
+        // 发布文章
+        $('.e08c1b1b-338d-4493-8eec-1087e31831df').remove();
+        // 文章列表
+        $('.7f33c43a-061e-49c9-8780-edf4264984da').remove();
     }
 }
 

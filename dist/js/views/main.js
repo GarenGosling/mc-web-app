@@ -20,14 +20,14 @@ if(UrlParm.parm("pageNameMain") && UrlParm.parm("menuCodeMain")){
 function navbarClick(pageName, menuCode) {
     $("#row2").find(".active").removeClass("active");
     $("#"+pageName).addClass("active");
-    changeMenu(menuCode);
+    changeMenu(pageName, menuCode);
 }
 
 /**
  * 改变左侧菜单
  * @param menuCode
  */
-function changeMenu(menuCode){
+function changeMenu(pageName, menuCode){
     var params_menu = {};
     params_menu.parentCode = menuCode;
     $.ajax({
@@ -61,6 +61,10 @@ function changeMenu(menuCode){
                 }
                 if(defaultUrl && defaultCode){
                     menuClick(defaultUrl, defaultCode);
+                    // 个人中心
+                    if(pageName == "personal-center-main"){
+                        personal_center_login_vaild();
+                    }
                 }
             }else{
                 alert(response.message);
