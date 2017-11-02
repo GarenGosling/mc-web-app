@@ -1,6 +1,17 @@
+if(isLogin()){
+    $("#welcome").text(getLoginName());
+    $("#loginBtn").hide();
+    $("#logoutBtn").show();
+}else{
+    $("#loginBtn").show();
+    $("#logoutBtn").hide();
+}
 
 $(function() {
     loginSuccessCallback();    // 登录成功回调方法
+    if(isLogin()){
+        $("#welcome").text(getLoginName());
+    }
     var orgList1 = new Org({
         $el: '#index',
         $renderEl: '#tpl-cooperate-wrap',

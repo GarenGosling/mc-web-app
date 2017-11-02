@@ -134,8 +134,6 @@
 <script type="text/javascript" src="js/plugins/bundle.main.js"></script>
 <script type="text/javascript" src="js/common/org.js"></script>
 <script type="text/javascript" src="js/common/common.js"></script>
-<script type="text/javascript" src="js/common/login.js"></script>
-<script type="text/javascript" src="js/views/personal-center-public.js"></script>
 
 
 <script type="text/tmp" id="tmp5">
@@ -175,6 +173,7 @@
 
 
 <script type="text/javascript">
+    personal_center_login_vaild();
     var params_menu = {};
     params_menu.parentCode = "0";
     $.ajax({
@@ -184,7 +183,6 @@
         data: params_menu,
         url: url.mc.menu_tree_parentCode,
         success: function(response){
-            debugger
             if(response && response.code == 200){
                 var html = '';
                 html += $("#tmp5").render(response.data);

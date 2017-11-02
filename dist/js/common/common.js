@@ -1,41 +1,3 @@
-/***************** 页面跳转 *******************/
-function changePage(pageName, tag) {
-
-    if(tag == "head"){
-        $(".active").removeClass("active");
-        $("#"+pageName).addClass("active");
-        if(pageName == "main"){
-            $(".left").html("");
-            $(".right").html("");
-            $(".mainDiv").load("main.html");
-        }else if(pageName == "personal-center"){
-            var ticket = getTicket();
-            if(ticket){
-                $(".mainDiv").html("");
-                $(".left").load("common/left2.html");
-                $(".right").load(pageName+"-main.html");
-            }else {
-                login();
-                // $(".mainDiv").html("");
-                // $(".left").load("common/left2.html");
-                // $(".right").load(pageName+"-main.html");
-            }
-
-        }else{
-            $(".mainDiv").html("");
-            $(".left").load("common/left.html");
-            $(".right").load(pageName+".html");
-        }
-    }
-
-    if(tag == "left"){
-        $("#left_menu").find(".active").removeClass("active");
-        $("#"+pageName).addClass("active");
-        $(".right").load(pageName+".html");
-    }
-
-}
-
 /***************** url *******************/
 var server = {};
 server.ip_test = '120.27.22.41';
@@ -165,34 +127,29 @@ function getLoginName() {
  * 有登录认证，并且有登录信息，则前往作者认证方法
  */
 function personal_center_login_vaild() {
-    var ticket = getTicket();
-    if(!ticket){
-        login();
-    }else{
-        var loginVo = getLoginVo();
-        if(!loginVo){
-            _getAndSaveLoginVo(ticket);
+    if(isLogin()){
+        if(getLoginVo()){
+            _personal_center_author_valid();
         }else{
-            var userCode = loginVo.loginInfo.userCode;
-            _personal_center_author_valid(ticket, userCode);
+            _getAndSaveLoginVo();
         }
+    }else{
+        login();
     }
 }
 
 /**
  * 验证作者
- * @param ticket
- * @param userCode
  * @private
  */
-function _personal_center_author_valid(ticket, userCode){
-    if(!getAuthor()){
+function _personal_center_author_valid(){
+    if(!getAuthor() && getUserCode()){
         $.ajax({
             type: "GET",
             dataType: "json",
-            url: url.mc.api_author_userCode + "?userCode="+userCode,
+            url: url.mc.api_author_userCode + "?userCode="+getUserCode(),
             beforeSend: function(request) {
-                request.setRequestHeader("ticket", ticket);
+                request.setRequestHeader("ticket", getTicket());
             },
             success: function(response){
                 if(response && response.code == 200){
@@ -212,26 +169,19 @@ function _personal_center_author_valid(ticket, userCode){
     }
 }
 
+/**
+ * 作者用到的页面是否显示
+ */
 function authorShow(){
-    var author = getAuthor();
-    if(author){
+    if(getAuthor()){
         $("#personal-center-articles").show();
         $("#personal-center-public").show();
-        $("#personal-center-edit").show();
     }else {
         $("#personal-center-articles").hide();
         $("#personal-center-public").hide();
-        $("#personal-center-edit").hide();
     }
 }
 
-/**
- * 获取登录信息
- * 包括：登录信息、用户基本信息、授权应用信息
- */
-function getLoginVoFromClient() {
-    return localStorage.getItem("loginVo");
-}
 
 /**
  * 退出登录
@@ -239,8 +189,7 @@ function getLoginVoFromClient() {
  * @returns {boolean}
  */
 function logout() {
-    var ticket = getTicket();
-    if(!ticket){
+    if(!getTicket()){
         alert("您还没有登录");
         return false;
     }
@@ -249,7 +198,7 @@ function logout() {
         dataType: "json",
         url: url.cas.logout,
         beforeSend: function(request) {
-            request.setRequestHeader("ticket", ticket);
+            request.setRequestHeader("ticket", getTicket());
         },
         success: function(response){
             console.log(response);
@@ -268,32 +217,27 @@ function logout() {
  * 登录成功回调方法
  */
 function loginSuccessCallback(){
-    var ticket = UrlParm.parm("ticket");
-    if(ticket){
-        localStorage.setItem("ticket",ticket);
+    if(UrlParm.parm("ticket")){
+        localStorage.setItem("ticket",UrlParm.parm("ticket"));
         $.ajax({
             type: "GET",
             dataType: "json",
             url: url.cas.loginVo,
             beforeSend: function(request) {
-                request.setRequestHeader("ticket", ticket);
+                request.setRequestHeader("ticket", UrlParm.parm("ticket"));
             },
             success: function(response){
                 if(response && response.code == 200){
                     var loginVo = response.data;
                     var loginVoJson = JSON.stringify(loginVo);
                     localStorage.setItem("loginVoJson", loginVoJson);
-                    $("#welcome").text(getLoginName());
-                    //changePage('personal-center', 'head');
                     window.location.href = 'main.html?pageNameMain=personal-center-main&menuCodeMain=5518c3a5-21ce-43b2-88d2-17e34ee1ba53';
                 }else{
                     alert(response.message);
                 }
             }
         });
-
     }
-
 }
 
 /**
@@ -301,78 +245,34 @@ function loginSuccessCallback(){
  * @returns {boolean}
  */
 function isLogin() {
-    var ticket = getTicket();
-    if(ticket){
+    if(getTicket()){
         return true;
     }
     return false;
 }
 
-function testLoginApi(){
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: url.mc.api_test,
-        beforeSend: function(request) {
-            request.setRequestHeader("ticket", getTicket());
-        },
-        success: function(response){
-            if(response && response.code == 400){
-                window.location.href = url.cas.login;
-            }else{
-                alert("code:"+response.code+" -- message:" + response.message);
-            }
-        }
-    });
-}
-
-
 /**
  * 保存登录信息
  * 从服务器获取登录信息，然后保存到客户端
  */
-function _getAndSaveLoginVo(ticket){
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: url.cas.loginVo,
-        beforeSend: function(request) {
-            request.setRequestHeader("ticket", ticket);
-        },
-        success: function(response){
-            if(response && response.code == 200){
-                var loginVo = response.data;
-                var loginVoJson = JSON.stringify(loginVo);
-                localStorage.setItem("loginVoJson", loginVoJson);
-            }else{
-                alert(response.message);
+function _getAndSaveLoginVo(){
+    if(getTicket()){
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: url.cas.loginVo,
+            beforeSend: function(request) {
+                request.setRequestHeader("ticket", getTicket());
+            },
+            success: function(response){
+                if(response && response.code == 200){
+                    var loginVo = response.data;
+                    var loginVoJson = JSON.stringify(loginVo);
+                    localStorage.setItem("loginVoJson", loginVoJson);
+                }else{
+                    alert(response.message);
+                }
             }
-        }
-    });
-}
-
-/**
- * 查询树形菜单
- * @param parentCode
- * @param callback
- */
-function menuTreeFull(parentCode, callback) {
-    var params = {};
-    params.parentCode = parentCode;
-    $.ajax({
-        type: "GET",
-        contentType: "application/json;charset=UTF-8",
-        dataType: "json",
-        data: params,
-        url: url.mc.menu_tree_parentCode,
-        success: function(response){
-            if(response && response.code == 200){
-                callback(response.data);
-            }else{
-                alert(response.message);
-            }
-        }
-    });
-
-
+        });
+    }
 }

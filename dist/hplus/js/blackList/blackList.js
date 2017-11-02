@@ -241,7 +241,6 @@ function repoFormatResult(repo) {
  * @returns {*}
  */
 function repoFormatSelection(repo) {
-    debugger
     if(isNull(repo) || isNull(repo.employeename)) return "请选择";
     return repo.employeename;
 }

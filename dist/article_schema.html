@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>精英样板</title>
+<title>文章概要</title>
 <link href="style/main.css" rel="stylesheet"></head>
 
 <body id="middle-invest">
-<h1 class="subtit mar_b10">当前位置：<span>中产生活</span> &gt;&gt; <em>有关美食</em></h1>
+<h1 class="subtit mar_b10"></h1>
 <div class="subcont">
 	<div class="subcont_elite">
 		<div class="subcont_elite_wrap">
@@ -28,7 +28,7 @@
 	{{for}}
 	{{if md5 != null && md5 != ''}}
 	<li class="mr20 fl">
-		<p><a href="article_detail.html?id={{:id}}"><img id="topic_1_tmp{{:md5}}" style="width:157px;height:100px;"></a></p>
+		<p><a href="article_view2.html?id={{:id}}"><img id="topic_1_tmp{{:md5}}" style="width:157px;height:100px;"></a></p>
 		<h5>{{:title}}</h5>
 		<h6>{{:authorPenName}}</h6>
 	</li>
@@ -40,7 +40,7 @@
 	{{for}}
 	{{if md5 != null && md5 != ''}}
 	<li class="mr20 fl">
-		<p><a href="article_detail.html?id={{:id}}"><img id="topic_2_tmp{{:md5}}" style="width:157px;height:100px;"></a></p>
+		<p><a href="article_view2.html?id={{:id}}"><img id="topic_2_tmp{{:md5}}" style="width:157px;height:100px;"></a></p>
 		<h5>{{:title}}</h5>
 		<h6>{{:authorPenName}}</h6>
 	</li>
@@ -53,7 +53,7 @@
 	{{if md5 != null && md5 != ''}}
 	<dl class="artical_list clearfix">
 		<dt class="fl">
-			<a href="article_detail.html?id={{:id}}"><img id="artical_tmp{{:md5}}" style="width:157px;height:100px;"></a>
+			<a href="article_view2.html?id={{:id}}"><img id="artical_tmp{{:md5}}" style="width:157px;height:100px;"></a>
 		</dt>
 		<dd class="fr">
 			<h3>{{:title}}</h3>
@@ -83,10 +83,10 @@
 <script type="text/javascript">
     $("body").find("h1").html('当前位置：<span>'+UrlParm.parm("parentModule")+'&gt;&gt;'+UrlParm.parm("moduleName")+'</span>');
 
-    getArticleBySubjectName(UrlParm.parm("menuCode"), "专题一", "topic_1_tmp", "topic_1", "articles.html?subjectName=专题一&moduleName=专题一&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&url="+url.mc.articles_query);
-    getArticleBySubjectName(UrlParm.parm("menuCode"), "专题二", "topic_2_tmp", "topic_2", "articles.html?subjectName=专题二&moduleName=专题二&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&url="+url.mc.articles_query);
-    getArticleByArtical(UrlParm.parm("menuCode"), "精选文章", "artical_tmp", "artical", "articles.html?&moduleName=精选文章&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&orderBy=id&url="+url.mc.articles_query);
-    getArticleByPop(UrlParm.parm("menuCode"), "精选会员专题", "pop_tmp", "pop", "articles.html?&moduleName=精选会员专题&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&url="+url.mc.articles_popAuthor);
+    getArticleBySubjectName(UrlParm.parm("menuCode"), "专题一", "topic_1_tmp", "topic_1", "article_list.html?subjectName=专题一&moduleName=专题一&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&url="+url.mc.articles_query);
+    getArticleBySubjectName(UrlParm.parm("menuCode"), "专题二", "topic_2_tmp", "topic_2", "article_list.html?subjectName=专题二&moduleName=专题二&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&url="+url.mc.articles_query);
+    getArticleByArtical(UrlParm.parm("menuCode"), "精选文章", "artical_tmp", "artical", "article_list.html?&moduleName=精选文章&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&orderBy=id&url="+url.mc.articles_query);
+    getArticleByPop(UrlParm.parm("menuCode"), "精选会员专题", "pop_tmp", "pop", "article_list.html?&moduleName=精选会员专题&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&url="+url.mc.articles_popAuthor);
 
     /**
 	 * 专题文章

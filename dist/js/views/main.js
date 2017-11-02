@@ -1,4 +1,12 @@
 $(".footer").load("common/foot.html");
+if(isLogin()){
+    $("#welcome").text(getLoginName());
+    $("#loginBtn").hide();
+    $("#logoutBtn").show();
+}else{
+    $("#loginBtn").show();
+    $("#logoutBtn").hide();
+}
 
 if(UrlParm.parm("pageNameMain") && UrlParm.parm("menuCodeMain")){
     navbarClick(UrlParm.parm("pageNameMain"), UrlParm.parm("menuCodeMain"));
@@ -10,7 +18,6 @@ if(UrlParm.parm("pageNameMain") && UrlParm.parm("menuCodeMain")){
  * @param menuCode
  */
 function navbarClick(pageName, menuCode) {
-    debugger
     $("#row2").find(".active").removeClass("active");
     $("#"+pageName).addClass("active");
     changeMenu(menuCode);
@@ -21,7 +28,6 @@ function navbarClick(pageName, menuCode) {
  * @param menuCode
  */
 function changeMenu(menuCode){
-    debugger
     var params_menu = {};
     params_menu.parentCode = menuCode;
     $.ajax({
@@ -79,7 +85,6 @@ function menuClick(url, code){
  * @param url
  */
 function changeIframe(url, code){
-    debugger
     $(".right").html("");
     if(url && code){
         if(url.indexOf("?")>-1){
