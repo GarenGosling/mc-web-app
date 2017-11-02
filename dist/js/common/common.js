@@ -25,6 +25,7 @@ url.mc.partnerLink_all = server.mc + '/partnerLink/all';
 url.mc.carousel_all = server.mc + '/carousel/all';
 url.mc.api_author_userCode = server.mc + '/api/author/userCode';
 url.mc.api_author = server.mc + '/api/author';
+url.mc.api_author_page = server.mc + '/api/author/page';
 url.mc.api_test = server.mc + '/api/test';
 url.mc.menu_tree_parentCode = server.mc + '/menu/tree/parentCode';
 url.mc.api_articles = server.mc + '/api/articles';
