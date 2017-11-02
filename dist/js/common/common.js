@@ -143,7 +143,7 @@ function personal_center_login_vaild() {
  * @private
  */
 function _personal_center_author_valid(){
-    if(!getAuthor() && getUserCode()){
+    if(getUserCode()){
         $.ajax({
             type: "GET",
             dataType: "json",

@@ -15,6 +15,14 @@
 			<span>作者申请</span>
 		</h3>
 		<div class="subcont_publish_add">
+			<div class="pb30 clearfix" id="authorStatusDiv">
+				<label class="fl">审核状态：</label>
+				<input id="authorStatusText" readonly></input>
+			</div>
+			<div class="pb30 clearfix" id="authorRejectReasonDiv">
+				<label class="fl">审核备注：</label>
+				<textarea id="authorRejectReasonText" readonly style="width:285px;"></textarea>
+			</div>
 			<div class="pb30 clearfix">
 				<label class="fl">姓名：</label>
 				<input class="fl" type="text" placeholder="请输入真实姓名" id="realName">
@@ -52,10 +60,24 @@
 <script type="text/javascript" src="js/common/common.js"></script>
 
 <script type="text/javascript">
-    personal_center_login_vaild();
 	$(function () {
+        personal_center_login_vaild();
 		var author = getAuthor();
 		if(author){
+		    console.log(author);
+		    $("#authorStatusDiv").show();
+            if(author.status == 0){
+                $("#authorStatusText").val("待审核");
+			}
+            if(author.status == 1){
+                $("#authorStatusText").val("审核通过（请点击”个人中心“，刷新个人中心菜单栏，或者重新登录。）");
+            }
+            if(author.status == 2){
+                $("#authorStatusText").val("审核驳回");
+            }
+    		$("#authorRejectReasonDiv").show();
+			$("#authorRejectReasonText").val(author.rejectReason);
+
 			$("#authorBtn").hide();
 			$("#realName").val(author.realName);
 			$("#penName").val(author.penName);
@@ -90,12 +112,9 @@
                 },
                 success: function(response){
                     if(response && response.code == 200){
-                        var author = response.data;
-                        if(author){
-                            var loginVo = getLoginVo();
-                            loginVo.author = author;
-                            localStorage.setItem("loginVo", loginVo);
-                        }
+                        alert("申请成功");
+						$("#authorBtn").hide();
+                        personal_center_login_vaild();
                     }else{
                         alert(response.message);
                     }
