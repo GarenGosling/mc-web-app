@@ -225,7 +225,7 @@
 <script type="text/javascript" src="js/common/common.js"></script>
 
 <script type="text/tmp" id="articalsTmp">
-		{{for}}
+		{{for list}}
         	<tr>
 				<td>{{:id}}</td>
 				<td><a href="article_view2.html?id={{:id}}">{{:title}}</a></td>
@@ -235,9 +235,13 @@
 				<td>{{:~dataFormat(create_time)}}</td>
 				<td>{{:~dataFormat(publish_time)}}</td>
 				<td>
+					{{if :~root.loginName=='admin'}}
 					<a class="pca-btn-red" onclick="audit({{:id}}, 1)">通过</a>
 					<a class="pca-btn-white" onclick="audit({{:id}}, 2)">驳回</a>
 					<input type="text" id="{{:id}}" class="pac-paging-input2" placeHolder="请填写驳回原因"/>
+					{{else}}
+					<a class="pca-btn-red">编辑</a>
+					{{/if}}
 				</td>
 			</tr>
 		{{/for}}
@@ -358,7 +362,10 @@
             success: function(response){
                 console.log(response);
                 if(response && response.code == 200){
-                    var html = $("#articalsTmp").render(response.data.list);
+                    var loginName=getLoginName();
+                    loginName = loginName==null?"":loginName;
+                    response.data.loginName=loginName;
+                    var html = $("#articalsTmp").render(response.data);
                     $("#authorsTbody").html(html);
                     initPagingShow(params.length, response.data.count);
                 }else{
