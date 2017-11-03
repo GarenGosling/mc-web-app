@@ -237,7 +237,7 @@
 				<td>
 					<a class="pca-btn-red" onclick="audit({{:id}}, 1)">通过</a>
 					<a class="pca-btn-white" onclick="audit({{:id}}, 2)">驳回</a>
-					<input type="text" class="pac-paging-input2" placeHolder="请填写驳回原因"/>
+					<input type="text" id="{{:id}}" class="pac-paging-input2" placeHolder="请填写驳回原因"/>
 				</td>
 			</tr>
 		{{/for}}
@@ -380,11 +380,11 @@
 		    alert("状态异常");
 		    return false;
 		}
-        var remark = $("#remark").text();
-		if(status == 2 && (remark == "请填写驳回原因" || remark == null || remark == "") ){
-		    alert("请填写驳回原因");
-		    return false;
-		}
+        var remark = $("#"+id).val();
+        if(status == 2 && !remark){
+            alert("请填写驳回原因");
+            return false;
+        }
 		var searchParams = {};
 		searchParams.id = id;
 		searchParams.status = status;
