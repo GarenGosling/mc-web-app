@@ -1,0 +1,350 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>个人中心-发布文章</title>
+<link rel="stylesheet" href="http://static.runoob.com/assets/js/jquery-treeview/jquery.treeview.css" />
+<link href="style/main.css" rel="stylesheet"><link href="style/main.css" rel="stylesheet">
+<style type="text/css">
+	table {
+		border-top: 1px solid #e5e5e5;
+		border-left: 1px solid #e5e5e5;
+		width: 95%;
+	}
+	th {
+		border-right: 1px solid #e5e5e5;
+		border-bottom: 1px solid #e5e5e5;
+		padding-left: 10px;
+		padding-right: 10px;
+		line-height: 30px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		text-align: center;
+	}
+	td {
+		border-right: 1px solid #e5e5e5;
+		border-bottom: 1px solid #e5e5e5;
+		padding-left: 10px;
+		padding-right: 10px;
+		line-height: 30px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		text-align: center;
+	}
+	.pca-btn-white{
+		display: inline-block;
+		width: 50px;
+		height: 20px;
+		line-height: 20px;
+		text-align: center;
+		font-size: 12px;
+		cursor: pointer;
+		border: 1px solid #d50f22;
+		color: #d50f22;
+		background: #fff;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		margin-left: 5px;
+	}
+	.pca-btn-red{
+		display: inline-block;
+		width: 50px;
+		height: 20px;
+		line-height: 20px;
+		text-align: center;
+		font-size: 12px;
+		cursor: pointer;
+		border: 1px solid #d50f22;
+		color: #fff;
+		background: #d50f22;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+	.pca-input{
+		display: inline-block;
+		width: 110px;
+		height: 20px;
+		line-height: 20px;
+		border: 1px solid #bfbfbf;
+		color: #999;
+		font-size: 12px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		margin-left: 5px;
+
+	}
+	.pca-search-div {
+		width: 220px;
+		float: left;
+		padding-left: 30px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		line-height: 20px;
+	}
+	.pca-search-btn-div {
+		width: 120px;
+		float: left;
+		padding-left: 30px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		line-height: 20px;
+	}
+	.pac-search-input {
+		border: 1px solid #bfbfbf;
+		font-size: 12px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		padding-left: 12px;
+		width: 150px;
+	}
+	.pac-paging-input {
+		border: 1px solid #bfbfbf;
+		font-size: 12px;
+		padding-top: 3px;
+		padding-bottom: 3px;
+		padding-left: 5px;
+		width: 20px;
+	}
+	.pac-search-label {
+		padding-top: 8px;
+		padding-bottom: 5px;
+		font-weight: bold;
+	}
+	.pac-search-select {
+		border: 1px solid #bfbfbf;
+		font-size: 12px;
+		padding-top: 2px;
+		padding-bottom: 5px;
+		padding-left: 12px;
+		width: 150px;
+	}
+	.pac-padding-btn {
+		border:1px solid #e5e5e5;color:#000;
+		padding-left:5px;
+		padding-right:5px;
+		padding-top:1px;
+		padding-bottom:3px;
+		cursor: pointer;
+		font-size:12px;
+	}
+</style>
+</head>
+
+<body id="personal-center-public">
+
+<h1 class="subtit mar_b10">当前位置：<span>个人中心</span> &gt;&gt; <em>文章列表</em></h1>
+<div class="subcont">
+	<div class="subcont_publish">
+		<h3 class="g_tit_bor_red">
+			<span>文章列表</span>
+		</h3>
+		<div style="width: 100%;font-size: 12px; height:50px;padding-top:10px;">
+			<div class="pca-search-div">
+				<label class="pac-search-label">标题：</label>
+				<input class="pac-search-input" type="text" placeHolder="请输入姓名" id="realName">
+			</div>
+			<div class="pca-search-div">
+				<label class="pac-search-label">作者：</label>
+				<input class="pac-search-input" type="text" placeHolder="请输入姓名或笔名" id="penName">
+			</div>
+			<div class="pca-search-div">
+				<label style="float: left;">审核状态：</label>
+				<div style="float: left;">
+					<select class="pac-search-select" id="status">
+						<option value="">请选择审核状态</option>
+						<option value="0">待审核</option>
+						<option value="1">审核通过</option>
+						<option value="2">审核驳回</option>
+					</select>
+				</div>
+			</div>
+			<div class="pca-search-btn-div">
+				<button onclick="initTable()">查询</button>
+				<button onclick="resetSearch()">重置</button>
+			</div>
+		</div>
+		<div style="width: 100%;padding-left:30px;">
+			<table cellspacing="0" cellpadding="0">
+				<thead>
+					<tr>
+						<th>序号</th>
+						<th>姓名</th>
+						<th>笔名</th>
+						<th>手机号</th>
+						<th>身份证号</th>
+						<th>申请时间</th>
+						<th>审核状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="authorsTbody"></tbody>
+			</table>
+
+			<div class="elimodlis_detail_pagination" style="margin-top:-20px;">
+				<div style="text-align:left;margin-top:-20px;">
+					显示 <em class="paging-begin">1</em>&nbsp;到&nbsp;<em class="paging-end">1</em>&nbsp;项，
+					共&nbsp;<em class="paging-total">1</em>&nbsp;项
+					&nbsp;&nbsp;第&nbsp;<input type="text" class="pac-paging-input paging-no-now" value="1"/>&nbsp;页，
+					<em class="pac-padding-btn paging-search">查询</em>
+				</div>
+				<div class="pagination inblock clearfix">
+					<div class="start all fl paging-first">首页</div>
+					<div class="pre all fl paging-plt">上一页</div>
+					<ul class="list clearfix fl">
+						<li class="all fl paging-lt">&lt;</li>
+						<li class="active all fl paging-no" id="paging-no-1">1</li>
+						<li class="all fl paging-no" id="paging-no-2">2</li>
+						<li class="all fl paging-no" id="paging-no-3">3</li>
+						<li class="all fl paging-no" id="paging-no-4">4</li>
+						<li class="all fl paging-no" id="paging-no-5">5</li>
+						<li class="all fl paging-gt">&gt;</li>
+					</ul>
+					<div class="end all fl paging-pgt">下一页</div>
+					<div class="next all fl paging-last">尾页</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="js/plugins/jquery.min.js"></script>
+<script type="text/javascript" src="js/plugins/jquery.slide.js"></script>
+<script type="text/javascript" src="js/plugins/jquery.treeview.js"></script>
+<script type="text/javascript" src="js/plugins/jsrender.js"></script>
+<script type="text/javascript" src="js/plugins/bundle.main.js"></script>
+<script type="text/javascript" src="js/plugins/urlHandler.js"></script>
+<script type="text/javascript" src="js/plugins/paging.js"></script>
+<script type="text/javascript" src="js/common/org.js"></script>
+<script type="text/javascript" src="js/common/common.js"></script>
+
+<script type="text/tmp" id="authorsTmp">
+		{{for}}
+        	<tr>
+				<td>{{:id}}</td>
+				<td>{{:realName}}</td>
+				<td>{{:penName}}</td>
+				<td>{{:phone}}</td>
+				<td>{{:idNum}}</td>
+				<td>{{:createTime}}</td>
+				<td>{{:status}}</td>
+				<td>
+					<a class="pca-btn-red" onclick="audit({{:id}}, 1)">通过</a>
+					<a class="pca-btn-white" style="" onclick="audit(2)">驳回</a>
+					<p contenteditable="true" class="pca-input" id="remark">请填写驳回原因</p>
+				</td>
+			</tr>
+		{{/for}}
+</script>
+
+<script type="text/javascript">
+    var PAGE_LENGTH = 5;
+    personal_center_login_vaild();
+	initTable();
+
+	$(function() {
+		$(".paging-search").click(function(){
+			initTable();
+		});
+        $(".paging-first").click(function(){
+            set_paging_no_now(1);
+            initTable();
+        });
+        $(".paging-last").click(function(){
+            set_paging_no_now(get_paging_no_max(PAGE_LENGTH));
+            initTable();
+        });
+        $(".paging-plt").click(function(){
+            set_paging_no_now(get_paging_no_plt());
+            initTable();
+        });
+        $(".paging-pgt").click(function(){
+            set_paging_no_now(get_paging_no_prt(PAGE_LENGTH));
+            initTable();
+        });
+        $(".paging-no").click(function(){
+            $(".elimodlis_detail_pagination").find(".active").removeClass("active");
+            $(this).addClass("active");
+            var pageNo = $(this).text();
+            set_paging_no_now(pageNo);
+            initTable();
+        });
+        $(".paging-lt").click(function(){
+            show_paging_lt(PAGE_LENGTH);
+        });
+        $(".paging-gt").click(function(){
+            show_paging_gt(PAGE_LENGTH);
+        });
+	})
+
+    function initTable() {
+		var params = {};
+		params.start = get_paging_start(PAGE_LENGTH);
+		params.length = PAGE_LENGTH;
+        params.realName = $("#realName").val();
+        params.penName = $("#penName").val();
+        params.status = $("#status").val();
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+			data: params,
+            url: url.mc.api_author_page,
+            beforeSend: function(request) {
+                request.setRequestHeader("ticket", getTicket());
+            },
+            success: function(response){
+                console.log(response);
+                if(response && response.code == 200){
+                    var html = $("#authorsTmp").render(response.data.list);
+                    $("#authorsTbody").html(html);
+                    initPagingShow(params.length, response.data.count);
+                }else{
+                    alert(response.message);
+                }
+            }
+        });
+    }
+
+    function resetSearch() {
+        $("#realName").val("");
+        $("#penName").val("");
+        $("#status").val("");
+        initTable();
+    }
+
+    function audit(id, status) {
+		if(status != 1 && status !=2){
+		    alert("状态异常");
+		    return false;
+		}
+        var remark = $("#remark").text();
+		if(status == 2 && (remark == "请填写驳回原因" || remark == null || remark == "") ){
+		    alert("请填写驳回原因");
+		    return false;
+		}
+		var searchParams = {};
+		searchParams.id = id;
+		searchParams.status = status;
+		searchParams.rejectReason = remark;
+        var searchParamsJson = JSON.stringify(searchParams);
+        $.ajax({
+            type: "PUT",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            data: searchParamsJson,
+            url: url.mc.api_author,
+            beforeSend: function(request) {
+                request.setRequestHeader("ticket", getTicket());
+            },
+            success: function(response){
+                if(response && response.code == 200){
+                    initTable();
+                }else{
+                    alert(response.message);
+                }
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
