@@ -36,9 +36,14 @@
 				<a class="g_btn_white">重置</a>
 				<a class="g_btn_red" style="margin-left: 30px;" onclick="applyAuthor()">提交申请</a>
 			</div>
+			<hr style="color: #e5e5e5;"  id="authorHr">
+			<div class="pb30 clearfix" id="authorStatusDiv" style="color: blue;font-size: 14px;">
+				审核通过后请重新登录，以刷新个人中心的菜单栏。点击
+				<a style="font-style: italic;font-weight: bold;color: red;cursor: pointer;" onclick="refreshAuthorStatus()">这里</a>，刷新审核状态。<br>
+				审核状态：<em id="authorStatusText" style="font-style: italic;font-weight: bold;color: red;">待审核</em><br/>
+				审核备注：<em id="authorRejectReasonText" style="font-style: italic;font-weight: bold;color: red;">无</em>
+			</div>
 		</div>
-
-
 	</div>
 </div>
 
@@ -53,16 +58,7 @@
 
 <script type="text/javascript">
     personal_center_login_vaild();
-	$(function () {
-		var author = getAuthor();
-		if(author){
-			$("#authorBtn").hide();
-			$("#realName").val(author.realName);
-			$("#penName").val(author.penName);
-			$("#phone").val(author.phone);
-			$("#idNum").val(author.idNum);
-		}
-	});
+    initValidAuthor();
     /**
      * 申请开通作者权限
      */
@@ -90,18 +86,70 @@
                 },
                 success: function(response){
                     if(response && response.code == 200){
-                        var author = response.data;
-                        if(author){
-                            var loginVo = getLoginVo();
-                            loginVo.author = author;
-                            localStorage.setItem("loginVo", loginVo);
-                        }
+                        alert("申请成功");
+						$("#authorBtn").hide();
+                        personal_center_login_vaild();
                     }else{
                         alert(response.message);
                     }
                 }
             });
         }
+    }
+
+    function initValidAuthor() {
+        var author = getAuthor();
+        if(author){
+            console.log(author);
+            $("#authorStatusDiv").show();
+            $("#authorHr").show();
+            if(author.status == 0){
+                $("#authorStatusText").text("待审核");
+            }
+            if(author.status == 1){
+                $("#authorStatusText").text("审核通过");
+            }
+            if(author.status == 2){
+                $("#authorStatusText").text("审核驳回");
+            }
+            if(author.rejectReason){
+                $("#authorRejectReasonText").text(author.rejectReason);
+            }else{
+                $("#authorRejectReasonText").text("无");
+            }
+            $("#authorBtn").hide();
+            $("#realName").val(author.realName);
+            $("#penName").val(author.penName);
+            $("#phone").val(author.phone);
+            $("#idNum").val(author.idNum);
+        }
+    }
+
+    function refreshAuthorStatus() {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: url.mc.api_author_userCode + "?userCode="+getUserCode(),
+            beforeSend: function(request) {
+                request.setRequestHeader("ticket", getTicket());
+            },
+            success: function(response){
+                if(response && response.code == 200){
+                    var author = response.data;
+                    if(author){
+                        var loginVo = getLoginVo();
+                        loginVo.author = author;
+                        var loginVoJson = JSON.stringify(loginVo);
+                        localStorage.setItem("loginVoJson", loginVoJson);
+                        alert("已刷新");
+                        initValidAuthor();
+                    }
+                    authorShow();
+                }else{
+                    alert(response.message);
+                }
+            }
+        });
     }
 </script>
 </body>

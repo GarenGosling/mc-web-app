@@ -25,6 +25,7 @@ url.mc.partnerLink_all = server.mc + '/partnerLink/all';
 url.mc.carousel_all = server.mc + '/carousel/all';
 url.mc.api_author_userCode = server.mc + '/api/author/userCode';
 url.mc.api_author = server.mc + '/api/author';
+url.mc.api_author_page = server.mc + '/api/author/page';
 url.mc.api_test = server.mc + '/api/test';
 url.mc.menu_tree_parentCode = server.mc + '/menu/tree/parentCode';
 url.mc.menu_parentCode=server.mc+'/menu/parentCode';
@@ -145,7 +146,7 @@ function personal_center_login_vaild() {
  * @private
  */
 function _personal_center_author_valid(){
-    if(!getAuthor() && getUserCode()){
+    if(getUserCode()){
         $.ajax({
             type: "GET",
             dataType: "json",
@@ -175,12 +176,11 @@ function _personal_center_author_valid(){
  * 作者用到的页面是否显示
  */
 function authorShow(){
-    if(getAuthor()){
-        $("#personal-center-articles").show();
-        $("#personal-center-public").show();
-    }else {
-        $("#personal-center-articles").hide();
-        $("#personal-center-public").hide();
+    if(!getAuthor()){
+        // 发布文章
+        $('.e08c1b1b-338d-4493-8eec-1087e31831df').remove();
+        // 文章列表
+        $('.7f33c43a-061e-49c9-8780-edf4264984da').remove();
     }
 }
 
