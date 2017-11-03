@@ -236,8 +236,8 @@
 				<td>{{:~statusFormat(status)}}</td>
 				<td>
 					<a class="pca-btn-red" onclick="audit({{:id}}, 1)">通过</a>
-					<a class="pca-btn-white" style="" onclick="audit(2)">驳回</a>
-					<input type="text" id="remark" class="pac-paging-input2" placeHolder="请填写驳回原因"/>
+					<a class="pca-btn-white" style="" onclick="audit({{:id}}, 2)">驳回</a>
+					<input type="text" id="{{:id}}" class="pac-paging-input2" placeHolder="请填写驳回原因"/>
 				</td>
 			</tr>
 		{{/for}}
@@ -381,8 +381,8 @@
 		    alert("状态异常");
 		    return false;
 		}
-        var remark = $("#remark").val();
-		if(status == 2 && (remark == "请填写驳回原因" || remark == null || remark == "") ){
+        var remark = $("#"+id).val();
+		if(status == 2 && !remark){
 		    alert("请填写驳回原因");
 		    return false;
 		}
