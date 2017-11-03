@@ -228,12 +228,12 @@
 		{{for}}
         	<tr>
 				<td>{{:id}}</td>
-				<td><a href="#">{{:title}}</a></td>
+				<td><a href="article_view2.html?id={{:id}}">{{:title}}</a></td>
 				<td>{{:~statusFormat(status)}}</td>
 				<td>{{:author_pen_name}}</td>
 				<td>{{:real_name}}</td>
-				<td>{{:create_time}}</td>
-				<td>{{:publish_time}}</td>
+				<td>{{:~dataFormat(create_time)}}</td>
+				<td>{{:~dataFormat(publish_time)}}</td>
 				<td>
 					<a class="pca-btn-red" onclick="audit({{:id}}, 1)">通过</a>
 					<a class="pca-btn-white" onclick="audit({{:id}}, 2)">驳回</a>
