@@ -5,7 +5,7 @@ server.ip_local = 'localhost';
 server.base = "http://";
 server.cas = server.base + server.ip_test + ':9090';
 server.oss = server.base + server.ip_test + ':9091';
-server.mc = server.base + server.ip_test + ':9093';
+server.mc = server.base + server.ip_local + ':9093';
 server.host = server.base + server.ip_test + ':8081';
 
 var url = {};
@@ -34,7 +34,8 @@ url.mc.articles_query = server.mc + '/articles/query';
 url.mc.articles_popAuthor = server.mc + '/articles/popAuthor';
 url.mc.articles = server.mc + '/articles';
 url.mc.moreAttention_all=server.mc+"/moreAttentions";
-url.mc.lifeWizard_status=server.mc+"//lifeWizard/status";
+url.mc.lifeWizard_status=server.mc+"/lifeWizard/status";
+url.mc.comment=server.mc+"/comments";
 url.host.index = server.host;
 
 
