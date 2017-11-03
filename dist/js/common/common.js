@@ -27,11 +27,13 @@ url.mc.api_author_userCode = server.mc + '/api/author/userCode';
 url.mc.api_author = server.mc + '/api/author';
 url.mc.api_test = server.mc + '/api/test';
 url.mc.menu_tree_parentCode = server.mc + '/menu/tree/parentCode';
+url.mc.menu_parentCode=server.mc+'/menu/parentCode';
 url.mc.api_articles = server.mc + '/api/articles';
 url.mc.articles_query = server.mc + '/articles/query';
 url.mc.articles_popAuthor = server.mc + '/articles/popAuthor';
 url.mc.articles = server.mc + '/articles';
-
+url.mc.moreAttention_all=server.mc+"/moreAttentions";
+url.mc.lifeWizard_status=server.mc+"//lifeWizard/status";
 url.host.index = server.host;
 
 

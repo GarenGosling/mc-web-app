@@ -1,9 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>首页</title>
-    <link href="style/main.css" rel="stylesheet"></head>
+    <link href="style/main.css" rel="stylesheet">
+</head>
 
 <body id="index">
 <div class="header">
@@ -28,9 +30,11 @@
                 <li class="j_triangle z_in5 pos_r fl">
                     <a class="opacity fl" href="#">合作链接</a>
                     <span class="triangle fl"></span>
-                    <ol class="hide">
-                        <li><a href="http://www.baidu.com" target="blank">百度</a></li>
-                        <li><a class="last" href="http://www.sina.com" target="blank">新浪</a></li>
+                    <ol class="hide" id="partnerLink1">
+                        <script class="partnerLink1" type="text/x-jsrender">
+                        <li><a href="{{:url}}" target="blank">{{:name}}</a></li>
+
+                        </script>
                     </ol>
                 </li>
             </ul>
@@ -42,31 +46,17 @@
             <div class="logo">
                 <a href="#"><img src="images/logo.png"></a>
             </div>
-            <ul class="clearfix">
+            <ul class="clearfix" id="head-menu-wrap">
+                <script type="text/x-jsrender" id="head-menu">
+                {{if #index <=3}}
                 <li class="fl">
-                    <a href="#">网站首页</a>
-                </li>
-                <li class="fl">
-                    <a href="main.html?pageNameMain=global-view&menuCodeMain=817ef08d-9e45-4aca-8947-07335ed9c18b">全球视野</a>
-                </li>
-                <li class="fl">
-                    <a href="main.html?pageNameMain=stone-from-hill&menuCodeMain=45c32aa2-7592-459d-81ba-d6df9cf5dec3">他山之石</a>
-                </li>
-                <li class="fl">
-                    <a href="main.html?pageNameMain=chinese-world&menuCodeMain=d21cc30d-1910-44fb-8586-a233952f2b17">华人世界</a>
-                </li>
+                {{else}}
                 <li class="fr">
-                    <a href="main.html?pageNameMain=personal-center-main&menuCodeMain=5518c3a5-21ce-43b2-88d2-17e34ee1ba53">个人中心</a>
+                {{/if}}
+                    <a href="{{:url}}">{{:name}}</a>
                 </li>
-                <li class="fr">
-                    <a href="main.html?pageNameMain=invest&menuCodeMain=beed32e3-5f1a-4842-880a-1a1fe48fc27f">中产投资</a>
-                </li>
-                <li class="fr">
-                    <a href="main.html?pageNameMain=elite-model&menuCodeMain=5d2e7f43-e851-4c1d-b7f2-4e3fcd41cc2d">主题文章</a>
-                </li>
-                <li class="fr">
-                    <a href="main.html?pageNameMain=middle-life&menuCodeMain=4bea141d-e38e-4bc2-9eed-4e08faee3ad2">中产生活</a>
-                </li>
+
+                </script>
             </ul>
         </div>
     </div>
@@ -87,7 +77,8 @@
 			{{/if}}
 			{{/for}}
 		</ul>
-		</script>
+
+        </script>
     </div>
 </div>
 <div class="main w1200 clearfix">
@@ -104,43 +95,34 @@
 					{{/if}}
 					{{/for}}
 				</ul>
-				</script>
+
+                </script>
             </div>
         </div>
+
         <div class="list fl">
             <ol class="j_news_tab_nav clearfix">
-                <li class="active fl">旅行家</li>
-                <li class="fl">中产文论</li>
-                <li class="fl">全球视野</li>
+                <li class="active fl">全球视野</li>
                 <li class="fl">他山之石</li>
+                <li class="fl">华人世界</li>
             </ol>
-            <ul class="j_news_tab_con show">
-                <li>
-                    <a href="#">
-                        [房车]1房车旅游是一种以房车为载体的新型旅游方式。旅游型旅游方式型旅游型旅游方式型旅游型旅游方式型
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        [房车]1房车旅游是一种以房车为载体的新型旅游方式。旅游型旅游方式型旅游型旅游方式型旅游型旅游方式型
-                    </a>
-                </li>
+            <ul class="j_news_tab_con show" id="tpl-article1-warp1">
             </ul>
-            <ul class="j_news_tab_con">
-                <li>
-                    <a href="#">
-                        [房车]2房车旅游是一种以房车为载体的新型旅游方式。旅游型旅游方式型旅游型旅游方式型旅游型旅游方式型
-                    </a>
-                </li>
+            <ul class="j_news_tab_con" id="tpl-article1-warp2">
             </ul>
-            <ul class="j_news_tab_con">
-                <li>
-                    <a href="#">
-                        [房车]3房车旅游是一种以房车为载体的新型旅游方式。旅游型旅游方式型旅游型旅游方式型旅游型旅游方式型
-                    </a>
-                </li>
+            <ul class="j_news_tab_con" id="tpl-article1-warp3">
             </ul>
+            <script id="tpl-article1"  type="text/x-jsrender">
+                {{for list}}
+                <li>
+                <a  href="article_view2.html?id={{:id}}">
+                    {{:title}}
+                </a>
+                </li>
+                {{/for}}
+            </script>
         </div>
+
         <div class="wx bor w230 fr">
             <h3 class="tit_bor fon_nor"><a class="fr" href="#more_attention">更多&gt;</a>关注公众号</h3>
             <div class="wx_pic">
@@ -152,203 +134,129 @@
     </div>
     <div class="say">
         <div class="bor">
-            <h3 class="tit_bor fon_bol">中产者说</h3>
-            <div class="say_list">
+            <h3 class="tit_bor fon_bol">中产生活</h3>
+            <div class="say_list" id="tpl-article2-wrap1">
+                <script id="tpl-article2" type="text/x-jsrender">
+                {{for list}}
+                {{if #getIndex() ==0 }}
                 <dl class="clearfix">
-                    <dt class="fl"><img src="images/1-6.jpg"></dt>
-                    <dd class="fr">
-                        <h5>
-                            <strong class="j_say_list_tit">什么是旅行家，它能为我们带来怎样的便利</strong>
-                        </h5>
-                        <h6>我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地。我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地</h6>
-                        <div>
-                            <span>作者：</span>
-                            <em>张三</em>
-                            <i>2017-04-16</i>
-                            <a class="fr" href="#">查看全文&gt;</a>
-                        </div>
-                    </dd>
-                </dl>
-                <dl class="no_pic clearfix">
-                    <dt class="fl"><img src="images/1-7.jpg"></dt>
-                    <dd class="fr">
-                        <h5>
-                            <strong class="j_say_list_tit">什么是旅行家，它能为我们带来怎样的便利</strong>
-                        </h5>
-                        <h6>我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地。我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地</h6>
-                        <div>
-                            <span>作者：</span>
-                            <em>张三</em>
-                            <i>2017-04-16</i>
-                            <a class="fr" href="#">查看全文&gt;</a>
-                        </div>
-                    </dd>
-                </dl>
-                <dl class="no_pic clearfix">
-                    <dt class="fl"><img src="images/1-7.jpg"></dt>
-                    <dd class="fr">
-                        <h5>
-                            <strong class="j_say_list_tit">什么是旅行家，它能为我们带来怎样的便利</strong>
-                        </h5>
-                        <h6>我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地。我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地</h6>
-                        <div>
-                            <span>作者：</span>
-                            <em>张三</em>
-                            <i>2017-04-16</i>
-                            <a class="fr" href="#">查看全文&gt;</a>
-                        </div>
-                    </dd>
-                </dl>
-                <dl class="no_pic clearfix">
-                    <dt class="fl"><img src="images/1-7.jpg"></dt>
-                    <dd class="fr">
-                        <h5>
-                            <strong class="j_say_list_tit">什么是旅行家，它能为我们带来怎样的便利</strong>
-                        </h5>
-                        <h6>我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地。我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地</h6>
-                        <div>
-                            <span>作者：</span>
-                            <em>张三</em>
-                            <i>2017-04-16</i>
-                            <a class="fr" href="#">查看全文&gt;</a>
-                        </div>
-                    </dd>
-                </dl>
+                {{else #getIndex()==~root.list.length-1}}
                 <dl class="no_pic last clearfix">
-                    <dt class="fl"><img src="images/1-7.jpg"></dt>
+                {{else}}
+                <dl class="no_pic clearfix">
+                {{/if}}
+                    <dt class="fl"><img src="{{:~root.downloadurl}}{{:md5}}"></dt>
                     <dd class="fr">
                         <h5>
-                            <strong class="j_say_list_tit">什么是旅行家，它能为我们带来怎样的便利</strong>
+                            <strong class="j_say_list_tit">{{:title}}</strong>
                         </h5>
-                        <h6>我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地。我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地</h6>
+                        <h6>{{:summary}}</h6>
                         <div>
                             <span>作者：</span>
-                            <em>张三</em>
-                            <i>2017-04-16</i>
-                            <a class="fr" href="#">查看全文&gt;</a>
+                            <em>{{:authorPenName}}</em>
+                            <i>{{:~dataFormat(createTime)}}</i>
+                            <a class="fr" target="_blank" href="article_view2.html?id={{:id}}">查看全文&gt;</a>
                         </div>
                     </dd>
                 </dl>
+                {{/for}}
+                <!--<dl class="no_pic clearfix">-->
+                    <!--<dt class="fl"><img src="images/1-7.jpg"></dt>-->
+                    <!--<dd class="fr">-->
+                        <!--<h5>-->
+                            <!--<strong class="j_say_list_tit">什么是旅行家，它能为我们带来怎样的便利</strong>-->
+                        <!--</h5>-->
+                        <!--<h6>-->
+                            <!--我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地。我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地</h6>-->
+                        <!--<div>-->
+                            <!--<span>作者：</span>-->
+                            <!--<em>张三</em>-->
+                            <!--<i>2017-04-16</i>-->
+                            <!--<a class="fr" href="#">查看全文&gt;</a>-->
+                        <!--</div>-->
+                    <!--</dd>-->
+                <!--</dl>-->
+                <!--<dl class="no_pic clearfix">-->
+                    <!--<dt class="fl"><img src="images/1-7.jpg"></dt>-->
+                    <!--<dd class="fr">-->
+                        <!--<h5>-->
+                            <!--<strong class="j_say_list_tit">什么是旅行家，它能为我们带来怎样的便利</strong>-->
+                        <!--</h5>-->
+                        <!--<h6>-->
+                            <!--我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地。我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地</h6>-->
+                        <!--<div>-->
+                            <!--<span>作者：</span>-->
+                            <!--<em>张三</em>-->
+                            <!--<i>2017-04-16</i>-->
+                            <!--<a class="fr" href="#">查看全文&gt;</a>-->
+                        <!--</div>-->
+                    <!--</dd>-->
+                <!--</dl>-->
+                <!--<dl class="no_pic clearfix">-->
+                    <!--<dt class="fl"><img src="images/1-7.jpg"></dt>-->
+                    <!--<dd class="fr">-->
+                        <!--<h5>-->
+                            <!--<strong class="j_say_list_tit">什么是旅行家，它能为我们带来怎样的便利</strong>-->
+                        <!--</h5>-->
+                        <!--<h6>-->
+                            <!--我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地。我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地</h6>-->
+                        <!--<div>-->
+                            <!--<span>作者：</span>-->
+                            <!--<em>张三</em>-->
+                            <!--<i>2017-04-16</i>-->
+                            <!--<a class="fr" href="#">查看全文&gt;</a>-->
+                        <!--</div>-->
+                    <!--</dd>-->
+                <!--</dl>-->
+                <!--<dl class="no_pic last clearfix">-->
+                    <!--<dt class="fl"><img src="images/1-7.jpg"></dt>-->
+                    <!--<dd class="fr">-->
+                        <!--<h5>-->
+                            <!--<strong class="j_say_list_tit">什么是旅行家，它能为我们带来怎样的便利</strong>-->
+                        <!--</h5>-->
+                        <!--<h6>-->
+                            <!--我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地。我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地</h6>-->
+                        <!--<div>-->
+                            <!--<span>作者：</span>-->
+                            <!--<em>张三</em>-->
+                            <!--<i>2017-04-16</i>-->
+                            <!--<a class="fr" href="#">查看全文&gt;</a>-->
+                        <!--</div>-->
+                    <!--</dd>-->
+                <!--</dl>-->
+                </script>
             </div>
         </div>
     </div>
     <div class="say">
         <div class="bor">
-            <h3 class="tit_bor fon_bol">中产文论</h3>
-            <div class="say_list">
-                <dl class="clearfix">
-                    <dt class="fl"><img src="images/1-8.jpg"></dt>
-                    <dd class="fr">
-                        <h5>
-                            <strong class="j_say_list_tit">什么是旅行家，它能为我们带来怎样的便利</strong>
-                        </h5>
-                        <h6>我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地。我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地</h6>
-                        <div>
-                            <span>作者：</span>
-                            <em>张三</em>
-                            <i>2017-04-16</i>
-                            <a class="fr" href="#">查看全文&gt;</a>
-                        </div>
-                    </dd>
-                </dl>
-                <dl class="no_pic clearfix">
-                    <dt class="fl"><img src="images/1-9.jpg"></dt>
-                    <dd class="fr">
-                        <h5>
-                            <strong class="j_say_list_tit">什么是旅行家，它能为我们带来怎样的便利</strong>
-                        </h5>
-                        <h6>我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地。我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地</h6>
-                        <div>
-                            <span>作者：</span>
-                            <em>张三</em>
-                            <i>2017-04-16</i>
-                            <a class="fr" href="#">查看全文&gt;</a>
-                        </div>
-                    </dd>
-                </dl>
-                <dl class="no_pic clearfix">
-                    <dt class="fl"><img src="images/1-7.jpg"></dt>
-                    <dd class="fr">
-                        <h5>
-                            <strong class="j_say_list_tit">什么是旅行家，它能为我们带来怎样的便利</strong>
-                        </h5>
-                        <h6>我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地。我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地</h6>
-                        <div>
-                            <span>作者：</span>
-                            <em>张三</em>
-                            <i>2017-04-16</i>
-                            <a class="fr" href="#">查看全文&gt;</a>
-                        </div>
-                    </dd>
-                </dl>
-                <dl class="no_pic clearfix">
-                    <dt class="fl"><img src="images/1-7.jpg"></dt>
-                    <dd class="fr">
-                        <h5>
-                            <strong class="j_say_list_tit">什么是旅行家，它能为我们带来怎样的便利</strong>
-                        </h5>
-                        <h6>我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地。我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地</h6>
-                        <div>
-                            <span>作者：</span>
-                            <em>张三</em>
-                            <i>2017-04-16</i>
-                            <a class="fr" href="#">查看全文&gt;</a>
-                        </div>
-                    </dd>
-                </dl>
-                <dl class="no_pic last clearfix">
-                    <dt class="fl"><img src="images/1-7.jpg"></dt>
-                    <dd class="fr">
-                        <h5>
-                            <strong class="j_say_list_tit">什么是旅行家，它能为我们带来怎样的便利</strong>
-                        </h5>
-                        <h6>我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地。我们为什么要叫旅行家，“旅”带着家人，出发，来一场更稀有的旅行，“行”带着家人，唱着行歌，体验精致、狂野之行，“家”带着家人，去属于自己的度假胜地</h6>
-                        <div>
-                            <span>作者：</span>
-                            <em>张三</em>
-                            <i>2017-04-16</i>
-                            <a class="fr" href="#">查看全文&gt;</a>
-                        </div>
-                    </dd>
-                </dl>
+            <h3 class="tit_bor fon_bol">主题文章</h3>
+            <div class="say_list" id="tpl-article2-wrap2">
             </div>
         </div>
     </div>
+
     <div class="guide">
         <h3 class="tit_bor fon_bol">生活向导</h3>
-        <ul class="guide_list clearfix">
+        <ul class="guide_list clearfix" id="tpl-life-wizard-warp">
+            <script id="tpl-life-wizard" type="text/x-jsrender">
+            {{for data}}
+            {{if #getIndex() <4}}
+            {{if (#getIndex()+1)%4!=0}}
             <li class="fl">
-                <p>
-                    <img src="images/1-10.jpg">
-                </p>
-                <div>
-                    <a class="opacity" href="#">旅&nbsp;&nbsp;&nbsp;行&nbsp;&nbsp;&nbsp;家</a>
-                </div>
-            </li>
-            <li class="fl">
-                <p>
-                    <img src="images/1-11.jpg">
-                </p>
-                <div>
-                    <a class="opacity">暂&nbsp;&nbsp;&nbsp;无&nbsp;&nbsp;&nbsp;项&nbsp;&nbsp;&nbsp;目</a>
-                </div>
-            </li>
-            <li class="fl">
-                <p>
-                    <img src="images/1-12.jpg">
-                </p>
-                <div>
-                    <a class="opacity">暂&nbsp;&nbsp;&nbsp;无&nbsp;&nbsp;&nbsp;项&nbsp;&nbsp;&nbsp;目</a>
-                </div>
-            </li>
+            {{else}}
             <li class="fr last">
+            {{/if}}
                 <p>
-                    <img src="images/1-13.jpg">
+                    <img src="{{:~root.downloadurl}}{{:md5}}">
                 </p>
                 <div>
-                    <a class="opacity">暂&nbsp;&nbsp;&nbsp;无&nbsp;&nbsp;&nbsp;项&nbsp;&nbsp;&nbsp;目</a>
+                    <a class="opacity" href="{{:url}}">{{:name}}</a>
                 </div>
             </li>
+            {{/if}}
+            {{/for}}
+            </script>
         </ul>
     </div>
     <div id="tpl-cooperate-wrap" class="flink">
@@ -370,27 +278,30 @@
 				更多品牌敬请期待...
 			</li>
 		</ul>
-		</script>
+
+        </script>
     </div>
     <div class="flink mar_b30">
+
         <a name="more_attention"></a>
         <h3>更多关注</h3>
-        <ul class="flink_list clearfix">
-            <li class="fl">
-                <a href="#"><img src="images/1-30.png"></a>
-            </li>
-            <li class="fl">
-                <a href="#"><img src="images/1-31.png"></a>
-            </li>
-            <li class="fl">
-                <a href="#"><img src="images/1-32.png"></a>
-            </li>
-            <li class="fl">
-                <a href="#"><img src="images/1-33.png"></a>
-            </li>
+        <ul class="flink_list clearfix" id="tpl-more-attendion-wrap">
+            <script id="tpl-more-attendion" type="text/x-jsrender">
+            {{for data}}
+            {{if (#getIndex()+1)%5 == 0}}
             <li class="fr last">
+            {{else}}
+            <li class="fl">
+            {{/if}}
+            {{if md5}}
+                <a href="http://{{:url}}"><img src="{{:~root.downloadurl}}{{:md5}}"></a>
+            {{else}}
                 更多关注敬请期待...
+            {{/if}}
             </li>
+            {{/for}}
+
+            </script>
         </ul>
     </div>
 </div>
@@ -416,12 +327,97 @@
 <script type="text/javascript" src="js/plugins/jquery.slide.js"></script>
 <script type="text/javascript" src="js/plugins/jsrender.js"></script>
 <script type="text/javascript" src="js/plugins/urlHandler.js"></script>
-<script type="text/javascript" src="js/plugins/bundle.main.js"></script></body>
+<script type="text/javascript" src="js/plugins/bundle.main.js"></script>
+</body>
 <!--<script type="text/javascript" src="js/url.js"></script>-->
 <script type="text/javascript" src="js/common/org.js"></script>
 <script type="text/javascript" src="js/common/common.js"></script>
 <script type="text/javascript" src="js/views/main.js"></script>
 
 <script type="text/javascript" src="js/views/index.js"></script>
+<script type="text/javascript" src="js/common/dataFormat.js"></script>
 
+<script>
+    $.views.helpers({
+        dataFormat:function (timestamp) {
+            return $.dateFormat(timestamp,"yyyy-MM-dd");
+        }
+    })
+    $(function () {
+        //合作连接
+        var partnerLink1 = $.templates(".partnerLink1");
+        $.get(url.mc.partnerLink_all, function (result) {
+            if (result.code == 200) {
+                var html = partnerLink1(result.data);
+                $("#partnerLink1").html(html);
+            } else {
+                alert(result.message);
+            }
+        })
+        //更过关注
+        var tplMoreAttendion = $.templates("#tpl-more-attendion");
+        $.get(url.mc.moreAttention_all, function (result) {
+            if (result.code == 200) {
+                result.downloadurl = url.oss.download;
+                var length = 5 - result.data.length % 5;
+                if (length != 0) {
+                    while (length != 0) {
+                        result.data.push({"md5": false});
+                        length--;
+                    }
+                }
+                var html = tplMoreAttendion(result);
+                $("#tpl-more-attendion-wrap").html(html);
+            }
+        })
+        /*更多关注*/
+        $.get(url.mc.menu_parentCode, {'status': 1, 'parentCode': '0'}, function (result) {
+            if (result.code == 200) {
+
+                $("#head-menu-wrap").html($.templates("#head-menu")(result.data));
+            }
+        })
+        /*生活向导*/
+        $.get(url.mc.lifeWizard_status, {'status': 1}, function (result) {
+            if (result.code == 200) {
+                result.downloadurl = url.oss.download;
+                $("#tpl-life-wizard-warp").html($.templates("#tpl-life-wizard")(result));
+            }
+        })
+
+        //位置1出文章
+        var tpl_article1=$.templates("#tpl-article1");
+        var tpl_article2=$.templates("#tpl-article2");
+        function getArticle(menuCode,warpSelecter,tpl) {
+            $.get(url.mc.articles_query,{
+                "menuCode":menuCode,
+                "showDetail":0,
+                "orderBy":"view_num desc,id desc",
+                "start":0,
+                "length":5
+            },function (result) {
+                result.data.downloadurl = url.oss.download;
+                $(warpSelecter).html(tpl(result.data));
+            })
+        }
+        getArticle('817ef08d-9e45-4aca-8947-07335ed9c18b',"#tpl-article1-warp1",tpl_article1);
+        getArticle('45c32aa2-7592-459d-81ba-d6df9cf5dec3',"#tpl-article1-warp2",tpl_article1);
+        getArticle('d21cc30d-1910-44fb-8586-a233952f2b17',"#tpl-article1-warp3",tpl_article1);
+        getArticle('4bea141d-e38e-4bc2-9eed-4e08faee3ad2',"#tpl-article2-wrap1",tpl_article2);
+        getArticle('5d2e7f43-e851-4c1d-b7f2-4e3fcd41cc2d',"#tpl-article2-wrap2",tpl_article2);
+
+
+//        //位置1
+//        var menus={"menus":[{"code":"817ef08d-9e45-4aca-8947-07335ed9c18b","name":"全球视野"},
+//            {"code":"45c32aa2-7592-459d-81ba-d6df9cf5dec3","name":"他山之石"},
+//            {"code":"d21cc30d-1910-44fb-8586-a233952f2b17","name":"华人世界"}]
+//
+//        };
+//        $("#tpl-menu1-warp").html($.templates("#tpl-menu1")(menus));
+
+        //位置2
+
+
+    })
+</script>
 </html>
