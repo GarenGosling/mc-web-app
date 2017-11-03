@@ -228,7 +228,7 @@
 				<td>{{:createTime}}</td>
 				<td>{{:status}}</td>
 				<td>
-					<a class="pca-btn-red" onclick="audit(1)">通过</a>
+					<a class="pca-btn-red" onclick="audit({{:id}}, 1)">通过</a>
 					<a class="pca-btn-white" style="" onclick="audit(2)">驳回</a>
 					<p contenteditable="true" class="pca-input" id="remark">请填写驳回原因</p>
 				</td>
@@ -311,7 +311,7 @@
         initTable();
     }
 
-    function audit(status) {
+    function audit(id, status) {
 		if(status != 1 && status !=2){
 		    alert("状态异常");
 		    return false;
@@ -322,13 +322,15 @@
 		    return false;
 		}
 		var searchParams = {};
+		searchParams.id = id;
 		searchParams.status = status;
 		searchParams.rejectReason = remark;
+        var searchParamsJson = JSON.stringify(searchParams);
         $.ajax({
             type: "PUT",
             contentType: "application/json;charset=UTF-8",
             dataType: "json",
-            data: searchParams,
+            data: searchParamsJson,
             url: url.mc.api_author,
             beforeSend: function(request) {
                 request.setRequestHeader("ticket", getTicket());
