@@ -132,20 +132,20 @@
 
 <body id="personal-center-public">
 
-<h1 class="subtit mar_b10">当前位置：<span>个人中心</span> &gt;&gt; <em>作者审核</em></h1>
+<h1 class="subtit mar_b10">当前位置：<span>个人中心</span> &gt;&gt; <em>文章列表</em></h1>
 <div class="subcont">
 	<div class="subcont_publish">
 		<h3 class="g_tit_bor_red">
-			<span>作者审核</span>
+			<span>文章列表</span>
 		</h3>
 		<div style="width: 100%;font-size: 12px; height:50px;padding-top:10px;">
 			<div class="pca-search-div">
-				<label class="pac-search-label">姓名：</label>
+				<label class="pac-search-label">标题：</label>
 				<input class="pac-search-input" type="text" placeHolder="请输入姓名" id="realName">
 			</div>
 			<div class="pca-search-div">
-				<label class="pac-search-label">笔名：</label>
-				<input class="pac-search-input" type="text" placeHolder="请输入笔名" id="penName">
+				<label class="pac-search-label">作者：</label>
+				<input class="pac-search-input" type="text" placeHolder="请输入姓名或笔名" id="penName">
 			</div>
 			<div class="pca-search-div">
 				<label style="float: left;">审核状态：</label>
@@ -225,8 +225,8 @@
 				<td>{{:penName}}</td>
 				<td>{{:phone}}</td>
 				<td>{{:idNum}}</td>
-				<td>{{:~dataFormat(createTime)}}</td>
-				<td>{{:~statusFormat(status)}}</td>
+				<td>{{:createTime}}</td>
+				<td>{{:status}}</td>
 				<td>
 					<a class="pca-btn-red" onclick="audit({{:id}}, 1)">通过</a>
 					<a class="pca-btn-white" style="" onclick="audit(2)">驳回</a>
@@ -240,21 +240,6 @@
     var PAGE_LENGTH = 5;
     personal_center_login_vaild();
 	initTable();
-    $.views.helpers({
-        dataFormat:function (timestamp) {
-            return $.dateFormat(timestamp,"yyyy-MM-dd HH:mm:ss");
-        },
-        statusFormat:function (status) {
-			if(status==0)
-			    return "待审核";
-			else if(status==1)
-			    return "审核通过";
-			else if(status==2)
-			    return "审核驳回";
-			else
-			    return "状态未知"+status;
-        }
-    })
 
 	$(function() {
 		$(".paging-search").click(function(){
