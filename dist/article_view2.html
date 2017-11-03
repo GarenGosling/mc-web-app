@@ -13,7 +13,7 @@
 <div class="subcont">
     <div class="subcont_artical" id="articleDetailMain"></div>
     <div class="subcont_msg">
-        <h3>论坛留言</h3>
+        <h3>发表评论</h3>
         <div class="user clearfix">
 					<span class="fl">
 						用户名:
@@ -21,10 +21,10 @@
 					</span>
         </div>
         <div class="txarea">
-            <textarea placeholder="评论内容不超过400字..."></textarea>
+            <textarea placeholder="评论内容不超过400字..." ></textarea>
             <div class="code clearfix">
             </div>
-            <div class="pub">发布留言</div>
+            <div class="pub">发表评论</div>
         </div>
     </div>
     <div class="subcont_reply">
@@ -164,7 +164,6 @@
                 url: url.mc.comment,
                 success: function (result) {
                     if (result.code == 200) {
-                        alert("评论成功");
                         window.location.reload();
                     } else {
                         alert(result.message);
