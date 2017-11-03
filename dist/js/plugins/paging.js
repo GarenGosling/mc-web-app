@@ -16,7 +16,6 @@ function initPagingShow(length, total){
  * @param length
  */
 function showPageNos(pageNo, length){
-    debugger
     var paging_no_max = get_paging_no_max(length);
     var n = parseInt(pageNo / 5) * 5 + 1;
     var m = parseInt(pageNo / 5 + 1) * 5;
@@ -115,7 +114,6 @@ function get_paging_no_prt(length){
  * @returns {number}
  */
 function get_paging_no_max(length){
-    debugger
     var total = parseInt(get_paging_total());
     length = parseInt(length);
     if(total % length == 0){
@@ -130,7 +128,6 @@ function get_paging_no_max(length){
  * @returns {jQuery}
  */
 function get_paging_total(){
-    debugger
     var paging_total = $(".paging-total").text();
     if(!paging_total){
         paging_total = 0;
