@@ -235,12 +235,12 @@
 				<td>{{:~dataFormat(create_time)}}</td>
 				<td>{{:~dataFormat(publish_time)}}</td>
 				<td>
-					{{if :~root.loginName=='admin'}}
+					{{if ~root.loginName=='admin'}}
 					<a class="pca-btn-red" onclick="audit({{:id}}, 1)">通过</a>
 					<a class="pca-btn-white" onclick="audit({{:id}}, 2)">驳回</a>
 					<input type="text" id="{{:id}}" class="pac-paging-input2" placeHolder="请填写驳回原因"/>
 					{{else}}
-					<a class="pca-btn-red">编辑</a>
+					<a href="personal-center-public.html?id={{:id}}" class="pca-btn-red">编辑</a>
 					{{/if}}
 				</td>
 			</tr>
