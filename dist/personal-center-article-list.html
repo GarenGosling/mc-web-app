@@ -388,14 +388,14 @@
 		var searchParams = {};
 		searchParams.id = id;
 		searchParams.status = status;
-		searchParams.rejectReason = remark;
+		searchParams.remark = remark;
         var searchParamsJson = JSON.stringify(searchParams);
         $.ajax({
             type: "PUT",
             contentType: "application/json;charset=UTF-8",
             dataType: "json",
             data: searchParamsJson,
-            url: url.mc.api_articles+"/"+searchParams.id+"/auditArticle",
+            url: url.mc.api_articles+"/audit",
             beforeSend: function(request) {
                 request.setRequestHeader("ticket", getTicket());
             },
