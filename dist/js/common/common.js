@@ -36,6 +36,7 @@ url.mc.articles = server.mc + '/articles';
 url.mc.moreAttention_all=server.mc+"/moreAttentions";
 url.mc.lifeWizard_status=server.mc+"/lifeWizard/status";
 url.host.index = server.host;
+url.host.articles_queryByAuthor = server.mc + "/api/articles/queryByAuthor";
 
 
 /***************** 登录相关 *******************/

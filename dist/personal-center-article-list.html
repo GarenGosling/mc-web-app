@@ -150,11 +150,11 @@
 		<div style="width: 100%;font-size: 12px; height:50px;padding-top:10px;padding-left:10px;">
 			<div class="pca-search-div">
 				<label class="pac-search-label">标题：</label>
-				<input class="pac-search-input" type="text" placeHolder="请输入文章标题" id="realName">
+				<input class="pac-search-input" type="text" placeHolder="请输入文章标题" id="articleTitle">
 			</div>
 			<div class="pca-search-div">
 				<label class="pac-search-label">作者：</label>
-				<input class="pac-search-input" type="text" placeHolder="请输入姓名或笔名" id="penName">
+				<input class="pac-search-input" type="text" placeHolder="请输入姓名或笔名" id="authorName">
 			</div>
 			<div class="pca-search-div">
 				<label style="float: left;">审核状态：</label>
@@ -224,16 +224,16 @@
 <script type="text/javascript" src="js/common/dataFormat.js"></script>
 <script type="text/javascript" src="js/common/common.js"></script>
 
-<script type="text/tmp" id="authorsTmp">
+<script type="text/tmp" id="articalsTmp">
 		{{for}}
         	<tr>
 				<td>{{:id}}</td>
-				<td><a href="#">不变的追求，永恒的选择-丽江</a></td>
+				<td><a href="#">{{:title}}</a></td>
 				<td>{{:~statusFormat(status)}}</td>
-				<td>不一样的烟火</td>
-				<td>{{:realName}}</td>
-				<td>2017-11-02 18:28:36</td>
-				<td>2017-11-03 02:00:00</td>
+				<td>{{:author_pen_name}}</td>
+				<td>{{:real_name}}</td>
+				<td>{{:create_time}}</td>
+				<td>{{:publish_time}}</td>
 				<td>
 					<a class="pca-btn-red" onclick="audit({{:id}}, 1)">通过</a>
 					<a class="pca-btn-white" onclick="audit({{:id}}, 2)">驳回</a>
@@ -344,21 +344,21 @@
 		var params = {};
 		params.start = get_paging_start(PAGE_LENGTH);
 		params.length = PAGE_LENGTH;
-        params.realName = $("#realName").val();
-        params.penName = $("#penName").val();
+        params.title = $("#articleTitle").val();
+        params.authorName = $("#authorName").val();
         params.status = $("#status").val();
         $.ajax({
             type: "GET",
             dataType: "json",
 			data: params,
-            url: url.mc.api_author_page,
+            url: url.host.articles_queryByAuthor,
             beforeSend: function(request) {
                 request.setRequestHeader("ticket", getTicket());
             },
             success: function(response){
                 console.log(response);
                 if(response && response.code == 200){
-                    var html = $("#authorsTmp").render(response.data.list);
+                    var html = $("#articalsTmp").render(response.data.list);
                     $("#authorsTbody").html(html);
                     initPagingShow(params.length, response.data.count);
                 }else{
