@@ -395,7 +395,7 @@
             contentType: "application/json;charset=UTF-8",
             dataType: "json",
             data: searchParamsJson,
-            url: url.mc.api_author,
+            url: url.mc.api_articles+"/"+searchParams.id+"/auditArticle",
             beforeSend: function(request) {
                 request.setRequestHeader("ticket", getTicket());
             },
