@@ -9,7 +9,7 @@
 	table {
 		border-top: 1px solid #e5e5e5;
 		border-left: 1px solid #e5e5e5;
-		width: 100%;
+		width: 95%;
 	}
 	th {
 		border-right: 1px solid #e5e5e5;
@@ -97,6 +97,14 @@
 		padding-left: 12px;
 		width: 150px;
 	}
+	.pac-paging-input {
+		border: 1px solid #bfbfbf;
+		font-size: 12px;
+		padding-top: 3px;
+		padding-bottom: 3px;
+		padding-left: 5px;
+		width: 20px;
+	}
 	.pac-search-label {
 		padding-top: 8px;
 		padding-bottom: 5px;
@@ -109,6 +117,15 @@
 		padding-bottom: 5px;
 		padding-left: 12px;
 		width: 150px;
+	}
+	.pac-padding-btn {
+		border:1px solid #e5e5e5;color:#000;
+		padding-left:5px;
+		padding-right:5px;
+		padding-top:1px;
+		padding-bottom:3px;
+		cursor: pointer;
+		font-size:12px;
 	}
 </style>
 </head>
@@ -146,7 +163,7 @@
 				<button onclick="resetSearch()">重置</button>
 			</div>
 		</div>
-		<div style="width: 100%">
+		<div style="width: 100%;padding-left:30px;">
 			<table cellspacing="0" cellpadding="0">
 				<thead>
 					<tr>
@@ -164,18 +181,26 @@
 			</table>
 
 			<div class="elimodlis_detail_pagination" style="margin-top:-20px;">
+				<div style="text-align:left;margin-top:-20px;">
+					显示 <em class="paging-begin">1</em>&nbsp;到&nbsp;<em class="paging-end">1</em>&nbsp;项，
+					共&nbsp;<em class="paging-total">1</em>&nbsp;项
+					&nbsp;&nbsp;第&nbsp;<input type="text" class="pac-paging-input paging-no-now" value="1"/>&nbsp;页，
+					<em class="pac-padding-btn paging-search">查询</em>
+				</div>
 				<div class="pagination inblock clearfix">
-					<div class="start all fl">首页</div>
-					<div class="pre all fl">上一页</div>
+					<div class="start all fl paging-first">首页</div>
+					<div class="pre all fl paging-plt">上一页</div>
 					<ul class="list clearfix fl">
-						<li class="active all fl">1</li>
-						<li class="all fl">2</li>
-						<li class="all fl">3</li>
-						<li class="all fl">4</li>
-						<li class="all fl">5</li>
+						<li class="all fl paging-lt">&lt;</li>
+						<li class="active all fl paging-no" id="paging-no-1">1</li>
+						<li class="all fl paging-no" id="paging-no-2">2</li>
+						<li class="all fl paging-no" id="paging-no-3">3</li>
+						<li class="all fl paging-no" id="paging-no-4">4</li>
+						<li class="all fl paging-no" id="paging-no-5">5</li>
+						<li class="all fl paging-gt">&gt;</li>
 					</ul>
-					<div class="end all fl">下一页</div>
-					<div class="next all fl">尾页</div>
+					<div class="end all fl paging-pgt">下一页</div>
+					<div class="next all fl paging-last">尾页</div>
 				</div>
 			</div>
 		</div>
@@ -188,6 +213,7 @@
 <script type="text/javascript" src="js/plugins/jsrender.js"></script>
 <script type="text/javascript" src="js/plugins/bundle.main.js"></script>
 <script type="text/javascript" src="js/plugins/urlHandler.js"></script>
+<script type="text/javascript" src="js/plugins/paging.js"></script>
 <script type="text/javascript" src="js/common/org.js"></script>
 <script type="text/javascript" src="js/common/common.js"></script>
 
@@ -211,13 +237,49 @@
 </script>
 
 <script type="text/javascript">
+    var PAGE_LENGTH = 5;
     personal_center_login_vaild();
 	initTable();
 
+	$(function() {
+		$(".paging-search").click(function(){
+			initTable();
+		});
+        $(".paging-first").click(function(){
+            set_paging_no_now(1);
+            initTable();
+        });
+        $(".paging-last").click(function(){
+            set_paging_no_now(get_paging_no_max(PAGE_LENGTH));
+            initTable();
+        });
+        $(".paging-plt").click(function(){
+            set_paging_no_now(get_paging_no_plt());
+            initTable();
+        });
+        $(".paging-pgt").click(function(){
+            set_paging_no_now(get_paging_no_prt(PAGE_LENGTH));
+            initTable();
+        });
+        $(".paging-no").click(function(){
+            $(".elimodlis_detail_pagination").find(".active").removeClass("active");
+            $(this).addClass("active");
+            var pageNo = $(this).text();
+            set_paging_no_now(pageNo);
+            initTable();
+        });
+        $(".paging-lt").click(function(){
+            show_paging_lt(PAGE_LENGTH);
+        });
+        $(".paging-gt").click(function(){
+            show_paging_gt(PAGE_LENGTH);
+        });
+	})
+
     function initTable() {
 		var params = {};
-		params.start = 0;
-		params.length = 5;
+		params.start = get_paging_start(PAGE_LENGTH);
+		params.length = PAGE_LENGTH;
         params.realName = $("#realName").val();
         params.penName = $("#penName").val();
         params.status = $("#status").val();
@@ -234,6 +296,7 @@
                 if(response && response.code == 200){
                     var html = $("#authorsTmp").render(response.data.list);
                     $("#authorsTbody").html(html);
+                    initPagingShow(params.length, response.data.count);
                 }else{
                     alert(response.message);
                 }
