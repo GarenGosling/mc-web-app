@@ -62,7 +62,7 @@
 	}
 	.pca-input{
 		display: inline-block;
-		width: 110px;
+		width: 220px;
 		height: 20px;
 		line-height: 20px;
 		border: 1px solid #bfbfbf;
@@ -76,7 +76,6 @@
 	.pca-search-div {
 		width: 220px;
 		float: left;
-		padding-left: 30px;
 		padding-top: 10px;
 		padding-bottom: 10px;
 		line-height: 20px;
@@ -105,6 +104,13 @@
 		padding-left: 5px;
 		width: 20px;
 	}
+	.pac-paging-input2 {
+		border: 1px solid #bfbfbf;
+		font-size: 12px;
+		padding-left: 5px;
+		width: 300px;
+		height: 30px;
+	}
 	.pac-search-label {
 		padding-top: 8px;
 		padding-bottom: 5px;
@@ -126,6 +132,9 @@
 		padding-bottom:3px;
 		cursor: pointer;
 		font-size:12px;
+	}
+	.zindex {
+		z-index: -10;
 	}
 </style>
 </head>
@@ -163,46 +172,43 @@
 				<button onclick="resetSearch()">重置</button>
 			</div>
 		</div>
-		<div style="width: 100%;padding-left:30px;">
+		<div id="tableDiv" style="overflow-x:auto;">
 			<table cellspacing="0" cellpadding="0">
 				<thead>
 					<tr>
-						<th>序号</th>
-						<th>姓名</th>
-						<th>笔名</th>
-						<th>手机号</th>
-						<th>身份证号</th>
-						<th>申请时间</th>
-						<th>审核状态</th>
-						<th>操作</th>
+						<th><div style="width: 50px;">序号</div></th>
+						<th><div style="width: 100px;">姓名</div></th>
+						<th><div style="width: 150px;">笔名</div></th>
+						<th class="zindex"><div style="width: 100px;">手机号</div></th>
+						<th class="zindex"><div style="width: 150px;">身份证号</div></th>
+						<th class="zindex"><div style="width: 150px;">申请时间</div></th>
+						<th class="zindex"><div style="width: 50px;">审核状态</div></th>
+						<th class="zindex"><div style="width: 440px;">操作</div></th>
 					</tr>
 				</thead>
 				<tbody id="authorsTbody"></tbody>
 			</table>
-
-			<div class="elimodlis_detail_pagination" style="margin-top:-20px;">
-				<div style="text-align:left;margin-top:-20px;">
-					显示 <em class="paging-begin">1</em>&nbsp;到&nbsp;<em class="paging-end">1</em>&nbsp;项，
-					共&nbsp;<em class="paging-total">1</em>&nbsp;项
-					&nbsp;&nbsp;第&nbsp;<input type="text" class="pac-paging-input paging-no-now" value="1"/>&nbsp;页，
-					<em class="pac-padding-btn paging-search">查询</em>
-				</div>
-				<div class="pagination inblock clearfix">
-					<div class="start all fl paging-first">首页</div>
-					<div class="pre all fl paging-plt">上一页</div>
-					<ul class="list clearfix fl">
-						<li class="all fl paging-lt">&lt;</li>
-						<li class="active all fl paging-no" id="paging-no-1">1</li>
-						<li class="all fl paging-no" id="paging-no-2">2</li>
-						<li class="all fl paging-no" id="paging-no-3">3</li>
-						<li class="all fl paging-no" id="paging-no-4">4</li>
-						<li class="all fl paging-no" id="paging-no-5">5</li>
-						<li class="all fl paging-gt">&gt;</li>
-					</ul>
-					<div class="end all fl paging-pgt">下一页</div>
-					<div class="next all fl paging-last">尾页</div>
-				</div>
-			</div>
+		</div>
+		<div style="text-align:left;margin-top: 20px;float: left;width: 320px;padding-left:10px;">
+			显示 <em class="paging-begin">1</em>&nbsp;到&nbsp;<em class="paging-end">1</em>&nbsp;项，
+			共&nbsp;<em class="paging-total">1</em>&nbsp;项
+			&nbsp;&nbsp;第&nbsp;<input type="text" class="pac-paging-input paging-no-now" value="1"/>&nbsp;页，
+			<em class="pac-padding-btn paging-search">查询</em>
+		</div>
+		<div class="pagination inblock clearfix pagging-ctrl" style="float:right;text-align: center;margin-top: 20px;">
+			<div class="start all fl paging-first">首页</div>
+			<div class="pre all fl paging-plt">上一页</div>
+			<ul class="list clearfix fl">
+				<li class="all fl paging-lt">&lt;</li>
+				<li class="active all fl paging-no" id="paging-no-1">1</li>
+				<li class="all fl paging-no" id="paging-no-2">2</li>
+				<li class="all fl paging-no" id="paging-no-3">3</li>
+				<li class="all fl paging-no" id="paging-no-4">4</li>
+				<li class="all fl paging-no" id="paging-no-5">5</li>
+				<li class="all fl paging-gt">&gt;</li>
+			</ul>
+			<div class="end all fl paging-pgt">下一页</div>
+			<div class="next all fl paging-last">尾页</div>
 		</div>
 	</div>
 </div>
@@ -231,7 +237,7 @@
 				<td>
 					<a class="pca-btn-red" onclick="audit({{:id}}, 1)">通过</a>
 					<a class="pca-btn-white" style="" onclick="audit(2)">驳回</a>
-					<p contenteditable="true" class="pca-input" id="remark">请填写驳回原因</p>
+					<input type="text" id="remark" class="pac-paging-input2" placeHolder="请填写驳回原因"/>
 				</td>
 			</tr>
 		{{/for}}
@@ -290,6 +296,49 @@
         $(".paging-gt").click(function(){
             show_paging_gt(PAGE_LENGTH);
         });
+
+        //给table外面的div滚动事件绑定一个函数
+        $("#tableDiv").scroll(function () {
+            var left = $("#tableDiv").scrollLeft(); //获取滚动的距离
+            var trs = $("#tableDiv table tr"); //获取表格的所有tr
+            var ths = $('#tableDiv table tr:first th');
+            trs.each(function (i) {
+                $(this).children().eq(0).css({
+                    "position": "relative",
+                    "top": "0px",
+                    "left": left,
+                    "z-index": "0",
+                    "background-color": "#FFFFFF",
+                    "cellspacing": "0",
+                    "border": "1"
+                });
+                $(this).children().eq(1).css({
+                    "position": "relative",
+                    "top": "0px",
+                    "left": left,
+                    "background-color": "#FFFFFF",
+                    "cellspacing": "0",
+                    "border": "1"
+                });
+                $(this).children().eq(2).css({
+                    "position": "relative",
+                    "top": "0px",
+                    "left": left,
+                    "background-color": "#FFFFFF",
+                    "cellspacing": "0",
+                    "border": "1"
+                });
+            });
+            ths.eq(0).css({
+                "background-color": "#F0F0F0"
+            });
+            ths.eq(1).css({
+                "background-color": "#F0F0F0"
+            });
+            ths.eq(2).css({
+                "background-color": "#F0F0F0"
+            });
+        });
 	})
 
     function initTable() {
@@ -332,7 +381,7 @@
 		    alert("状态异常");
 		    return false;
 		}
-        var remark = $("#remark").text();
+        var remark = $("#remark").val();
 		if(status == 2 && (remark == "请填写驳回原因" || remark == null || remark == "") ){
 		    alert("请填写驳回原因");
 		    return false;
