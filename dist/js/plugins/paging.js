@@ -72,7 +72,7 @@ function get_paging_no_now(){
  */
 function set_paging_no_now(paging_no_now){
     $(".paging-no-now").val(paging_no_now);
-    $(".elimodlis_detail_pagination").find(".active").removeClass("active");
+    $(".pagging-ctrl").find(".active").removeClass("active");
     var no = paging_no_now;
     if(no >5){
         no = no - parseInt(no / 5) * 5;
