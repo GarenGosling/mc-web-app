@@ -116,7 +116,7 @@ $(function() {
 		$('.j_triangle').find('ol').slideUp(150);
 	});
 
-	$('.j_say_list_tit').click(function() {
+	$('.say_list').delegate(".j_say_list_tit","click",function() {
 		$(this).parent().parent().parent().toggleClass('no_pic');
 	});
 });
