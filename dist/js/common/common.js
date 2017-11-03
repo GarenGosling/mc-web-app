@@ -34,7 +34,7 @@ url.mc.articles_query = server.mc + '/articles/query';
 url.mc.articles_popAuthor = server.mc + '/articles/popAuthor';
 url.mc.articles = server.mc + '/articles';
 url.mc.moreAttention_all=server.mc+"/moreAttentions";
-url.mc.lifeWizard_status=server.mc+"//lifeWizard/status";
+url.mc.lifeWizard_status=server.mc+"/lifeWizard/status";
 url.host.index = server.host;
 
 
