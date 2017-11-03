@@ -225,8 +225,8 @@
 				<td>{{:penName}}</td>
 				<td>{{:phone}}</td>
 				<td>{{:idNum}}</td>
-				<td>{{:createTime}}</td>
-				<td>{{:status}}</td>
+				<td>{{:~dataFormat(createTime)}}</td>
+				<td>{{:~statusFormat(status)}}</td>
 				<td>
 					<a class="pca-btn-red" onclick="audit(1)">通过</a>
 					<a class="pca-btn-white" style="" onclick="audit(2)">驳回</a>
@@ -240,6 +240,21 @@
     var PAGE_LENGTH = 5;
     personal_center_login_vaild();
 	initTable();
+    $.views.helpers({
+        dataFormat:function (timestamp) {
+            return $.dateFormat(timestamp,"yyyy-MM-dd HH:mm:ss");
+        },
+        statusFormat:function (status) {
+			if(status==0)
+			    return "待审核";
+			else if(status==1)
+			    return "审核通过";
+			else if(status==2)
+			    return "审核驳回";
+			else
+			    return "状态未知"+status;
+        }
+    })
 
 	$(function() {
 		$(".paging-search").click(function(){
