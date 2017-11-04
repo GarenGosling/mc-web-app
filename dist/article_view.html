@@ -43,7 +43,16 @@
             url: url,
             success: function(response){
                 if(response && response.code == 200){
-                    var article = response.data.list[0];
+                    var articles = response.data.list;
+                    var article = null;
+                    if(articles && articles.length > 0){
+                        $(articles).each(function (i, item) {
+							if(item.status == 1){
+								article = item;
+								return;
+							}
+                        });
+					}
                     if(article){
                         var details = article.articleDetails;
                         var html = '';

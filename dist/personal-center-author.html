@@ -74,9 +74,17 @@
             params.realName = $("#realName").val();
             params.penName = $("#penName").val();
             params.status = 0;
+
+            var reqType = "POST";
+            if(getAuthor() && getAuthor().status == 2){
+                reqType = "PUT";
+                params.id = getAuthor().id;
+                params.rejectReason = getAuthor().rejectReason + "（再次申请）";
+				params.userCode = getAuthor().userCode;
+			}
             var paramsJson = JSON.stringify(params);
             $.ajax({
-                type: "POST",
+                type: reqType,
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
                 data: paramsJson,
@@ -86,9 +94,7 @@
                 },
                 success: function(response){
                     if(response && response.code == 200){
-                        alert("申请成功");
-						$("#authorBtn").hide();
-                        personal_center_login_vaild();
+                        refreshAuthorStatus();
                     }else{
                         alert(response.message);
                     }
@@ -108,6 +114,7 @@
             }
             if(author.status == 1){
                 $("#authorStatusText").text("审核通过");
+                $("#authorBtn").hide();
             }
             if(author.status == 2){
                 $("#authorStatusText").text("审核驳回");
@@ -117,7 +124,6 @@
             }else{
                 $("#authorRejectReasonText").text("无");
             }
-            $("#authorBtn").hide();
             $("#realName").val(author.realName);
             $("#penName").val(author.penName);
             $("#phone").val(author.phone);

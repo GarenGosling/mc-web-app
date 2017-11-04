@@ -38,7 +38,7 @@
                 <label class="fl">文章标题</label>
                 <input class="fl" type="text" placeHolder="请输入文章标题" id="params_title">
             </div>
-            <div class="pb30 clearfix">
+            <div class="pb30 clearfix" id="titleImgDiv">
                 <label class="fl">标题图片</label>
                 <label class="tit_pic fl">
                     <span></span>
@@ -132,6 +132,7 @@
 <script type="text/javascript" src="js/plugins/jquery.slide.js"></script>
 <script type="text/javascript" src="js/plugins/jsrender.js"></script>
 <script type="text/javascript" src="js/plugins/bundle.main.js"></script>
+<script type="text/javascript" src="js/plugins/urlHandler.js"></script>
 <script type="text/javascript" src="js/common/org.js"></script>
 <script type="text/javascript" src="js/common/common.js"></script>
 
@@ -176,6 +177,7 @@
     personal_center_login_vaild();
     var params_menu = {};
     params_menu.parentCode = "0";
+    toUpdate();
     $.ajax({
         type: "GET",
         contentType: "application/json;charset=UTF-8",
@@ -220,12 +222,20 @@
         });
         var paramsJson = JSON.stringify(params);
         console.log(params);
+
+        var reqMethod = "POST";
+        var reqUrl = url.mc.api_articles;
+        var articleId = UrlParm.parm("id");
+        if(articleId){
+            reqMethod = "PUT";
+            reqUrl = url.mc.api_articles + "/" + articleId;
+        }
         $.ajax({
-            type: "POST",
+            type: reqMethod,
             contentType: "application/json;charset=UTF-8",
             dataType: "json",
             data: paramsJson,
-            url: url.mc.api_articles,
+            url: reqUrl,
             beforeSend: function(request) {
                 request.setRequestHeader("ticket", getTicket());
             },
@@ -398,6 +408,60 @@
 
         });
 
+    function toUpdate() {
+        var articleId = UrlParm.parm("id");
+        if (articleId) {
+            $.ajax({
+                type: "GET",
+//                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                url: url.mc.articles + "/" + UrlParm.parm("id"),
+                success: function (response) {
+                    if (response && response.code == 200) {
+                        var article = response.data;
+                        if(article){
+                            $("#treeInput").text(article.menuFullName);
+                            $("#params_menuFullCode").val(article.menuFullCode);
+                            $("#params_menuFullName").val(article.menuFullName);
+                            $("#params_title").val(article.title);
+                            $("#titleImgDiv").find("img").attr("src",server.oss + '/download/' + article.md5).show();
+                            $("#params_md5").val(article.md5);
+                            $("#params_subjectName").text(article.subjectName);
+                            $("#params_summary").val(article.summary);
+                            if(article.articleDetails){
+                                $(article.articleDetails).each(function (i, item) {
+                                    if(i == 0){
+                                        if(item.text){
+                                            $(".textAndMd5").find("textarea").val(item.text);
+                                        }
+                                        if(item.md5){
+                                            $(".textAndMd5").find("img").attr("src",server.oss + '/download/' + item.md5).show();
+                                            $(".textAndMd5").find(".md5Hid").val(item.md5);
+                                        }
+                                    }else{
+                                        addBlock();
+                                    }
+                                });
+                                $(article.articleDetails).each(function (i, item) {
+                                    if(i != 0){
+                                        if(item.text){
+                                            $(".textAndMd5").eq(i).find("textarea").val(item.text);
+                                        }
+                                        if(item.md5){
+                                            $(".textAndMd5").eq(i).find("img").attr("src",server.oss + '/download/' + item.md5).show();
+                                            $(".textAndMd5").eq(i).find(".md5Hid").val(item.md5);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    } else {
+                        alert(response.message);
+                    }
+                }
+            });
+        }
+    }
 </script>
 </body>
 

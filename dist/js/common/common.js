@@ -182,10 +182,23 @@ function authorShow(){
         // 发布文章
         $('.e08c1b1b-338d-4493-8eec-1087e31831df').remove();
         // 作者列表
-        $('.9937f1c9-1a6f-4716-beea-45dd877adae1').remove();
+        $('.351e03e6-5507-465d-bcb7-1dc54b84c82e').remove();
         // 文章列表
         $('.7f33c43a-061e-49c9-8780-edf4264984da').remove();
+    }else{
+        // 不是管理员
+        if(getLoginVo().loginInfo.loginName != "admin"){
+            // 作者列表
+            $('.351e03e6-5507-465d-bcb7-1dc54b84c82e').remove();
+            if(getAuthor().status != 1){
+                // 发布文章
+                $('.e08c1b1b-338d-4493-8eec-1087e31831df').remove();
+                // 文章列表
+                $('.7f33c43a-061e-49c9-8780-edf4264984da').remove();
+            }
+        };
     }
+
 }
 
 
