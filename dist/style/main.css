@@ -283,23 +283,103 @@ input[disabled] {
     top: 25px;
     left: 50%;
     margin-left: -55px; }
-  .header .nav ul li {
-    margin: 0 30px 0 30px;
-    padding: 40px 0; }
+    .header .nav ul {
+      padding-top: 40px;
+     }
+  .header .nav ul > li {
+    position: relative;
+    padding: 0 0 40px 0; }
+  .header .nav ul > li.fl {
+    margin-right: 60px;
+    }
+  .header .nav ul > li.fr {
+    margin-left: 60px;
+    }
     .header .nav ul li.last {
       margin: 0; }
-    .header .nav ul li a {
+    .header .nav ul > li > a {
       display: inline-block;
-      padding: 8px 4px;
+      padding: 8px 14px;
       color: #333;
       font-size: 14px;
       border-bottom: 2px solid #fff; }
-      .header .nav ul li a:hover {
+      .header .nav ul > li > a:hover {
         border-bottom: 2px solid #d50f22;
         color: #d50f22; }
-      .header .nav ul li a.active {
+      .header .nav ul > li:hover > a{
         border-bottom: 2px solid #d50f22;
         color: #d50f22; }
+      .header .nav ul > li > a.active {
+        border-bottom: 2px solid #d50f22;
+        color: #d50f22; }
+.header .nav ul > li:nth-child(5) > ol ol {
+  left: inherit;
+  right: 100%;
+} 
+.nav_level_second {
+  z-index: 3;
+  position: absolute;
+  top: 39px;
+  left: 0;
+  right: 0;
+  display: none;
+  padding: 7px 0;
+  background: #f1f1f2;
+}
+
+.nav_level_second.on {
+  display: block;
+}
+
+.nav_level_second > li{
+  padding: 3px 0;
+}
+
+.nav_level_second > li > a{
+  display: block;
+  height: 26px;
+  line-height: 26px;
+  font-size: 14px;
+  color: #434343;
+  background: #f1f1f2;
+  text-align: center;
+}
+
+.nav_level_second > li > a:hover{
+  display: block;
+  height: 26px;
+  background: #fff;
+  font-size: 14px;
+  color: #d50f22;
+}
+
+.nav_level_second > li ol {
+  display: none;
+  position: absolute;
+  top:0px;
+  left: 100%;
+  z-index: 6;
+  background: #fff;
+  border: 1px solid #eee;
+}
+
+.nav_level_second > li ol li{
+  padding: 6px 88px 7px 30px;
+}
+
+.nav_level_second > li ol a {
+  display: inline-block;
+  height: 22px;
+  line-height: 22px;
+  white-space: nowrap;
+  border-bottom: 1px solid #fff;
+  color: #666;
+  font-size: 12px;
+}
+
+.nav_level_second > li ol a:hover{
+  border-bottom: 1px solid #d50f22;
+}
 
 .main {
   padding: 50px 0 0 0; }
