@@ -290,10 +290,10 @@ input[disabled] {
     position: relative;
     padding: 0 0 40px 0; }
   .header .nav ul > li.fl {
-    margin-right: 60px;
+    margin-right: 0px;
     }
   .header .nav ul > li.fr {
-    margin-left: 60px;
+    margin-left: 0px;
     }
     .header .nav ul li.last {
       margin: 0; }
