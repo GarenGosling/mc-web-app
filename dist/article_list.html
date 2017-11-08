@@ -75,6 +75,7 @@
 	if(UrlParm.parm("orderBy")){
 	    params.orderBy = UrlParm.parm("orderBy");
 	}
+	params.status = 1;
 	getArticles(UrlParm.parm("moduleName"), "articles_tmp", "articles", params, UrlParm.parm("url"));
 
 

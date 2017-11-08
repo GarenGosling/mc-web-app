@@ -102,6 +102,7 @@
         params.subjectName = moduleName;
         params.start = 0;
         params.length = 4;
+        params.status = 1;
         $.ajax({
             type: "GET",
             contentType: "application/json;charset=UTF-8",
@@ -143,6 +144,7 @@
         params.start = 0;
         params.length = 3;
         params.orderBy = "id";
+        params.status = 1;
         $.ajax({
             type: "GET",
             contentType: "application/json;charset=UTF-8",
