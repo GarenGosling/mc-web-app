@@ -57,6 +57,8 @@
 		</dt>
 		<dd class="fr">
 			<h3>{{:title}}</h3>
+			<p>{{:summary}}</p>
+			<br/>
 			<div class="clearfix">
 				<p class="fl"><span>作者：</span><em>{{:authorPenName}}</em></p>
 				<p class="fl"><span>观看：</span><em>57</em></p>
@@ -83,8 +85,8 @@
 <script type="text/javascript">
     $("body").find("h1").html('当前位置：<span>'+UrlParm.parm("parentModule")+'&gt;&gt;'+UrlParm.parm("moduleName")+'</span>');
 
-    getArticleBySubjectName(UrlParm.parm("menuCode"), "专题一", "topic_1_tmp", "topic_1", "article_list.html?subjectName=专题一&moduleName=专题一&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&url="+url.mc.articles_query);
-    getArticleBySubjectName(UrlParm.parm("menuCode"), "专题二", "topic_2_tmp", "topic_2", "article_list.html?subjectName=专题二&moduleName=专题二&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&url="+url.mc.articles_query);
+    //getArticleBySubjectName(UrlParm.parm("menuCode"), "专题一", "topic_1_tmp", "topic_1", "article_list.html?subjectName=专题一&moduleName=专题一&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&url="+url.mc.articles_query);
+    //getArticleBySubjectName(UrlParm.parm("menuCode"), "专题二", "topic_2_tmp", "topic_2", "article_list.html?subjectName=专题二&moduleName=专题二&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&url="+url.mc.articles_query);
     getArticleByArtical(UrlParm.parm("menuCode"), "精选文章", "artical_tmp", "artical", "article_list.html?&moduleName=精选文章&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&orderBy=id&url="+url.mc.articles_query);
     getArticleByPop(UrlParm.parm("menuCode"), "精选会员专题", "pop_tmp", "pop", "article_list.html?&moduleName=精选会员专题&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&url="+url.mc.articles_popAuthor);
 
