@@ -3,7 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>精英样板-列表</title>
-<link href="style/main.css" rel="stylesheet"></head>
+<link href="style/main.css" rel="stylesheet">
+<link href="style/paging.css" rel="stylesheet">
+</head>
 
 <body id="elite-model-list">
 
@@ -12,20 +14,26 @@
 	<div class="subcont_elite">
 		<div class="subcont_elite_wrap">
 			<div class="artical" id="articles"></div>
-			<div class="elite_model_list_pagination">
-				<div class="pagination inblock clearfix">
-					<div class="start all fl">首页</div>
-					<div class="pre all fl">上一页</div>
-					<ul class="list clearfix fl">
-						<li class="active all fl">1</li>
-						<li class="all fl">2</li>
-						<li class="all fl">3</li>
-						<li class="all fl">4</li>
-						<li class="all fl">5</li>
-					</ul>
-					<div class="end all fl">下一页</div>
-					<div class="next all fl">尾页</div>
-				</div>
+			<div style="text-align:left;margin-top: 20px;float: left;width: 320px;padding-left:10px;">
+				显示 <em class="paging-begin">1</em>&nbsp;到&nbsp;<em class="paging-end">1</em>&nbsp;项，
+				共&nbsp;<em class="paging-total">1</em>&nbsp;项
+				&nbsp;&nbsp;第&nbsp;<input type="text" class="pac-paging-input paging-no-now" value="1"/>&nbsp;页，
+				<em class="pac-padding-btn paging-search">查询</em>
+			</div>
+			<div class="pagination inblock clearfix pagging-ctrl" style="float:right;text-align: center;margin-top: 20px;">
+				<div class="start all fl paging-first">首页</div>
+				<div class="pre all fl paging-plt">上一页</div>
+				<ul class="list clearfix fl">
+					<li class="all fl paging-lt">&lt;</li>
+					<li class="active all fl paging-no" id="paging-no-1">1</li>
+					<li class="all fl paging-no" id="paging-no-2">2</li>
+					<li class="all fl paging-no" id="paging-no-3">3</li>
+					<li class="all fl paging-no" id="paging-no-4">4</li>
+					<li class="all fl paging-no" id="paging-no-5">5</li>
+					<li class="all fl paging-gt">&gt;</li>
+				</ul>
+				<div class="end all fl paging-pgt">下一页</div>
+				<div class="next all fl paging-last">尾页</div>
 			</div>
 		</div>
 	</div>
@@ -34,6 +42,7 @@
 <script type="text/javascript" src="js/plugins/jquery.min.js"></script>
 <script type="text/javascript" src="js/plugins/bundle.main.js"></script>
 <script type="text/javascript" src="js/plugins/urlHandler.js"></script>
+<script type="text/javascript" src="js/plugins/paging.js"></script>
 <script type="text/javascript" src="js/plugins/jsrender.js"></script>
 <script type="text/javascript" src="js/common/common.js"></script>
 
@@ -61,23 +70,26 @@
 </script>
 
 <script type="text/javascript">
+    var PAGE_LENGTH = 5;
 	$("body").find("h1").html('当前位置：<span>'+UrlParm.parm("parentModule")+'&gt;&gt;'+UrlParm.parm("moduleName")+'</span>');
+	initTable();
 
-	var params = {};
-	params.start = 0;
-	params.length = 10;
-	if(UrlParm.parm("menuCode")){
-		params.menuCode = UrlParm.parm("menuCode");
-	}
-	if(UrlParm.parm("subjectName")){
-		params.subjectName = UrlParm.parm("subjectName");
-	}
-	if(UrlParm.parm("orderBy")){
-	    params.orderBy = UrlParm.parm("orderBy");
-	}
-	params.status = 1;
-	getArticles(UrlParm.parm("moduleName"), "articles_tmp", "articles", params, UrlParm.parm("url"));
-
+	function initTable() {
+        var params = {};
+        params.start = get_paging_start(PAGE_LENGTH);
+        params.length = PAGE_LENGTH;
+        if(UrlParm.parm("menuCode")){
+            params.menuCode = UrlParm.parm("menuCode");
+        }
+        if(UrlParm.parm("subjectName")){
+            params.subjectName = UrlParm.parm("subjectName");
+        }
+        if(UrlParm.parm("orderBy")){
+            params.orderBy = UrlParm.parm("orderBy");
+        }
+        params.status = 1;
+        getArticles(UrlParm.parm("moduleName"), "articles_tmp", "articles", params, UrlParm.parm("url"));
+    }
 
     /**
      * 精选文章
@@ -106,12 +118,49 @@
                             $("#"+tmpName+item.md5).attr("src",imgUrl);
                         }
                     });
+                    initPagingShow(params.length, response.data.count);
                 }else{
                     alert(response.message);
                 }
             }
         });
     }
+
+    $(function() {
+        $(".paging-search").click(function(){
+            initTable();
+        });
+        $(".paging-first").click(function(){
+            set_paging_no_now(1);
+            initTable();
+        });
+        $(".paging-last").click(function(){
+            set_paging_no_now(get_paging_no_max(PAGE_LENGTH));
+            initTable();
+        });
+        $(".paging-plt").click(function(){
+            set_paging_no_now(get_paging_no_plt());
+            initTable();
+        });
+        $(".paging-pgt").click(function(){
+            set_paging_no_now(get_paging_no_prt(PAGE_LENGTH));
+            initTable();
+        });
+        $(".paging-no").click(function(){
+            $(".pagging-ctrl").find(".active").removeClass("active");
+            $(this).addClass("active");
+            var pageNo = $(this).text();
+            set_paging_no_now(pageNo);
+            initTable();
+        });
+        $(".paging-lt").click(function(){
+            show_paging_lt(PAGE_LENGTH);
+        });
+        $(".paging-gt").click(function(){
+            show_paging_gt(PAGE_LENGTH);
+        });
+
+    })
 
 </script>
 </body>

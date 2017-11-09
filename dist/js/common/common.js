@@ -28,6 +28,7 @@ url.mc.api_author = server.mc + '/api/author';
 url.mc.api_author_page = server.mc + '/api/author/page';
 url.mc.api_test = server.mc + '/api/test';
 url.mc.menu_tree_parentCode = server.mc + '/menu/tree/parentCode';
+url.mc.menu_tree_parentCode_cache = server.mc + '/menu/tree/parentCode/cache';
 url.mc.menu_parentCode=server.mc+'/menu/parentCode';
 url.mc.api_articles = server.mc + '/api/articles';
 url.mc.articles_query = server.mc + '/articles/query';

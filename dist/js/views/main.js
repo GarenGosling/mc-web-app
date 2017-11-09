@@ -9,7 +9,7 @@ if(isLogin()){
 }
 
 if(UrlParm.parm("pageNameMain") && UrlParm.parm("menuCodeMain")){
-    $.get(url.mc.menu_tree_parentCode, {'parentCode': '0'}, function (result) {
+    $.get(url.mc.menu_tree_parentCode_cache, {'parentCode': '0'}, function (result) {
         console.log("result:" + result);
         if (result.code == 200) {
             menu_cache = result.data;

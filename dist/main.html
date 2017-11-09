@@ -10,12 +10,12 @@
 	<div class="top">
 		<div class="w1200 clearfix">
 			<div class="fl" id="loginBtn">
-				<span class="slogan">中产阶级社会生活向导</span>
+				<span class="slogan">中产阶层的社会生活向导</span>
 				<a class="opacity" style="color:blue;" href="javascript:login()">登录</a> /
 				<a class="opacity" style="color:blue;" href="javascript:register()">注册</a>
 			</div>
 			<div class="fl" id="logoutBtn">
-				<span class="slogan">中产阶级社会生活向导</span>
+				<span class="slogan">中产阶层的社会生活向导</span>
 				<a class="opacity" style="color:blue;" href="javascript:logout()">退出</a>
 				<span class="slogan" style="margin-left: 20px;color: red;">
                 Hi, <i id="welcome" style="font-size: 12px;font-weight: bold;font-style: italic;"></i> ! 欢迎来到个人中心(*^▽^*)
@@ -39,9 +39,9 @@
 
 	<div class="nav pos_r" id="row2">
 		<div class="w1200">
-			<div class="logo">
-				<a href="index.html"><img src="images/logo.png"></a>
-			</div>
+			<!--<div class="logo">-->
+				<!--<a href="index.html"><img src="images/logo.png"></a>-->
+			<!--</div>-->
 			<ul class="clearfix" id="head-menu-wrap">
 				<script type="text/x-jsrender" id="head-menu">
                 {{if #index <=5}}
@@ -73,6 +73,11 @@
                     </ol>
                     {{/if}}
                 </li>
+                {{if #index ==5}}
+                    <li class="logo2">
+                        <a href="#"><img src="images/logo.png"></a>
+                    </li>
+                {{/if}}
                 </script>
 				<!--<li class="fl">-->
 					<!--<a href="index.html" id="main">网站首页</a>-->
