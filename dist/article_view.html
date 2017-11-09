@@ -3,13 +3,121 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>中产生活</title>
-<link href="style/main.css" rel="stylesheet"></head>
+<link href="style/main.css" rel="stylesheet">
+	<style>
+		.f0 {
+			float: left;
+			margin-right: 20px
+		}
+
+		.f3 {
+			float: left;
+			color: #d50f22
+		}
+
+		.f4 {
+			float: right;
+			color: #d50f22
+		}
+	</style>
+</head>
 
 <body id="middle-invest">
 
-<h1 class="subtit mar_b10">当前位置：<span>中产者网首页</span> &gt;&gt; <em>中产生活</em></h1>
+<h1 class="subtit mar_b10">当前位置：<span id="articalDetailModule"></span></h1>
 <div class="subcont">
-	<div class="subcont_artical"></div>
+	<div class="subcont_artical" id="articleDetailMain"></div>
+	<div class="subcont_msg">
+		<h3>发表评论</h3>
+		<div class="user clearfix" id="tpl-param-wrap">
+		</div>
+		<script type="text/jsrender" id="tpl-param1">
+            <span class="f0" param="articleCode" code="{{:#data}}" id="param">回复文章</span>
+            </script>
+		<script type="text/jsrender" id="tpl-param2">
+            <span class="f0" param="parentCode" code="{{:code}}" id="param">回复{{:index}}楼</span>
+            <a href="javascript:;" class="f3" onClick="replyArticle()">回复文章</a>
+            </script>
+		<div class="txarea">
+			<textarea placeholder="评论内容不超过400字..."></textarea>
+			<div class="code clearfix">
+			</div>
+			<div class="pub">发表评论</div>
+		</div>
+	</div>
+	<div class="subcont_reply">
+		<ul id="tpl-comments-wrap">
+		</ul>
+		<script id="tpl-comments" type="text/x-jsrender">
+            <li class="subcont_reply_box">
+                <div class="user clearfix">
+                    <span class="f0">{{:index}}楼</span>
+                    <span class="fl">
+                    用户名:
+                    <em>{{:loginName}}</em>
+                    </span>
+                    <i class="fr">{{:~dataFormat(createTime)}}</i>
+                </div>
+                <div class="comment">
+                    <a href="javascript:;" class="f4" onClick="replyComment('{{:code}}',{{:index}})">回复</a>
+                    {{:content}}
+                </div>
+                {{if children && children.length>0}}
+                <div style="margin-left: 50px">
+
+                    <ul>
+                        {{for children ~parentIndex=index}}
+                        <li>
+                            <div class="user clearfix">
+                                <!--<span class="f0">回复{{:~parentIndex}}楼</span>-->
+                            <span class="fl">
+                            用户名:
+                            <em>{{:loginName}}</em>
+                            </span>
+                                <i class="fr">{{:~dataFormat(createTime)}}</i>
+                            </div>
+                            <div class="comment">
+                                {{:content}}
+                            </div>
+                        </li>
+                        {{/for}}
+                    </ul>
+
+                </div>
+                {{/if}}
+            </li>
+            </script>
+		<div class="elimodlis_detail_pagination">
+			<div class="pagination inblock clearfix" id="tpl-page-wrap">
+			</div>
+			<script type="text/jsrender" id="tpl-page">
+                {{if nowPage<=1}}
+                    <div class="start all fl">首页</div>
+                    <div class="pre all fl">上一页</div>
+                {{else}}
+                    <div class="start all fl" onClick="toPage(1)">首页</div>
+                    <div class="pre all fl" onClick="toPage({{:nowPage-1}})">上一页</div>
+                {{/if}}
+
+                <ul class="list clearfix fl">
+                    {{for list ~parentNowPage=nowPage}}
+                    {{if #data==~parentNowPage}}
+                    <li class="active all fl">{{:#data}}</li>
+                    {{else}}
+                    <li class="all fl" onClick="toPage({{:#data}})">{{:#data}}</li>
+                    {{/if}}
+                    {{/for}}
+                </ul>
+                {{if nowPage>=totalPage}}
+                <div class="end all fl">下一页</div>
+                <div class="next all fl">尾页</div>
+                {{else}}
+                <div class="end all fl" onclick="toPage({{:nowPage+1}})">下一页</div>
+                <div class="next all fl" onclick="toPage({{:totalPage}})">尾页</div>
+                {{/if}}
+                </script>
+		</div>
+	</div>
 </div>
 
 
@@ -18,9 +126,11 @@
 <script type="text/javascript" src="js/plugins/urlHandler.js"></script>
 <script type="text/javascript" src="js/plugins/jsrender.js"></script>
 <script type="text/javascript" src="js/common/common.js"></script>
-<script type="text/tmp" id="articleTmp">
+<script type="text/javascript" src="js/common/dataFormat.js"></script>
+
+<script type="text/tmp" id="articleDetailTmp">
 		{{for}}
-        	<p>{{:text}}</p>
+        	<p style="text-indent: 0;">{{:text}}</p>
         	{{if md5 != null && md5 != ''}}
 			<p style="text-align: center; text-indent: 0;padding: 10px 0">
 				<img id="{{:md5}}" style="width:600px;height:300px;">
@@ -31,56 +141,166 @@
 
 
 <script type="text/javascript">
-    $("body").find("h1").html('当前位置：<span>'+UrlParm.parm("parentModule")+'&gt;&gt;'+UrlParm.parm("moduleName")+'</span>');
+    var nowPage = 1;
+    var length = 5;
+    function replyComment(code,index){
+        console.log(code)
+        var data={}
+        data.code=code;
+        data.index=index;
+        $("#tpl-param-wrap").html($.templates("#tpl-param2")(data))
+        location.href="#tpl-param-wrap"
+    }
+    function toPage(page) {
+        nowPage=page;
+        getComments();
+    }
+    function replyArticle() {
+        $("#tpl-param-wrap").html($.templates("#tpl-param1")($("#article_code").val()))
+    }
+    function getComments() {
+        var query={};
+        query.articleCode=$("#article_code").val();
+        query.start=(nowPage-1)*length;
+        query.length=length;
+        $.get(url.mc.comment + "/page", query, function (result) {
+            if (result.code == 200) {
+                /*评论头加载*/
+                $("#tpl-param-wrap").html($.templates("#tpl-param1")($("#article_code").val()))
+                $.each(result.data.list, function (index, value) {
+                    value.index = result.data.count - index-(nowPage-1)*length;
+                })
+                /*显示评论信息*/
+                $("#tpl-comments-wrap").html($.templates("#tpl-comments")(result.data.list));
 
-    var menuCode = UrlParm.parm("menuCode");
-    if(menuCode){
-        var url = url.mc.articles_query + "?menuCode=" + menuCode + "&showDetail=1";
-        $.ajax({
-            type: "GET",
-            contentType: "application/json;charset=UTF-8",
-            dataType: "json",
-            url: url,
-            success: function(response){
-                if(response && response.code == 200){
-                    var articles = response.data.list;
-                    var article = null;
-                    if(articles && articles.length > 0){
-                        $(articles).each(function (i, item) {
-							if(item.status == 1){
-								article = item;
-								return;
-							}
-                        });
-					}
-                    if(article){
-                        var details = article.articleDetails;
-                        var html = '';
-                        html += '<h2>'+article.title+'</h2>';
-                        html += '<h3>';
-                        html += '<span>作者：</span><em class="pr40">'+article.authorPenName+'</em>';
-                        html += '<span>本站发布时间：</span><em>'+article.publishTime+'</em>';
-                        html += '</h3>';
-                        html += '<div class="subcont_artical_para">';
-                        html += $("#articleTmp").render(details);
-                        html += '</div>';
-                        $(".subcont_artical").html(html);
-                        $(details).each(function(i, item){
-                            if(item.md5){
-                                var imgUrl = server.oss + '/download/' + item.md5;
-                                $("#"+item.md5).attr("src",imgUrl);
-							}
-						});
-                    }
+                /*显示分页信息*/
+                /*设置分页*/
+                var totalPage = Math.ceil(result.data.count / length);
+                if(totalPage==0){
+                    $("#tpl-page-wrap").html("")
                 }else{
-                    alert(response.message);
+                    var data={}
+                    data.totalPage=totalPage;
+                    data.nowPage=nowPage;
+                    var list=[];
+                    if(totalPage<5){
+                        for(var i=1;i<=totalPage;i++)
+                            list.push(i);
+                    }else{
+                        var start=nowPage-2;
+                        var end=nowPage+2;
+                        if(start<1) {
+                            end+=1-start;
+                            start=1;
+                        }
+                        if(end>totalPage){
+                            start-=end-totalPage;
+                            end=totalPage;
+                        }
+                        for(var i=start;i<=end;i++)
+                            list.push(i);
+                    }
+
+                    data.list=list;
+                    $("#tpl-page-wrap").html($.templates("#tpl-page")(data))
                 }
             }
-        });
-	}
+        })
+    }
+    $(function () {
+        debugger
+        $.views.helpers({
+            dataFormat: function (timestamp) {
+                return $.dateFormat(timestamp, "yyyy-MM-dd HH:mm:ss");
+            }
+        })
+        var menuCode = UrlParm.parm("menuCode");
+        if(menuCode){
+            $.ajax({
+                type: "GET",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                url: url.mc.articles_query + "?menuCode=" + menuCode + "&showDetail=1",
+                success: function(response){
+                    if(response && response.code == 200){
+                        var articles = response.data.list;
+                        var article = null;
+                        if(articles && articles.length > 0){
+                            $(articles).each(function (i, item) {
+                                if(item.status == 1){
+                                    article = item;
+                                    return;
+                                }
+                            });
+                        }
+                        if(article){
+                            var module = article.menuFullName.substring(1, article.menuFullName.length).replace("/", ">>")
+                            $("#articalDetailModule").text(module);
+                            var details = article.articleDetails;
+                            var html = '<input type="hidden" id="article_code" value="' + article.code + '">';
+                            html += '<h2>' + article.title + '</h2>';
+                            html += '<h3>';
+                            html += '<span>作者：</span><em class="pr40">' + article.authorPenName + '</em>';
+                            html += '<span>本站发布时间：</span><em>' + article.publishTime + '</em>';
+                            html += '</h3>';
+                            html += '<div class="subcont_artical_para">';
+                            html += $("#articleDetailTmp").render(details);
+                            html += '</div>';
+                            $("#articleDetailMain").html(html);
+                            $(details).each(function (i, item) {
+                                if (item.md5) {
+                                    var imgUrl = server.oss + '/download/' + item.md5;
+                                    $("#" + item.md5).attr("src", imgUrl);
+                                }
+                            });
+                        }
+                        /*评论内容*/
+                        getComments();
+                    }else{
+                        alert(response.message);
+                    }
+                }
+            });
+        }
+
+        $(".pub").click(function () {
+//            console.log($("#param").attr("param"));
+//            console.log($("#param").attr("code"));
+//            console.log($("textarea").val().trim());
+            if ($("#param").attr("param")==null) {
+                alert("评论内容不存在...")
+                return;
+            }
+            var comment = {}
+            comment[$("#param").attr("param")] =$("#param").attr("code");
+            comment.content = $("textarea").val().trim();
+            console.log(comment.content);
+            if (comment.content.length > 400) {
+                alert("评论内容超过400字了...")
+                return;
+            }
+
+            $.ajax({
+                type: "post",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                data: JSON.stringify(comment),
+                url: url.mc.comment,
+                success: function (result) {
+                    if (result.code == 200) {
+                        window.location.reload();
+                    } else {
+                        alert(result.message);
+                    }
+                }
+            });
+        })
+
+
+    })
+
 
 </script>
-
 
 </body>
 </html>
