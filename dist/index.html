@@ -399,40 +399,26 @@
             }
         })
         /*导航菜单*/
-        if(!menu_cache){
-            $.get(url.mc.menu_tree_parentCode, {'parentCode': '0'}, function (result) {
-                console.log("result:" + result);
-                if (result.code == 200) {
-                    menu_cache = result.data;
-                    console.log(result.data);
-                    $("#head-menu-wrap").html($.templates("#head-menu")(result.data));
-                    //二级菜单
-                    $("#head-menu-wrap > li").hover(function() {
-                        $(this).children('ol').filter(':not(:animated)').slideDown();
-                    }, function() {
-                        $(this).children('ol').slideUp();
-                    })
-                    $("#head-menu-wrap > li li").hover(function() {
-                        $(this).children('ol').show();
-                    }, function() {
-                        $(this).children('ol').hide();
-                    })
-                }
-            })
-        }else{
-            $("#head-menu-wrap").html($.templates("#head-menu")(menu_cache));
-            //二级菜单
-            $("#head-menu-wrap > li").hover(function() {
-                $(this).children('ol').filter(':not(:animated)').slideDown();
-            }, function() {
-                $(this).children('ol').slideUp();
-            })
-            $("#head-menu-wrap > li li").hover(function() {
-                $(this).children('ol').show();
-            }, function() {
-                $(this).children('ol').hide();
-            })
-        }
+        $.get(url.mc.menu_tree_parentCode, {'parentCode': '0'}, function (result) {
+            console.log("result:" + result);
+            if (result.code == 200) {
+                menu_cache = result.data;
+                console.log(result.data);
+                $("#head-menu-wrap").html($.templates("#head-menu")(result.data));
+                //二级菜单
+                $("#head-menu-wrap > li").hover(function() {
+                    $(this).children('ol').filter(':not(:animated)').slideDown();
+                }, function() {
+                    $(this).children('ol').slideUp();
+                })
+                $("#head-menu-wrap > li li").hover(function() {
+                    $(this).children('ol').show();
+                }, function() {
+                    $(this).children('ol').hide();
+                })
+            }
+        })
+
 
 
 
