@@ -364,6 +364,7 @@
         params.title = $("#articleTitle").val();
         params.authorName = $("#authorName").val();
         params.status = $("#status").val();
+        params.orderBy = "a1.id desc";
         $.ajax({
             type: "GET",
             dataType: "json",

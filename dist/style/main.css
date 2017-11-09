@@ -282,7 +282,7 @@ input[disabled] {
     position: absolute;
     top: 25px;
     left: 50%;
-    margin-left: -55px; }
+    margin-left: -61px; }
     .header .nav ul {
       padding-top: 40px;
      }
@@ -324,7 +324,7 @@ input[disabled] {
   right: 0;
   display: none;
   padding: 7px 0;
-  background: #f1f1f2;
+  background: #fff;
 }
 
 .nav_level_second.on {
@@ -339,17 +339,17 @@ input[disabled] {
   display: block;
   height: 26px;
   line-height: 26px;
-  font-size: 14px;
+  font-size: 12px;
   color: #434343;
-  background: #f1f1f2;
+  background: #fff;
   text-align: center;
 }
 
 .nav_level_second > li > a:hover{
   display: block;
   height: 26px;
-  background: #fff;
-  font-size: 14px;
+  background: #ccffdd;
+  font-size: 12px;
   color: #d50f22;
 }
 
@@ -372,13 +372,12 @@ input[disabled] {
   height: 22px;
   line-height: 22px;
   white-space: nowrap;
-  border-bottom: 1px solid #fff;
   color: #666;
   font-size: 12px;
 }
 
-.nav_level_second > li ol a:hover{
-  border-bottom: 1px solid #d50f22;
+.nav_level_second > li ol li:hover{
+  background: #ccffdd;
 }
 
 .main {

@@ -49,60 +49,45 @@
             <ul class="clearfix" id="head-menu-wrap">
                 <script type="text/x-jsrender" id="head-menu">
                 {{if #index <=5}}
-                <li class="fl">
+                    <li class="fl">
                 {{else}}
-                <li class="fr">
+                    <li class="fr">
                 {{/if}}
-                    <a href="{{:url}}">{{:name}}</a>
+                    {{if url=="#"}}
+                        <a href="#">{{:name}}</a>
+                    {{else}}
+                        <a href="main.html?pageNameMain={{:description}}&menuCodeMain={{:code}}">{{:name}}</a>
+                    {{/if}}
+                    {{if children != null && children.length>0}}
                     <ol class="nav_level_second">
+                        {{for children ~parentCode=code}}
                         <li>
-                            <a href="#">中国</a>
+                            <a href="main.html?pageNameMain={{:description}}&menuCodeMain={{:~parentCode}}">{{:name}}</a>
+                            {{if children != null && children.length>0}}
                             <ol>
+                                {{for children ~parentCode2=~parentCode}}
                                 <li>
-                                    <a href="#">现中产阶级状况</a>
+                                    <a href="main.html?pageNameMain={{:code}}&menuCodeMain={{:~parentCode2}}">{{:name}}</a>
                                 </li>
-                                <li>
-                                    <a href="#">结构分数</a>
-                                </li>
-                                <li>
-                                    <a href="#">数据分析</a>
-                                </li>
+                                {{/for}}
                             </ol>
+                            {{/if}}
                         </li>
-                        <li>
-                            <a href="#">美国</a>
-                            <ol>
-                                <li>
-                                    <a href="#">2.1</a>
-                                </li>
-                                <li>
-                                    <a href="#">2.2</a>
-                                </li>
-                                <li>
-                                    <a href="#">2.3</a>
-                                </li>
-                            </ol>
-                        </li>
-                        <li>
-                            <a href="#">日本</a>
-                            <ol>
-                                <li>
-                                    <a href="#">3.1</a>
-                                </li>
-                                <li>
-                                    <a href="#">3.2</a>
-                                </li>
-                                <li>
-                                    <a href="#">3.3</a>
-                                </li>
-                            </ol>
-                        </li>
+                        {{/for}}
                     </ol>
+                    {{/if}}
                 </li>
                 </script>
             </ul>
         </div>
     </div>
+
+
+
+
+
+
+
 
 
     <div id="banner" class="banner">
@@ -413,24 +398,44 @@
                 $("#tpl-more-attendion-wrap").html(html);
             }
         })
-        /*更多关注*/
-        $.get(url.mc.menu_parentCode, {'status': 1, 'parentCode': '0'}, function (result) {
-            if (result.code == 200) {
+        /*导航菜单*/
+        if(!menu_cache){
+            $.get(url.mc.menu_tree_parentCode, {'parentCode': '0'}, function (result) {
+                console.log("result:" + result);
+                if (result.code == 200) {
+                    menu_cache = result.data;
+                    console.log(result.data);
+                    $("#head-menu-wrap").html($.templates("#head-menu")(result.data));
+                    //二级菜单
+                    $("#head-menu-wrap > li").hover(function() {
+                        $(this).children('ol').filter(':not(:animated)').slideDown();
+                    }, function() {
+                        $(this).children('ol').slideUp();
+                    })
+                    $("#head-menu-wrap > li li").hover(function() {
+                        $(this).children('ol').show();
+                    }, function() {
+                        $(this).children('ol').hide();
+                    })
+                }
+            })
+        }else{
+            $("#head-menu-wrap").html($.templates("#head-menu")(menu_cache));
+            //二级菜单
+            $("#head-menu-wrap > li").hover(function() {
+                $(this).children('ol').filter(':not(:animated)').slideDown();
+            }, function() {
+                $(this).children('ol').slideUp();
+            })
+            $("#head-menu-wrap > li li").hover(function() {
+                $(this).children('ol').show();
+            }, function() {
+                $(this).children('ol').hide();
+            })
+        }
 
-                $("#head-menu-wrap").html($.templates("#head-menu")(result.data));
-                //二级菜单
-                $("#head-menu-wrap > li").hover(function() {
-                    $(this).children('ol').filter(':not(:animated)').slideDown();
-                }, function() {
-                    $(this).children('ol').slideUp();
-                })
-                $("#head-menu-wrap > li li").hover(function() {
-                    $(this).children('ol').show();
-                }, function() {
-                    $(this).children('ol').hide();
-                })
-            }
-        })
+
+
         /*生活向导*/
         $.get(url.mc.lifeWizard_status, {'status': 1}, function (result) {
             if (result.code == 200) {
