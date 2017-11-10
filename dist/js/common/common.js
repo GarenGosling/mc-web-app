@@ -5,7 +5,7 @@ server.ip_local = 'localhost';
 server.base = "http://";
 server.cas = server.base + server.ip_test + ':9090';
 server.oss = server.base + server.ip_test + ':9091';
-server.mc = server.base + server.ip_test + ':9093';
+server.mc = server.base + server.ip_local + ':9093';
 server.host = server.base + server.ip_test + ':8081';
 
 var url = {};
