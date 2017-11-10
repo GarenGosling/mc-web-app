@@ -1,5 +1,5 @@
 $(function() {
-    window.setInterval("reinitIframe()", 1000);
+    window.setInterval("reinitIframe()", 200);
 })
 
 function reinitIframe(){
