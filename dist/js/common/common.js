@@ -7,7 +7,7 @@ server.cas = server.base + server.ip_test + ':9090';
 server.oss = server.base + server.ip_test + ':9091';
 server.mc = server.base + server.ip_test + ':9093';
 server.host = server.base + server.ip_test + ':8081';
-server.host.video = server.base + server.ip_test + ':7070';
+server.host_video = server.base + server.ip_test + ':7070';
 
 var url = {};
 url.cas = {};
@@ -41,7 +41,7 @@ url.mc.lifeWizard_status=server.mc+"/lifeWizard/status";
 url.mc.comment=server.mc+"/comments";
 url.host.index = server.host;
 url.host.articles_queryByAuthor = server.mc + "/api/articles/queryByAuthor";
-url.host.video_guide = server.host.video + "/guide.mp4";
+url.host.video_guide = server.host_video + "/guide.mp4";
 
 
 /***************** 登录相关 *******************/

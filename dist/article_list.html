@@ -51,10 +51,12 @@
 	{{if md5 != null && md5 != ''}}
 	<dl class="artical_list clearfix">
 		<dt class="fl">
-			<img id="articles_tmp{{:md5}}" style="width:157px;height:100px;">
+			<a href="article_view2.html?id={{:id}}">
+				<img id="articles_tmp{{:md5}}" style="width:157px;height:100px;">
+			</a>
 		</dt>
 		<dd class="pos_r fr">
-			<h3>{{:title}}</h3>
+			<h3 href="article_view2.html?id={{:id}}"><a href="article_view2.html?id={{:id}}">{{:title}}</a></h3>
 			<div class="clearfix">
 				<p class="fl"><span>作者：</span><em>{{:authorPenName}}</em></p>
 				<p class="fl"><span>观看：</span><em>257</em></p>

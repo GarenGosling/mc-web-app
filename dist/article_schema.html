@@ -89,8 +89,8 @@
 
     //getArticleBySubjectName(UrlParm.parm("menuCode"), "专题一", "topic_1_tmp", "topic_1", "article_list.html?subjectName=专题一&moduleName=专题一&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&url="+url.mc.articles_query);
     //getArticleBySubjectName(UrlParm.parm("menuCode"), "专题二", "topic_2_tmp", "topic_2", "article_list.html?subjectName=专题二&moduleName=专题二&parentModule=中产生活>>有关美食&menuCode="+UrlParm.parm("menuCode")+"&url="+url.mc.articles_query);
-    getArticleByArtical(UrlParm.parm("menuCode"), "精选文章", "artical_tmp", "artical", "article_list.html?&moduleName=精选文章&parentModule="+(UrlParm.parm("parentModule")+'&gt;&gt;'+UrlParm.parm("moduleName"))+"&menuCode="+UrlParm.parm("menuCode")+"&orderBy=id&url="+url.mc.articles_query);
-    getArticleByPop(UrlParm.parm("menuCode"), "精选会员专题", "pop_tmp", "pop", "article_list.html?&moduleName=精选会员专题&parentModule="+(UrlParm.parm("parentModule")+'&gt;&gt;'+UrlParm.parm("moduleName"))+"&menuCode="+UrlParm.parm("menuCode")+"&url="+url.mc.articles_popAuthor);
+    getArticleByArtical(UrlParm.parm("menuCode"), "精选文章", "artical_tmp", "artical", "article_list.html?&moduleName=文章列表&parentModule="+(UrlParm.parm("parentModule")+'&gt;&gt;'+UrlParm.parm("moduleName"))+"&menuCode="+UrlParm.parm("menuCode")+"&orderBy=id&url="+url.mc.articles_query);
+    //getArticleByPop(UrlParm.parm("menuCode"), "精选会员专题", "pop_tmp", "pop", "article_list.html?&moduleName=精选会员专题&parentModule="+(UrlParm.parm("parentModule")+'&gt;&gt;'+UrlParm.parm("moduleName"))+"&menuCode="+UrlParm.parm("menuCode")+"&url="+url.mc.articles_popAuthor);
 
     /**
 	 * 专题文章
@@ -146,7 +146,7 @@
         var params = {};
         params.menuCode = menuCode;
         params.start = 0;
-        params.length = 3;
+        params.length = 10;
         params.orderBy = "id";
         params.status = 1;
         $.ajax({
