@@ -7,6 +7,7 @@ server.cas = server.base + server.ip_test + ':9090';
 server.oss = server.base + server.ip_test + ':9091';
 server.mc = server.base + server.ip_test + ':9093';
 server.host = server.base + server.ip_test + ':8081';
+server.host.video = server.base + server.ip_test + ':7070';
 
 var url = {};
 url.cas = {};
@@ -20,6 +21,7 @@ url.cas.logout = server.cas + '/logout';
 url.cas.loginVo = server.cas + '/loginVo';
 
 url.oss.download = server.oss + '/download/';
+url.oss.upload = server.oss + '/upload';
 
 url.mc.partnerLink_all = server.mc + '/partnerLink/all';
 url.mc.carousel_all = server.mc + '/carousel/all';
@@ -39,6 +41,7 @@ url.mc.lifeWizard_status=server.mc+"/lifeWizard/status";
 url.mc.comment=server.mc+"/comments";
 url.host.index = server.host;
 url.host.articles_queryByAuthor = server.mc + "/api/articles/queryByAuthor";
+url.host.video_guide = server.host.video + "/guide.mp4";
 
 
 /***************** 登录相关 *******************/

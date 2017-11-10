@@ -310,7 +310,7 @@
             var $label = $(this).parent().parent();
             var file = new FormData($(this).parent("form")[0]);
             $.ajax({
-                url: 'http://120.27.22.41:9091/upload',
+                url: url.oss.upload,
                 type: 'POST',
                 data: file,
                 async: false,
