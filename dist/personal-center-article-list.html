@@ -53,6 +53,7 @@
 						<th class="zindex"><div style="width: 100px;">作者姓名</div></th>
 						<th class="zindex"><div style="width: 150px;">发布时间</div></th>
 						<th class="zindex"><div style="width: 150px;">出版时间</div></th>
+						<th class="zindex"><div style="width: 300px;">文章位置</div></th>
 						<th class="zindex">
 							<div style="width: 440px;" id="adminDo">操作</div>
 							<div style="width: 100px;" id="authorDo">操作</div>
@@ -107,6 +108,7 @@
 				<td>{{:real_name}}</td>
 				<td>{{:~dataFormat(create_time)}}</td>
 				<td>{{:~dataFormat(publish_time)}}</td>
+				<td>{{:menu_full_name}}</td>
 				<td>
 					{{if ~root.loginName=='admin'}}
 					<a class="pca-btn-red" onclick="audit({{:id}}, 1)">通过</a>
