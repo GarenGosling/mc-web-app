@@ -280,13 +280,31 @@
                 return;
             }
 
+//            $.ajax({
+//                type: "post",
+//                contentType: "application/json;charset=UTF-8",
+//                dataType: "json",
+//                data: JSON.stringify(comment),
+//                url: url.mc.comment,
+//                success: function (result) {
+//                    if (result.code == 200) {
+//                        window.location.reload();
+//                    } else {
+//                        alert(result.message);
+//                    }
+//                }
+//            });
+
             $.ajax({
-                type: "post",
+                type: "POST",
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
                 data: JSON.stringify(comment),
                 url: url.mc.comment,
-                success: function (result) {
+                beforeSend: function(request) {
+                    request.setRequestHeader("ticket", getTicket());
+                },
+                success: function(result){
                     if (result.code == 200) {
                         window.location.reload();
                     } else {
