@@ -184,7 +184,7 @@ function changeIframe(url, code){
         }
 
         //var myIframe = $("<iframe/>").attr("src",path).attr("width","100%").attr("scrolling","no").attr("frameborder","0").attr("height",document.documentElement.clientHeight);
-        var myIframe = $("<iframe/>").attr("src",path).attr("width","100%").attr("scrolling","no").attr("frameborder","0").attr("height","3000");
+        var myIframe = $("<iframe/>").attr("id","iframe").attr("src",path).attr("width","100%").attr("scrolling","no").attr("frameborder","0");
         $(".right").append(myIframe);
     }
 
