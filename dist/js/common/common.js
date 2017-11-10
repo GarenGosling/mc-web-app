@@ -213,7 +213,9 @@ function authorShow(){
  */
 function logout() {
     if(!getTicket()){
-        alert("您还没有登录");
+        localStorage.removeItem("ticket");
+        localStorage.removeItem("loginVoJson");
+        window.location.href = url.host.index;
         return false;
     }
     $.ajax({
@@ -230,7 +232,10 @@ function logout() {
                 localStorage.removeItem("loginVoJson");
                 window.location.href = url.host.index;
             }else{
-                alert(response.message);
+                //alert(response.message);
+                localStorage.removeItem("ticket");
+                localStorage.removeItem("loginVoJson");
+                window.location.href = url.host.index;
             }
         }
     });
